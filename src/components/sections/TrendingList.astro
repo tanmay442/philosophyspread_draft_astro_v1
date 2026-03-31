@@ -1,0 +1,29 @@
+---
+import TrendingArticle from '../cards/TrendingArticle.astro';
+---
+
+<div class="border-l-0 md:border-l-2 border-secondary md:pl-12 flex-grow">
+  <h2 class="font-label text-xs text-secondary mb-8 uppercase tracking-[0.4em]">Trending Now</h2>
+  <div class="space-y-12 mb-16">
+    <TrendingArticle 
+      number="01"
+      category="LOGIC"
+      title="The Limits of Pure Reason"
+      description="Why Kant's critique still matters in the age of Artificial Intelligence."
+    />
+    
+    <TrendingArticle 
+      number="02"
+      category="ESTHETICS"
+      title="Ugliness as Truth"
+      description="Questioning the classical obsession with symmetry and divine proportion."
+    />
+    
+    <TrendingArticle 
+      number="03"
+      category="POLITICS"
+      title="The Social Contract 2.0"
+      description="How digital decentralization is rewriting our agreements with power."
+    />
+  </div>
+</div>

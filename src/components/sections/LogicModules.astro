@@ -1,0 +1,44 @@
+---
+import LogicCard from '../cards/LogicCard.astro';
+---
+
+<section id="logic" class="py-24 px-8 md:px-12 bg-surface">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-12 md:mb-16 border-l-4 border-primary pl-6 flex justify-between items-end md:pr-4">
+      <div>
+        <h2 class="font-label text-sm text-primary mb-2 uppercase tracking-[0.3em]">Foundation</h2>
+        <h3 class="font-headline text-5xl">Master the Fundamentals</h3>
+      </div>
+      <a href="#" class="hidden md:flex font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors items-center group">
+        View All Modules 
+        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <LogicCard 
+        title="Virtue Ethics" 
+        description="Aristotelian pursuit of the 'Golden Mean'—the ideal balance between deficiency and excess in character." 
+      />
+      <LogicCard 
+        title="Logical Fallacies" 
+        description="A field guide to identifying and dismantling common cognitive traps in contemporary discourse." 
+      />
+      <LogicCard 
+        title="Stoic Calm" 
+        description="Training the dichotomy of control: distinguishing what we can change from what we must endure." 
+      />
+      <LogicCard 
+        title="Epistemology" 
+        description="How do we know what we know? Exploring the limits of perception and the structure of belief." 
+      />
+    </div>
+
+    <div class="mt-8 flex md:hidden justify-center">
+      <a href="#" class="font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors flex items-center group">
+        View All Modules 
+        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>

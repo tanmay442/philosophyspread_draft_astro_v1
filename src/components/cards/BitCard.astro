@@ -1,0 +1,35 @@
+---
+interface Props {
+  tag: string;
+  time?: string;
+  content: string;
+  href?: string;
+  bgClass?: string;
+  contentClass?: string;
+  icon?: string;
+}
+
+const { 
+  tag, 
+  time = "12:00 UTC", 
+  content, 
+  href = "#",
+  bgClass = "bg-white",
+  contentClass = "font-headline text-2xl leading-tight text-secondary font-semibold group-hover:italic transition-all",
+  icon
+} = Astro.props;
+---
+
+<div class={`relative break-inside-avoid border-2 border-secondary p-8 transition-all duration-200 hard-offset-teal hover:bg-tertiary-fixed cursor-pointer group mb-8 ${bgClass}`}>
+  <a href={href} class="absolute inset-0 z-10"></a>
+  <div class="flex justify-between items-start border-b border-outline-variant pb-4 mb-4">
+    <span class="font-label text-[10px] font-bold text-primary">{tag}</span>
+    <span class="font-label text-[10px] text-on-surface-variant opacity-60">{time}</span>
+  </div>
+  <p class={contentClass} set:html={content} />
+  {icon && (
+    <div class="mt-6 flex justify-end">
+      <span class="material-symbols-outlined text-secondary" data-icon={icon}>{icon}</span>
+    </div>
+  )}
+</div>

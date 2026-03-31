@@ -1,0 +1,18 @@
+---
+import FeaturedEssay from '../cards/FeaturedEssay.astro';
+import TrendingList from './TrendingList.astro';
+import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
+---
+
+<section id="essays" class="py-24 px-8 md:px-12 bg-surface-container-low border-t-2 border-secondary">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <FeaturedEssay />
+      
+      <div class="md:col-span-4 flex flex-col">
+        <TrendingList />
+        <SubmitEssayCard />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "Philosophy Spread | The Logical Manuscript" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <style is:global>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .hard-offset {
+        box-shadow: 4px 4px 0px 0px #245ba7;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hard-offset:hover {
+        transform: translateY(-4px);
+        box-shadow: 8px 8px 0px 0px #245ba7;
+      }
+      .hard-offset-teal {
+        box-shadow: 4px 4px 0px 0px #006b5f;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hard-offset-teal:hover {
+        transform: translateY(-4px);
+        box-shadow: 8px 8px 0px 0px #006b5f;
+      }
+      body {
+        font-family: 'Newsreader', serif;
+        background-color: #f8f9ff;
+        color: #0c1c2e;
+      }
+      * {
+        border-radius: 0px !important;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background selection:bg-secondary-container">
+    <slot />
+  </body>
+</html>

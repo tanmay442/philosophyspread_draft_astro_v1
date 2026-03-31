@@ -1,0 +1,116 @@
+---
+import Button from '../ui/Button.astro';
+
+const pathname = Astro.url.pathname;
+const currentPath = pathname.slice(1); // remove leading slash
+---
+
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-slate-950 border-b-2 border-secondary shadow-[1px_1px_0px_#245ba7]">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2 w-full relative z-50 bg-surface">
+    <a href="/" class="flex items-center hover:opacity-90 transition-opacity shrink-0">
+      <svg viewBox="0 0 500 100" class="h-10 w-[200px] sm:h-12 sm:w-[240px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sigma -->
+        <path d="M 35 35 L 15 35 L 30 55 L 15 75 L 35 75" stroke="#2a2d2c" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square"/>
+        
+        <!-- Atom -->
+        <g transform="translate(65, 55)">
+          <ellipse cx="0" cy="0" rx="12" ry="24" transform="rotate(30)" stroke="#2a2d2c" stroke-width="3"/>
+          <ellipse cx="0" cy="0" rx="12" ry="24" transform="rotate(-30)" stroke="#2a2d2c" stroke-width="3"/>
+          <ellipse cx="0" cy="0" rx="12" ry="24" transform="rotate(90)" stroke="#2a2d2c" stroke-width="3"/>
+          <circle cx="0" cy="0" r="4" fill="#d95c32"/>
+          <circle cx="-15" cy="-12" r="3" fill="#d95c32"/>
+          <circle cx="15" cy="12" r="3" fill="#d95c32"/>
+          <circle cx="12" cy="-15" r="3" fill="#d95c32"/>
+          <circle cx="-12" cy="15" r="3" fill="#d95c32"/>
+        </g>
+
+        <!-- Crown -->
+        <g transform="translate(105, 35)">
+          <path d="M 0 0 L 5 18 L 15 8 L 25 18 L 30 0 L 30 22 L 0 22 Z" stroke="#2a2d2c" stroke-width="3" stroke-linejoin="miter" stroke-linecap="square"/>
+          <line x1="0" y1="28" x2="30" y2="28" stroke="#2a2d2c" stroke-width="3" stroke-linecap="square"/>
+        </g>
+        
+        <!-- Planet -->
+        <g transform="translate(120, 75)">
+          <circle cx="0" cy="0" r="12" fill="#2a2d2c"/>
+          <ellipse cx="0" cy="0" rx="20" ry="5" transform="rotate(-20)" stroke="#d95c32" stroke-width="3" fill="none"/>
+        </g>
+        
+        <!-- Sword -->
+        <g transform="translate(155, 55)">
+          <path d="M -3 -5 L 3 -5 L 3 18 L 0 26 L -3 18 Z" fill="none" stroke="#d95c32" stroke-width="3" stroke-linejoin="miter"/>
+          <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#d95c32" stroke-width="3" stroke-linecap="square"/>
+          <line x1="0" y1="-5" x2="0" y2="-18" stroke="#2a2d2c" stroke-width="3"/>
+          <circle cx="0" cy="-20" r="3" fill="#2a2d2c"/>
+        </g>
+
+        <!-- Text -->
+        <text x="180" y="66" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="34" fill="#2a2d2c" letter-spacing="-0.02em">Philosophy <tspan fill="#d95c32">Spread</tspan></text>
+      </svg>
+    </a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center space-x-8">
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === 'logic-modules' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === '48hrs-bits' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/48hrs-bits">48hrs-bits</a>
+      <a class="font-label text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === 'essays' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays">Essays</a>
+    </nav>
+    <div class="hidden lg:flex items-center space-x-4">
+      <Button variant="primary">SUBSCRIBE</Button>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center p-2 text-secondary hover:text-primary transition-colors" aria-label="Toggle Menu">
+      <span class="material-symbols-outlined text-3xl menu-icon">menu</span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Backdrop -->
+  <div id="mobile-menu-backdrop" class="fixed inset-0 bg-secondary/20 backdrop-blur-sm z-30 hidden"></div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] md:w-[60vw] bg-surface z-40 hidden flex-col pt-24 px-6 pb-8 overflow-y-auto border-l-2 border-secondary shadow-2xl">
+    <nav class="flex flex-col space-y-6 mt-4 flex-grow">
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === 'logic-modules' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === '48hrs-bits' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/48hrs-bits">48hrs-bits</a>
+      <a class="font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === 'essays' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays">Essays</a>
+    </nav>
+    <div class="mt-auto pt-8">
+      <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  const menuIcon = toggleBtn?.querySelector('.menu-icon');
+
+  function toggleMenu() {
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileMenu?.classList.remove('hidden');
+      mobileMenu?.classList.add('flex');
+      backdrop?.classList.remove('hidden');
+      if (menuIcon) menuIcon.textContent = 'close';
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu?.classList.add('hidden');
+      mobileMenu?.classList.remove('flex');
+      backdrop?.classList.add('hidden');
+      if (menuIcon) menuIcon.textContent = 'menu';
+      document.body.style.overflow = '';
+    }
+  }
+
+  toggleBtn?.addEventListener('click', toggleMenu);
+  backdrop?.addEventListener('click', toggleMenu);
+
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', toggleMenu);
+  });
+</script>

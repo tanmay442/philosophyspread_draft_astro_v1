@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Hero from '../components/sections/Hero.astro';
+import LogicModules from '../components/sections/LogicModules.astro';
+import DailyBits from '../components/sections/DailyBits.astro';
+import IdeaTrials from '../components/sections/IdeaTrials.astro';
+import Essays from '../components/sections/Essays.astro';
+import GetInvolved from '../components/sections/GetInvolved.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<BaseLayout title="Philosophy Spread | The Logical Manuscript">
+  <Header />
+  <main class="pt-20">
+    <Hero />
+    <LogicModules />
+    <DailyBits />
+    <IdeaTrials />
+    <Essays />
+    <GetInvolved />
+  </main>
+  <Footer />
+</BaseLayout>

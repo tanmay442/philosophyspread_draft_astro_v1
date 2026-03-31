@@ -1,0 +1,37 @@
+---
+import HardOffsetCard from '../ui/HardOffsetCard.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  moduleNumber?: string;
+  icon?: string;
+  class?: string;
+  titleClass?: string;
+}
+
+const { 
+  title, 
+  description, 
+  moduleNumber, 
+  icon = "open_in_new", 
+  class: className = '',
+  titleClass = ''
+} = Astro.props;
+---
+
+<HardOffsetCard class={`group relative break-inside-avoid transition-all duration-200 ${className}`}>
+  {moduleNumber && (
+    <div class="flex justify-between items-start border-b border-outline-variant pb-4 mb-4">
+      <span class="font-label text-[10px] font-bold text-primary tracking-widest uppercase">[{moduleNumber}]</span>
+      {icon && <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" data-icon={icon}>{icon}</span>}
+    </div>
+  )}
+  <h4 class={`font-headline font-bold text-secondary mb-4 ${titleClass ? titleClass : (moduleNumber ? 'text-3xl' : 'text-2xl')}`}>{title}</h4>
+  <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-6 flex-grow">
+    {description}
+  </p>
+  <div class="pt-4 border-t border-outline-variant flex justify-between items-center mt-auto">
+    <button class="font-label text-[10px] text-primary uppercase tracking-widest hover:text-secondary transition-all">Expand Module -&gt;</button>
+  </div>
+</HardOffsetCard>

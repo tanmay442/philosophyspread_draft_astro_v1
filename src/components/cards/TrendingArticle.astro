@@ -1,0 +1,16 @@
+---
+interface Props {
+  number: string;
+  category: string;
+  title: string;
+  description: string;
+}
+
+const { number, category, title, description } = Astro.props;
+---
+
+<article class="group cursor-pointer">
+  <span class="font-label text-[10px] text-primary">{number} / {category}</span>
+  <h4 class="font-headline text-2xl group-hover:italic mt-2">{title}</h4>
+  <p class="font-body text-lg opacity-70 mt-2 line-clamp-2">{description}</p>
+</article>

@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BitCard from '../components/cards/BitCard.astro';
+---
+
+<BaseLayout title="48hrs-bits | Philosophy Spread">
+  <Header />
+  
+  <main class="pt-28 pb-20 px-8 max-w-7xl mx-auto">
+    <!-- Feed Header -->
+    <header class="mb-16 border-b-2 border-secondary pb-12">
+      <div class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-4">Continuous Stream</div>
+      <h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter text-secondary">48hrs-bits</h1>
+      <p class="font-body text-2xl italic text-on-surface-variant mt-6 max-w-2xl leading-relaxed">
+        Ephemeral fragments of logic and ethics. Captured in the moment, preserved for the pursuit of clarity.
+      </p>
+    </header>
+
+    <!-- Multi-column grid layout -->
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+      <BitCard 
+        tag="#091 / EXISTENTIALISM" 
+        time="14:02 UTC"
+        content="&quot;The anxiety of freedom is not a defect of the soul, but the weight of its own authorship.&quot;"
+        icon="share"
+      />
+      
+      <BitCard 
+        tag="#090 / LOGIC" 
+        time="12:45 UTC"
+        bgClass="bg-surface-container-low"
+        content="<span class='italic font-normal'>A implies B.</span> If we find B to be false, the structure of A must be dismantled. Loyalty to a false premise is the highest form of intellectual vanity."
+        contentClass="font-headline text-2xl leading-tight text-secondary group-hover:italic transition-all"
+        icon="bookmark"
+      />
+      
+      <BitCard 
+        tag="#089 / STOICISM" 
+        time="09:12 UTC"
+        content="&quot;Control is the only currency that retains value in a collapse.&quot;"
+        contentClass="font-headline text-3xl italic leading-tight text-secondary font-bold group-hover:not-italic transition-all"
+        icon="favorite"
+      />
+      
+      <BitCard 
+        tag="#088 / ETHICS" 
+        time="06:30 UTC"
+        content="Justice is not a destination. It is the friction between what is and what must be. To stop the friction is to accept the static."
+        contentClass="font-headline text-xl leading-relaxed text-secondary group-hover:italic transition-all"
+        icon="chat_bubble"
+      />
+      
+      <BitCard 
+        tag="#087 / EPISTEMOLOGY" 
+        time="Yesterday"
+        bgClass="bg-surface-container-low"
+        content="We do not see things as they are. We see things as we are equipped to measure them."
+        icon="visibility_off"
+      />
+      
+      <BitCard 
+        tag="#086 / PHENOMENOLOGY" 
+        time="Yesterday"
+        content="&quot;The silence of the room is a dialogue with the self.&quot;"
+        contentClass="font-headline text-3xl leading-none text-secondary font-bold tracking-tighter group-hover:italic transition-all"
+        icon="volume_off"
+      />
+      
+      <BitCard 
+        tag="#085 / DIALECTICS" 
+        time="Yesterday"
+        content="Thesis + Antithesis = A new prison. The escape requires a rejection of the binary altogether."
+        contentClass="font-headline text-xl leading-relaxed text-secondary group-hover:italic transition-all"
+      />
+    </div>
+
+    <!-- Pagination / Load More -->
+    <div class="mt-20 flex justify-center">
+      <button class="px-12 py-4 bg-white border-2 border-secondary text-secondary font-label text-sm tracking-widest uppercase hover:bg-tertiary-fixed transition-colors duration-200 hard-offset active:translate-y-0.5 active:shadow-none">
+        Load Historical Fragments
+      </button>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
