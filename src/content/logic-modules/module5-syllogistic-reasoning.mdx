@@ -1,0 +1,69 @@
+---
+moduleNumber: "L-05"
+title: "Syllogistic Reasoning"
+description: "Aristotelian logic mapping the deductive arguments where a conclusion is drawn from two premises. Bedrock of classic discourse."
+category: "Logic"
+difficulty: "Beginner"
+prerequisites: []
+---
+
+Syllogistic reasoning, originating from Aristotle's work, forms the foundation of formal logic. A syllogism is a form of deductive reasoning where the conclusion is drawn from two given premises.
+
+## Structure of a Syllogism
+
+Every syllogism consists of:
+- **Major Premise**: A general statement
+- **Minor Premise**: A specific statement related to the major
+- **Conclusion**: The inferred result
+
+<CodeBlock code={`Major Premise: All humans are mortal.
+Minor Premise: Socrates is human.
+Conclusion: Therefore, Socrates is mortal.`} />
+
+## Types of Syllogisms
+
+There are four types of categorical syllogisms:
+
+| Figure | Structure |
+|--------|-----------|
+| 1 | M-P, S-M → S-P |
+| 2 | P-M, S-M → S-P |
+| 3 | M-P, M-S → S-P |
+| 4 | P-M, M-S → S-P |
+
+<Blockquote icon="psychology">
+  The validity of a syllogism depends not on its content but on its form.
+</Blockquote>
+
+## Common Fallacies
+
+<Quiz
+  questions={[
+    {
+      question: "Which fallacy occurs when the middle term is not distributed in either premise?",
+      options: [
+        "Affirming the consequent",
+        "Undistributed middle",
+        "Illicit minor",
+        "Fallacy of four terms"
+      ],
+      correctIndex: 1,
+      explanation: "The fallacy of the undistributed middle occurs when the middle term that connects the two premises is never distributed (i.e., applies to all members of its category)."
+    }
+  ]}
+/>
+
+## Testing Validity
+
+A syllogism is valid if the conclusion necessarily follows from the premises. We can test validity using Venn diagrams:
+
+<TruthTable
+  variables={["All S are M", "All M are P", "All S are P?"]}
+  rows={[
+    { inputs: ["T", "T", "T"], result: "Valid" },
+    { inputs: ["T", "F", "?"], result: "Invalid" },
+    { inputs:["F", "T", "?"], result: "Invalid" }
+  ]}
+/>
+
+Mastering syllogistic reasoning provides the analytical foundation for more complex logical systems.

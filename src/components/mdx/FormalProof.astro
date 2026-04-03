@@ -1,0 +1,28 @@
+---
+interface Props {
+  steps: { line: string; formula: string; justification: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="overflow-x-auto my-8">
+  <table class="w-full border-collapse border-2 border-secondary bg-surface-container-low text-on-surface">
+    <thead>
+      <tr>
+        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary w-16 text-center">#</th>
+        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary text-left">Formula</th>
+        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary text-left">Justification</th>
+      </tr>
+    </thead>
+    <tbody>
+      {steps.map((step) => (
+        <tr class="hover:bg-secondary/5 transition-colors group">
+          <td class="border-2 border-secondary p-4 text-center font-mono text-sm text-primary">{step.line}</td>
+          <td class="border-2 border-secondary p-4 font-mono text-sm group-hover:text-primary transition-colors">{step.formula}</td>
+          <td class="border-2 border-secondary p-4 font-body text-sm italic opacity-80">{step.justification}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

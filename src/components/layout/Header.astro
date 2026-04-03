@@ -51,10 +51,10 @@ const currentPath = pathname.slice(1); // remove leading slash
     
     <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center space-x-8">
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === 'logic-modules' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === '48hrs-bits' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/48hrs-bits">48hrs-bits</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('bits') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/bits/1">48hrs-bits</a>
       <a class="font-label text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath === 'essays' ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays">Essays</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('essays') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays/1">Essays</a>
     </nav>
     <div class="hidden lg:flex items-center space-x-4">
       <Button variant="primary">SUBSCRIBE</Button>
@@ -72,10 +72,10 @@ const currentPath = pathname.slice(1); // remove leading slash
   <!-- Mobile Menu Overlay -->
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] md:w-[60vw] bg-surface z-40 hidden flex-col pt-24 px-6 pb-8 overflow-y-auto border-l-2 border-secondary shadow-2xl">
     <nav class="flex flex-col space-y-6 mt-4 flex-grow">
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === 'logic-modules' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === '48hrs-bits' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/48hrs-bits">48hrs-bits</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('bits') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/bits/1">48hrs-bits</a>
       <a class="font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath === 'essays' ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays">Essays</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('essays') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays/1">Essays</a>
     </nav>
     <div class="mt-auto pt-8">
       <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>

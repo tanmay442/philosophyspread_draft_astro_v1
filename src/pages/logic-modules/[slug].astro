@@ -1,0 +1,101 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import TruthTable from '../../components/mdx/TruthTable.astro';
+import FormalProof from '../../components/mdx/FormalProof.astro';
+import CodeBlock from '../../components/mdx/CodeBlock.astro';
+import Quiz from '../../components/mdx/Quiz.astro';
+
+export async function getStaticPaths() {
+  const modules = await getCollection('logicModules');
+  
+  // Sort modules by moduleNumber
+  const sortedModules = modules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
+  
+  return sortedModules.map((module, index) => ({
+    params: { slug: module.id },
+    props: { 
+      module,
+      prevModule: index > 0 ? sortedModules[index - 1] : null,
+      nextModule: index < sortedModules.length - 1 ? sortedModules[index + 1] : null,
+    },
+  }));
+}
+
+const { module, prevModule, nextModule } = Astro.props;
+const { Content } = await render(module);
+
+const components = {
+  TruthTable,
+  FormalProof,
+  CodeBlock,
+  Quiz,
+};
+---
+
+<BaseLayout title={`${module.data.title} | Logic Modules`}>
+  <Header />
+  
+  <main class="pt-32 px-6 md:px-12 pb-20 max-w-4xl mx-auto">
+    <article>
+      <header class="mb-16 border-b-2 border-secondary pb-12">
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-label text-sm text-primary font-bold tracking-[0.2em] uppercase">
+            [ {module.data.moduleNumber} ]
+          </span>
+          <span class="font-label text-xs border-2 border-secondary px-3 py-1 uppercase tracking-widest text-secondary">
+            {module.data.difficulty}
+          </span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold italic tracking-tighter text-secondary mb-6">
+          {module.data.title}
+        </h1>
+        <p class="text-xl text-on-surface-variant leading-relaxed font-body">
+          {module.data.description}
+        </p>
+        
+        {module.data.prerequisites.length > 0 && (
+          <div class="mt-8 p-4 bg-surface-container-low border-l-4 border-secondary">
+            <h3 class="font-label text-xs uppercase tracking-widest text-secondary mb-2">Prerequisites:</h3>
+            <ul class="flex flex-wrap gap-4">
+              {module.data.prerequisites.map(prereq => (
+                <li class="font-body text-sm italic">{prereq}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </header>
+
+      <div class="prose prose-xl prose-slate dark:prose-invert max-w-3xl mx-auto font-body text-secondary leading-relaxed
+        prose-headings:font-headline prose-headings:text-secondary prose-headings:font-bold
+        prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:border-b-2 prose-h2:border-secondary prose-h2:pb-4
+        prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
+        prose-p:mb-8 prose-p:text-xl prose-p:text-secondary/90
+        prose-a:text-primary prose-a:underline prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:text-secondary
+        prose-strong:text-secondary prose-strong:font-bold
+        prose-ul:list-square prose-ul:pl-6 prose-li:mb-3 prose-li:text-xl prose-li:text-secondary/90">
+        <Content components={components} />
+      </div>
+      
+      <nav class="mt-24 pt-8 border-t-2 border-secondary flex flex-col md:flex-row justify-between items-center gap-8">
+        {prevModule ? (
+          <a href={`/logic-modules/${prevModule.id}`} class="group flex flex-col items-start w-full md:w-1/2 p-6 border-2 border-transparent hover:border-secondary transition-colors">
+            <span class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">&lt;- Previous Module</span>
+            <span class="font-headline text-2xl group-hover:italic transition-all">{prevModule.data.title}</span>
+          </a>
+        ) : <div class="w-full md:w-1/2"></div>}
+        
+        {nextModule ? (
+          <a href={`/logic-modules/${nextModule.id}`} class="group flex flex-col items-end text-right w-full md:w-1/2 p-6 border-2 border-transparent hover:border-secondary transition-colors">
+            <span class="font-label text-[10px] uppercase tracking-widest text-primary mb-2">Next Module -&gt;</span>
+            <span class="font-headline text-2xl group-hover:italic transition-all">{nextModule.data.title}</span>
+          </a>
+        ) : <div class="w-full md:w-1/2"></div>}
+      </nav>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

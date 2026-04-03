@@ -8,13 +8,16 @@ interface Props {
   bgClass: string;
   hoverBgClass: string;
   hoverTextClass?: string;
+  href?: string;
 }
 
-const { tag, title, description, bgClass, hoverBgClass, hoverTextClass = '' } = Astro.props;
+const { tag, title, description, bgClass, hoverBgClass, hoverTextClass = '', href } = Astro.props;
+
+const Element = href ? 'a' : 'div';
 ---
 
-<div class={`flex-1 p-8 border-b-2 border-secondary transition-all duration-300 cursor-pointer group ${bgClass} ${hoverBgClass} ${hoverTextClass}`}>
+<Element href={href} class={`block flex-1 p-8 border-b-2 border-secondary transition-all duration-300 cursor-pointer group ${bgClass} ${hoverBgClass} ${hoverTextClass}`}>
   <SectionTag class={`block mb-4 text-primary ${hoverTextClass ? 'group-hover:text-white transition-colors' : ''}`}>{tag}</SectionTag>
   <h3 class="font-headline text-3xl mb-4 group-hover:italic">{title}</h3>
   <p class={`font-body text-lg opacity-80 ${hoverTextClass ? 'group-hover:opacity-100' : ''}`}>{description}</p>
-</div>
+</Element>

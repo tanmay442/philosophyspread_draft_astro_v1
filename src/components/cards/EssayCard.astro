@@ -6,6 +6,7 @@ interface Props {
   readTime: string;
   imageSrc: string;
   imageAlt: string;
+  href?: string;
   bgClass?: string;
   textClass?: string;
   tagClass?: string;
@@ -21,6 +22,7 @@ const {
   readTime, 
   imageSrc, 
   imageAlt,
+  href = "#",
   bgClass = "bg-white hover:bg-surface-container-low",
   textClass = "text-secondary",
   tagClass = "text-primary",
@@ -30,17 +32,19 @@ const {
 } = Astro.props;
 ---
 
-<article class={`border-2 border-secondary flex flex-col group transition-colors ${bgClass}`}>
-  <div class="aspect-video overflow-hidden border-b-2 border-secondary bg-white">
-    <img alt={imageAlt} class={`w-full h-full object-cover ${imageClass}`} src={imageSrc} referrerpolicy="no-referrer" />
-  </div>
-  <div class="p-8 flex-grow flex flex-col">
-    <span class={`font-label text-[10px] uppercase tracking-widest mb-4 block ${tagClass}`}>{tag}</span>
-    <h2 class={`font-headline text-3xl font-bold mb-4 leading-tight ${textClass}`}>{title}</h2>
-    <p class={`font-body text-base mb-6 flex-grow ${textClass === 'text-white' ? 'opacity-90' : 'text-on-surface-variant'}`}>{description}</p>
-    <div class={`flex items-center justify-between border-t pt-6 ${textClass === 'text-white' ? 'border-secondary-fixed/30' : 'border-outline-variant'}`}>
-      <span class={`font-label text-[10px] uppercase ${textClass === 'text-white' ? 'text-secondary-fixed' : 'text-outline'}`}>{readTime}</span>
-      <button class={`font-label text-[10px] uppercase font-bold transition-colors ${buttonClass}`}>{buttonText}</button>
+<a href={href} class="block group">
+  <article class={`border-2 border-secondary flex flex-col h-full transition-colors ${bgClass}`}>
+    <div class="aspect-video overflow-hidden border-b-2 border-secondary bg-white">
+      <img alt={imageAlt} class={`w-full h-full object-cover ${imageClass}`} src={imageSrc} referrerpolicy="no-referrer" />
     </div>
-  </div>
-</article>
+    <div class="p-8 flex-grow flex flex-col">
+      <span class={`font-label text-[10px] uppercase tracking-widest mb-4 block ${tagClass}`}>{tag}</span>
+      <h2 class={`font-headline text-3xl font-bold mb-4 leading-tight ${textClass}`}>{title}</h2>
+      <p class={`font-body text-base mb-6 flex-grow ${textClass === 'text-white' ? 'opacity-90' : 'text-on-surface-variant'}`}>{description}</p>
+      <div class={`flex items-center justify-between border-t pt-6 ${textClass === 'text-white' ? 'border-secondary-fixed/30' : 'border-outline-variant'}`}>
+        <span class={`font-label text-[10px] uppercase ${textClass === 'text-white' ? 'text-secondary-fixed' : 'text-outline'}`}>{readTime}</span>
+        <span class={`font-label text-[10px] uppercase font-bold transition-colors ${buttonClass}`}>{buttonText}</span>
+      </div>
+    </div>
+  </article>
+</a>

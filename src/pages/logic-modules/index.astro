@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import LogicCard from '../../components/cards/LogicCard.astro';
+
+const logicModules = await getCollection('logicModules');
+const sortedModules = logicModules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
+---
+
+<BaseLayout title="Logic Modules | Philosophy Spread">
+  <Header />
+  
+  <main class="pt-32 px-6 md:px-12 pb-20">
+    <header class="max-w-7xl mx-auto mb-16">
+      <div class="font-label text-xs text-primary mb-4 tracking-[0.2em] uppercase">[ Foundation ]</div>
+      <h1 class="text-6xl md:text-8xl font-bold italic tracking-tighter text-secondary mb-6">Logic Modules</h1>
+      <p class="max-w-2xl text-xl text-on-surface-variant leading-relaxed font-body">
+        Master the fundamentals of formal logic, reasoning, and cognitive defense.
+      </p>
+    </header>
+
+    <section class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {sortedModules.map((module) => (
+          <a href={`/logic-modules/${module.id}`} class="block group">
+            <LogicCard 
+              moduleNumber={module.data.moduleNumber}
+              title={module.data.title} 
+              description={module.data.description} 
+            />
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

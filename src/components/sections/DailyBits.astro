@@ -1,5 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BitCard from '../cards/BitCard.astro';
+
+const bits = await getCollection('bits');
+const sortedBits = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf()).slice(0, 5);
 ---
 
 <section id="bits" class="py-24 px-8 md:px-12 bg-surface-container-low border-y-2 border-secondary">
@@ -9,34 +13,21 @@ import BitCard from '../cards/BitCard.astro';
         <h2 class="font-headline text-5xl mb-4">48hrs-bits</h2>
         <p class="font-label text-sm text-secondary uppercase tracking-widest">Dense fragments of wisdom updated bi-daily.</p>
       </div>
-      <span class="hidden md:inline-block font-label text-xs bg-primary text-on-primary px-3 py-1">LIVE FEED</span>
+      <a href="/bits/1" class="hidden md:inline-block font-label text-xs bg-primary text-on-primary px-3 py-1 hover:bg-secondary transition-colors">LIVE FEED</a>
     </div>
     
     <div class="columns-1 md:columns-2 lg:columns-3 gap-8">
-      <BitCard 
-        tag="#089 / METAPHYSICS" 
-        content="The Ship of Theseus is not a problem of wood, but of identity. Is the 'Self' a collection of parts or a continuity of memory?" 
-      />
-      <BitCard 
-        tag="#090 / ETHICS" 
-        content="Utilitarianism fails when it treats the Commissions as a mere variable in a global calculation of pleasure." 
-      />
-      <BitCard 
-        tag="#091 / EXISTENTIALISM" 
-        content="Existence precedes essence. You are the architect of your own meaning in a silent universe." 
-      />
-      <BitCard 
-        tag="#092 / PHENOMENOLOGY" 
-        content="Brackets are for math and Husserl. Suspend your assumptions about the external world to see the pure phenomenon." 
-      />
-      <BitCard 
-        tag="#093 / LOGIC" 
-        content="A straw man argument is a coward's shortcut. Steel-man your opponent if you truly seek truth." 
-      />
+      {sortedBits.map((bit) => (
+        <BitCard 
+          tag={`#${bit.data.bitNumber} / ${bit.data.category.toUpperCase()}`} 
+          content={bit.data.content} 
+          href={`/bits/${bit.id}`}
+        />
+      ))}
     </div>
 
     <div class="mt-8 flex md:hidden justify-center">
-      <span class="font-label text-xs bg-primary text-on-primary px-4 py-2">LIVE FEED</span>
+      <a href="/bits/1" class="font-label text-xs bg-primary text-on-primary px-4 py-2 hover:bg-secondary transition-colors">LIVE FEED</a>
     </div>
   </div>
 </section>

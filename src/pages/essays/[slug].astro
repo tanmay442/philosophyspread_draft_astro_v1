@@ -1,0 +1,92 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Blockquote from '../../components/mdx/Blockquote.astro';
+import EssayImage from '../../components/mdx/EssayImage.astro';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map(essay => ({
+    params: { slug: essay.id },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await render(essay);
+
+const components = {
+  Blockquote,
+  EssayImage,
+};
+---
+
+<BaseLayout title={`${essay.data.title} | Philosophy Spread`}>
+  <Header />
+  
+  <main class="pt-32 px-6 md:px-12 pb-20 max-w-4xl mx-auto">
+    <article>
+      <header class="mb-12 text-center">
+        <div class="font-label text-xs text-primary mb-4 tracking-[0.2em] uppercase">
+          [ {essay.data.category} ]
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold italic tracking-tighter text-secondary mb-6">
+          {essay.data.title}
+        </h1>
+        <p class="text-xl text-on-surface-variant leading-relaxed font-body mb-8">
+          {essay.data.description}
+        </p>
+        <div class="flex items-center justify-center space-x-4 font-label text-xs uppercase tracking-widest text-secondary">
+          <span>By {essay.data.author}</span>
+          <span>&bull;</span>
+          <span>{essay.data.readTime}</span>
+          <span>&bull;</span>
+          <time datetime={essay.data.pubDate.toISOString()}>
+            {essay.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+      </header>
+
+      <div class="max-w-3xl mx-auto mb-16">
+        <img 
+          src={essay.data.imageSrc} 
+          alt={essay.data.imageAlt} 
+          class="w-full aspect-video object-cover border-2 border-secondary filter grayscale contrast-125"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+
+      <div class="prose prose-xl prose-slate dark:prose-invert max-w-3xl mx-auto font-body text-secondary leading-relaxed
+        prose-headings:font-headline prose-headings:text-secondary prose-headings:font-bold
+        prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:border-b-2 prose-h2:border-secondary prose-h2:pb-4
+        prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
+        prose-p:mb-8 prose-p:text-xl prose-p:text-secondary/90
+        prose-a:text-primary prose-a:underline prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:text-secondary
+        prose-strong:text-secondary prose-strong:font-bold
+        prose-ul:list-square prose-ul:pl-6 prose-li:mb-3 prose-li:text-xl prose-li:text-secondary/90
+        prose-blockquote:not-italic prose-blockquote:border-none prose-blockquote:pl-0">
+        <Content components={components} />
+      </div>
+      
+      {essay.data.tags.length > 0 && (
+        <div class="mt-16 pt-8 border-t-2 border-secondary flex flex-wrap gap-2">
+          {essay.data.tags.map(tag => (
+            <span class="font-label text-[10px] uppercase tracking-widest border border-secondary px-3 py-1 text-secondary">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div class="mt-12 pt-8 border-t border-outline-variant text-center">
+        <a href="/essays/1" class="font-label text-xs text-primary uppercase tracking-widest hover:text-secondary transition-colors">
+          &lt;- Back to Essays
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

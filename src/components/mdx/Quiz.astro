@@ -1,0 +1,103 @@
+---
+import TruthTable from './TruthTable.astro';
+
+interface Question {
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  truthTable?: {
+    variables: string[];
+    rows: { inputs: string[]; result: string }[];
+  };
+}
+
+interface Props {
+  questions: Question[];
+}
+
+const { questions } = Astro.props;
+const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+---
+
+<div class="my-12 space-y-12 quiz-container">
+  {questions.map((q, qIndex) => (
+    <div class="border-2 border-secondary p-8 bg-surface-container-lowest relative" data-question-index={qIndex}>
+      <div class="absolute -top-3 -left-3 bg-primary text-on-primary font-label text-xs px-3 py-1 border-2 border-secondary">
+        Q{qIndex + 1}
+      </div>
+      
+      <h4 class="font-headline text-2xl mb-6">{q.question}</h4>
+      
+      {q.truthTable && (
+        <div class="mb-6">
+          <TruthTable variables={q.truthTable.variables} rows={q.truthTable.rows} />
+        </div>
+      )}
+      
+      <div class="space-y-3 options-container">
+        {q.options.map((opt, oIndex) => (
+          <button 
+            class="w-full text-left border-2 border-secondary p-4 flex items-center hover:bg-secondary/10 transition-all duration-200 option-btn group"
+            data-correct={oIndex === q.correctIndex ? 'true' : 'false'}
+          >
+            <span class="font-label text-xs text-primary w-8 shrink-0 group-hover:scale-110 transition-transform">{letters[oIndex]}.</span>
+            <span class="font-body text-lg">{opt}</span>
+          </button>
+        ))}
+      </div>
+      
+      <div class="mt-6 p-6 border-2 hidden feedback-container">
+        <div class="font-label text-sm uppercase tracking-widest mb-3 feedback-title"></div>
+        <p class="font-body text-lg opacity-90 leading-relaxed">{q.explanation}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.quiz-container').forEach(container => {
+    const questions = container.querySelectorAll('[data-question-index]');
+    
+    questions.forEach(q => {
+      const options = q.querySelectorAll('.option-btn');
+      const feedback = q.querySelector('.feedback-container');
+      const feedbackTitle = q.querySelector('.feedback-title');
+      let isAnsweredCorrectly = false;
+      
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (isAnsweredCorrectly) return; // Stop if already got it right
+          
+          const isCorrect = opt.getAttribute('data-correct') === 'true';
+          
+          if (isCorrect) {
+            isAnsweredCorrectly = true;
+            
+            // Mark correct option green
+            opt.classList.remove('hover:bg-secondary/10', 'border-secondary', 'bg-red-500/20', 'border-red-600', 'dark:border-red-500');
+            opt.classList.add('bg-green-500/20', 'border-green-600', 'dark:border-green-500');
+            
+            // Show explanation
+            if (feedback && feedbackTitle) {
+              feedback.classList.remove('hidden');
+              feedback.classList.add('border-green-600', 'dark:border-green-500', 'bg-green-500/10');
+              feedbackTitle.textContent = 'Correct - Explanation';
+              feedbackTitle.classList.add('text-green-700', 'dark:text-green-400');
+            }
+            
+            // Disable all options visually
+            options.forEach(o => {
+              o.classList.remove('cursor-pointer', 'hover:bg-secondary/10');
+              o.disabled = true;
+            });
+          } else {
+            // Mark wrong option red
+            opt.classList.remove('hover:bg-secondary/10', 'border-secondary');
+            opt.classList.add('bg-red-500/20', 'border-red-600', 'dark:border-red-500');
+          }
+        });
+      });
+    });
+  });
+</script>

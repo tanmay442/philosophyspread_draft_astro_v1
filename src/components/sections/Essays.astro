@@ -6,6 +6,14 @@ import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
 
 <section id="essays" class="py-24 px-8 md:px-12 bg-surface-container-low border-t-2 border-secondary">
   <div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-end mb-12">
+      <h2 class="font-headline text-5xl">Essays</h2>
+      <a href="/essays/1" class="hidden md:flex font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors items-center group">
+        View All Essays 
+        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
       <FeaturedEssay />
       
@@ -13,6 +21,13 @@ import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
         <TrendingList />
         <SubmitEssayCard />
       </div>
+    </div>
+
+    <div class="mt-12 flex md:hidden justify-center">
+      <a href="/essays/1" class="font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors flex items-center group">
+        View All Essays 
+        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
     </div>
   </div>
 </section>

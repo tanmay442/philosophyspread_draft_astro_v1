@@ -1,33 +1,53 @@
 ---
+import { getCollection } from 'astro:content';
 import HeroBlock from '../cards/HeroBlock.astro';
+
+// Fetch the latest from each collection
+const logicModules = await getCollection('logicModules');
+const latestLogic = logicModules.sort((a, b) => b.data.moduleNumber.localeCompare(a.data.moduleNumber))[0];
+
+const bits = await getCollection('bits');
+const latestBit = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf())[0];
+
+const essays = await getCollection('essays');
+const latestEssay = essays.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
 ---
 
 <div class="md:col-span-4 flex flex-col bg-surface-container-low">
   <!-- Block 1: Logic Module (Ice Blue) -->
-  <HeroBlock 
-    tag="MODULE L-01"
-    title="Formal Syllogisms"
-    description="Deconstruct arguments into their base premises to find the objective truth hidden in rhetoric."
-    bgClass="bg-[#D3E3FC]"
-    hoverBgClass="hover:bg-[#FFCCBC] hover:-translate-y-1"
-  />
+  {latestLogic && (
+    <HeroBlock 
+      tag={`MODULE ${latestLogic.data.moduleNumber}`}
+      title={latestLogic.data.title}
+      description={latestLogic.data.description}
+      bgClass="bg-[#D3E3FC]"
+      hoverBgClass="hover:bg-[#FFCCBC] hover:-translate-y-1"
+      href={`/logic-modules/${latestLogic.id}`}
+    />
+  )}
   
   <!-- Block 2: 48hrs-bits (White) -->
-  <HeroBlock 
-    tag="BIT B-48"
-    title="The Premeditation of Evils"
-    description="Stoic visualization techniques to armor the mind against the chaos of chance."
-    bgClass="bg-[#FFFFFF]"
-    hoverBgClass="hover:bg-[#00887A]/10 hover:-translate-y-1"
-  />
+  {latestBit && (
+    <HeroBlock 
+      tag={`BIT ${latestBit.data.bitNumber}`}
+      title={latestBit.data.category}
+      description={latestBit.data.content.substring(0, 100) + '...'}
+      bgClass="bg-[#FFFFFF]"
+      hoverBgClass="hover:bg-[#00887A]/10 hover:-translate-y-1"
+      href={`/bits/${latestBit.id}`}
+    />
+  )}
   
   <!-- Block 3: Essays Teaser (Muted Peach) -->
-  <HeroBlock 
-    tag="ESSAY E-12"
-    title="The Inner Citadel"
-    description="A meditation on maintaining psychological sovereignty in an era of persistent digital noise."
-    bgClass="bg-[#FFCCBC]"
-    hoverBgClass="hover:bg-[#006b5f] hover:-translate-y-1"
-    hoverTextClass="hover:text-white"
-  />
+  {latestEssay && (
+    <HeroBlock 
+      tag={`ESSAY`}
+      title={latestEssay.data.title}
+      description={latestEssay.data.description}
+      bgClass="bg-[#FFCCBC]"
+      hoverBgClass="hover:bg-[#006b5f] hover:-translate-y-1"
+      hoverTextClass="hover:text-white"
+      href={`/essays/${latestEssay.id}`}
+    />
+  )}
 </div>
