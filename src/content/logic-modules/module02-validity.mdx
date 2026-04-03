@@ -1,0 +1,165 @@
+---
+moduleNumber: "L-02"
+title: "Validity & Soundness"
+description: "Learn to distinguish between an argument's logical structure (validity) and its truthfulness (soundness), the two pillars of strong deductive reasoning."
+category: "Deduction"
+difficulty: "Beginner"
+prerequisites: ["L-01"]
+---
+
+export const quizData = [
+  {
+    question: "1. Consider the argument: \"1. All bacteria live on Jupiter. 2. E. coli are a type of bacteria. ∴ 3. E. coli live on Jupiter.\" How would you evaluate it?",
+    options: [
+      "Valid and Sound",
+      "Valid but Unsound",
+      "Invalid",
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The argument is <strong>Valid</strong> because its structure is perfect (it's a syllogism). However, it is <strong>Unsound</strong> because the first premise, \"All bacteria live on Jupiter,\" is false."
+  },
+  {
+    question: "2. Argument: \"If the fire alarm rings, the cat will hide. The cat is hiding. Therefore, the fire alarm must be ringing.\" This argument commits which fallacy?",
+    options: [
+      "Denying the Antecedent",
+      "Affirming the Consequent",
+      "This is a valid argument",
+    ],
+    correctIndex: 1,
+    feedback: "Correct. This is a classic case of <strong>Affirming the Consequent</strong>. The cat could be hiding for many other reasons (e.g., a loud noise outside, a stranger in the house). The conclusion does not logically follow from the premises."
+  },
+  {
+    question: "3. Argument: \"If someone accessed the server, they must know the password. Sarah does not know the password. Therefore, Sarah cannot have accessed the server.\" What rule of inference does this valid argument follow?",
+    options: [
+      "Modus Ponens",
+      "Disjunctive Syllogism",
+      "Modus Tollens",
+    ],
+    correctIndex: 2,
+    feedback: "Correct. This is a perfect example of <strong>Modus Tollens</strong>. Structure: If P (accessed server) then Q (knows password). Not Q (does not know password). Therefore, Not P (cannot have accessed server)."
+  }
+];
+
+## 1. Validity: The Skeleton of an Argument
+
+In deductive reasoning, we move from general premises to a specific, certain conclusion. The most important feature of a deductive argument is its **validity**.
+
+<div class="bg-primary/10 border-l-4 border-primary p-6 my-8">
+  <p>An argument is <strong>valid</strong> if and only if it is <strong>impossible</strong> for all of its premises to be true and its conclusion to be false at the same time. Validity is about the argument's <strong>structure</strong>, not the actual truth of its premises.</p>
+</div>
+
+If an argument's structure is valid, it guarantees that if you start with truth, you will end with truth. Consider this classic structure:
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p><span class="text-primary">1. All ancient Greeks were thinkers.</span> (Major Premise)</p>
+  <p><span class="text-primary">2. Archimedes was an ancient Greek.</span> (Minor Premise)</p>
+  <p><strong class="text-secondary">∴ 3. Archimedes was a thinker.</strong></p>
+</div>
+
+The structure here is flawless. If premises 1 and 2 are true, the conclusion *must* be true.
+
+## 2. Soundness: When Structure Meets Truth
+
+While validity is crucial, we also care about whether an argument is actually true. This is where **soundness** comes in.
+
+<div class="overflow-x-auto my-8">
+  <table class="w-full border-collapse border-2 border-secondary">
+    <thead class="bg-surface-container">
+      <tr>
+        <th class="border-2 border-secondary p-4 text-left text-primary font-label text-xs uppercase tracking-widest">Concept</th>
+        <th class="border-2 border-secondary p-4 text-left text-primary font-label text-xs uppercase tracking-widest">Structure (Validity)</th>
+        <th class="border-2 border-secondary p-4 text-left text-primary font-label text-xs uppercase tracking-widest">Premises</th>
+        <th class="border-2 border-secondary p-4 text-left text-primary font-label text-xs uppercase tracking-widest">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border-2 border-secondary p-4 font-semibold">Sound Argument</td>
+        <td class="border-2 border-secondary p-4 text-green-500">Valid</td>
+        <td class="border-2 border-secondary p-4">All True</td>
+        <td class="border-2 border-secondary p-4">The Archimedes argument above.</td>
+      </tr>
+      <tr>
+        <td class="border-2 border-secondary p-4 font-semibold">Unsound Argument</td>
+        <td class="border-2 border-secondary p-4 text-green-500">Valid</td>
+        <td class="border-2 border-secondary p-4">At Least One False</td>
+        <td class="border-2 border-secondary p-4">1. All fish can walk. (False)<br/>2. A tuna is a fish. (True)<br/>∴ 3. A tuna can walk. (False)</td>
+      </tr>
+      <tr>
+        <td class="border-2 border-secondary p-4 font-semibold">Invalid Argument</td>
+        <td class="border-2 border-secondary p-4 text-red-500">Invalid</td>
+        <td class="border-2 border-secondary p-4">(Doesn't Matter)</td>
+        <td class="border-2 border-secondary p-4">1. All eagles have wings.<br/>2. Some drones have wings.<br/>∴ 3. Some drones are eagles.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+An unsound argument can often be "rescued" by fixing its false premises through research. An invalid argument, however, has a broken structure and cannot be fixed, no matter how true its premises are. Such structurally broken arguments are called **fallacies**.
+
+## 3. Common Formal Fallacies
+
+Formal fallacies are errors in the logical structure of an argument. Two of the most common are Affirming the Consequent and Denying the Antecedent.
+
+### Affirming the Consequent
+
+This fallacy happens when you assume that because the "then" part of a rule is true, the "if" part must also be true. It wrongly reverses the direction of the rule. The core error is assuming a specific cause just because you see the expected effect, when many other causes could have produced the same effect.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p><strong>Structure:</strong> If P, then Q. Q is true. Therefore, P is true. (Incorrect!)</p>
+  <p class="mt-4"><strong>Example:</strong></p>
+  <p><span class="text-primary">1. If a person is a famous tech CEO, then they are wealthy.</span></p>
+  <p><span class="text-primary">2. Elon Musk is wealthy.</span></p>
+  <p><strong class="text-secondary">∴ 3. Elon Musk is a famous tech CEO.</strong></p>
+  <p class="mt-4 text-sm text-on-surface-variant"><strong>Explanation:</strong> While the conclusion happens to be true in reality, the <b>reasoning</b> is flawed. The premises do not logically force the conclusion. A person could be wealthy from inheritance, winning the lottery, or being a movie star. The argument wrongly concludes that being a tech CEO is the only path to wealth.</p>
+</div>
+
+### Denying the Antecedent
+
+This fallacy happens when you assume that because the "if" part of a rule is false, the "then" part must also be false. An "if-then" rule only tells you what happens when the "if" condition is met; it makes no promises about what happens when it's not met.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p><strong>Structure:</strong> If P, then Q. P is not true. Therefore, Q is not true. (Incorrect!)</p>
+  <p class="mt-4"><strong>Example:</strong></p>
+  <p><span class="text-primary">1. If an animal is a penguin, then it cannot fly.</span></p>
+  <p><span class="text-primary">2. An ostrich is not a penguin.</span></p>
+  <p><strong class="text-secondary">∴ 3. An ostrich can fly.</strong></p>
+  <p class="mt-4 text-sm text-on-surface-variant"><strong>Explanation:</strong> This conclusion is false. The rule is only about penguins. Since an ostrich is not a penguin, the rule doesn't apply to it at all. We can't conclude anything about an ostrich's ability to fly based on a rule about penguins. The argument is invalid because it tries to apply the rule where it's not relevant.</p>
+</div>
+
+## 4. Elementary Rules of Inference
+
+These are fundamental, valid argument forms that serve as the building blocks for more complex reasoning. Learning to recognize them is a key skill.
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">1. Modus Ponens (M.P.)</h4>
+    <p class="font-mono">If P then Q<br/>P<br/>∴ Q</p>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">2. Modus Tollens (M.T.)</h4>
+    <p class="font-mono">If P then Q<br/>Not Q<br/>∴ Not P</p>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">3. Hypothetical Syllogism (H.S.)</h4>
+    <p class="font-mono">If P then Q<br/>If Q then R<br/>∴ If P then R</p>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">4. Disjunctive Syllogism (D.S.)</h4>
+    <p class="font-mono">P or Q<br/>Not P<br/>∴ Q</p>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">5. Constructive Dilemma (C.D.)</h4>
+    <p class="font-mono">(If P then Q) and (If R then S)<br/>P or R<br/>∴ Q or S</p>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-lg mb-2">6. Simplification (Simp.)</h4>
+    <p class="font-mono">P and Q<br/>∴ P</p>
+  </div>
+</div>
+
+## 5. Test Your Skills
+
+Apply what you've learned to evaluate the following arguments.
+
+<InteractiveQuiz questions={quizData} />

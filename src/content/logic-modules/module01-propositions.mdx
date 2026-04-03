@@ -1,0 +1,200 @@
+---
+moduleNumber: "L-01"
+title: "Propositions & Arguments"
+description: "Master the fundamental building blocks of critical reasoning: propositions, arguments, indicator words, and complex argument analysis."
+category: "Deduction"
+difficulty: "Beginner"
+prerequisites: []
+---
+
+export const propQuiz = [
+  {
+    question: "1. \"Socrates was a human.\"",
+    options: ["Proposition", "Not a Proposition"],
+    correctIndex: 0,
+    feedback: "This is a proposition. It makes a factual claim about Socrates that is definitively true."
+  },
+  {
+    question: "2. \"Know thyself!\"",
+    options: ["Proposition", "Not a Proposition"],
+    correctIndex: 1,
+    feedback: "This is not a proposition. It's a command (an exhortation). It doesn't assert something that can be true or false."
+  },
+  {
+    question: "3. \"Nobody knows her true character.\"",
+    options: ["Proposition", "Not a Proposition"],
+    correctIndex: 0,
+    feedback: "This is a proposition. It makes a claim about the state of knowledge regarding someone's character. This claim could be true or false (e.g., if someone actually does know her character, the statement is false)."
+  }
+];
+
+export const pracQuiz = [
+  {
+    question: "1. \"If universal basic income is so good for the economy, no one should complain that it's funded by taxes.\" What is the implied conclusion of someone making this argument critically?",
+    options: [
+      "Universal basic income is good for the economy.",
+      "We should be wary of universal basic income because people do complain about the taxes.",
+      "Taxes are always bad."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The argument's structure is a subtle critique. It sets up a condition (\"If it's so good...\") and then points to a consequence (\"no one should complain...\"). The unstated fact is that people *do* complain, which undermines the initial condition. The real argument is against the policy."
+  },
+  {
+    question: "2. \"Smartwatches are more hassle than they are worth. You have to charge them daily, and on the rare occasion you use an advanced feature, you'd rather just use your phone.\" What is the main conclusion?",
+    options: [
+      "You have to charge smartwatches daily.",
+      "You would rather use your phone for advanced features.",
+      "Smartwatches are more hassle than they are worth."
+    ],
+    correctIndex: 2,
+    feedback: "Correct. This argument begins with its conclusion. The subsequent sentences about charging and phone use are the premises offered as reasons to believe the first sentence."
+  },
+  {
+    question: "3. \"The soul is immortal, so there's no such thing as a dead soul.\" What is the unstated premise required for this argument to work?",
+    options: [
+      "Nothing that is immortal can be dead.",
+      "All souls go to heaven.",
+      "Souls are a religious concept."
+    ],
+    correctIndex: 0,
+    feedback: "Correct. This is an unstated definitional premise. The argument hinges on the idea that \"immortal\" and \"dead\" are mutually exclusive concepts. Premise: The soul is immortal. [Unstated Premise: Immortality means cannot be dead.] Conclusion: There are no dead souls."
+  },
+  {
+    question: "4. \"It doesn't matter who you vote for, because the government always gets in.\" What is the premise of this argument?",
+    options: [
+      "It doesn't matter who you vote for.",
+      "The government always gets in.",
+      "Voting is a civic duty."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The word \"because\" is a premise indicator. The claim that \"the government always gets in\" is offered as the reason (the premise) for the cynical conclusion that your vote doesn't matter. (The next module will explore why this is a weak argument!)"
+  }
+];
+
+## What is Critical Reasoning?
+
+Much of our daily life is guided by instinct, emotion, or gut feelings. But when we stop to think reflectively about what to believe or how to act, we engage in **critical reasoning**. According to educator Edward Glaser, this process involves three key elements:
+
+1. An **attitude** of being disposed to thoughtfully consider problems and subjects.
+2. **Knowledge** of the methods of logical inquiry and reasoning.
+3. **Skill** in applying those methods.
+
+This module focuses on building your knowledge and skill, starting with the most basic components of any logical discussion.
+
+## 1. The Building Block: Propositions
+
+A **proposition** is the cornerstone of logical reasoning. It's a declarative statement that possesses a **truth value**—meaning it must be either true or false, even if we don't currently know which. It is the core meaning or content of a statement.
+
+This distinguishes propositions from other types of sentences:
+
+- **Questions:** "Is the sun shining?" (Asks for information, isn't true or false)
+- **Commands:** "Put the book on the table." (Gives an order, isn't true or false)
+- **Exclamations:** "Wow, a supernova!" (Expresses emotion, isn't true or false)
+
+<div class="bg-primary/10 border-l-4 border-primary p-6 my-8">
+  <p class="font-semibold mb-2 text-primary">The Fundamental Test:</p>
+  <p>Ask yourself: "Could this statement, in principle, be proven true or false?" If yes, it's a proposition.</p>
+</div>
+
+### Practice: Identifying Propositions
+
+Test your understanding. Which of the following express a proposition?
+
+<InteractiveQuiz questions={propQuiz} />
+
+## 2. Constructing Arguments
+
+An **argument** in logic is not a dispute. It is a structured set of propositions where one or more statements (the **premises**) are offered as reasons to believe another statement (the **conclusion**).
+
+### Logic vs. Rhetoric
+
+Arguments can be used for different purposes. **Rhetoric** is the art of persuasion, using arguments to "win" a debate or convince an audience, sometimes appealing to emotion. In contrast, **philosophy** uses arguments as a tool for learning and discovering truth. Our focus here is on the logical structure of arguments, not their persuasive power.
+
+### Premises and Conclusions
+
+The role a proposition plays depends on the context. A statement can be a conclusion in one argument and a premise in another.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: Shifting Roles</p>
+  <p><strong>Argument A:</strong></p>
+  <p><span class="text-primary">1. All humans are mortal.</span></p>
+  <p><span class="text-primary">2. Socrates is human.</span></p>
+  <p><strong class="text-secondary">∴ 3. Therefore, Socrates is mortal.</strong></p>
+  <hr class="border-secondary/30 my-4" />
+  <p><strong>Argument B:</strong></p>
+  <p><span class="text-primary">1. Socrates is mortal.</span> (Now a premise)</p>
+  <p><span class="text-primary">2. All mortals have finite lifespans.</span></p>
+  <p><strong class="text-secondary">∴ 3. Therefore, Socrates has a finite lifespan.</strong></p>
+</div>
+
+## 3. Spotting Arguments: Indicator Words
+
+English provides helpful clues for identifying premises and conclusions. While not always present, these indicator words are strong signals of an argument's structure.
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-primary mb-4 text-lg">Premise Indicators</h4>
+    <ul class="list-none p-0 columns-2 gap-4 font-body">
+      <li>since</li>
+      <li>because</li>
+      <li>for</li>
+      <li>as</li>
+      <li>given that</li>
+      <li>seeing that</li>
+      <li>for the reason that</li>
+      <li>inasmuch as</li>
+      <li>owing to</li>
+      <li>if...</li>
+    </ul>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-6">
+    <h4 class="font-bold text-secondary mb-4 text-lg">Conclusion Indicators</h4>
+    <ul class="list-none p-0 columns-2 gap-4 font-body">
+      <li>therefore</li>
+      <li>thus</li>
+      <li>hence</li>
+      <li>so</li>
+      <li>consequently</li>
+      <li>it follows that</li>
+      <li>we may conclude</li>
+      <li>as a result</li>
+      <li>which means that</li>
+      <li>...then</li>
+    </ul>
+  </div>
+</div>
+
+## 4. Advanced Analysis
+
+Real-world arguments are rarely as neat as our examples. They often contain unstated assumptions, multiple steps, and persuasive language that isn't part of the core logic.
+
+### Enthymemes: The Unstated Premise
+
+An **enthymeme** is an argument with a missing or unstated premise. The speaker assumes the audience will fill in the blank. To properly evaluate the argument, we must make this hidden premise explicit.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: Celebrity Endorsement</p>
+  <p class="italic">"Jennifer Aniston's new skincare line has sold out everywhere. You should try it."</p>
+  <p class="mt-4"><strong>Stated Premise:</strong> Jennifer Aniston's skincare line is very popular.</p>
+  <p><strong>Conclusion:</strong> You should try it.</p>
+  <p><strong>Unstated Premise:</strong> You should try products that are popular and endorsed by celebrities known for their appearance.</p>
+  <p class="mt-2 text-sm text-on-surface-variant">By stating the hidden premise, we can see the argument relies on an appeal to popularity and authority, which we can then evaluate.</p>
+</div>
+
+### Chain Arguments & Subordinate Conclusions
+
+In a complex argument, the conclusion of one step can become a premise for the next. This creates a chain of reasoning. The intermediate conclusions are called **subordinate conclusions**.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: Chain of Consequences</p>
+  <p class="italic">"Watch your thoughts, for they become words. Watch your words, for they become actions. Therefore, watch your thoughts, for they become your actions."</p>
+  <p class="mt-4"><strong>Premise 1:</strong> Your thoughts become words.</p>
+  <p><strong>Subordinate Conclusion 1 / Premise 2:</strong> Your words become actions.</p>
+  <p><strong>Main Conclusion:</strong> Your thoughts become your actions.</p>
+</div>
+
+## 5. Test Your Skills: Practice Arguments
+
+Apply what you've learned. For each example, identify the premises (stated and unstated) and the conclusion.
+
+<InteractiveQuiz questions={pracQuiz} />

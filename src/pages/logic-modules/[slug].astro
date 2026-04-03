@@ -3,10 +3,10 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
-import TruthTable from '../../components/mdx/TruthTable.astro';
+import LogicTable from '../../components/mdx/LogicTable.astro';
 import FormalProof from '../../components/mdx/FormalProof.astro';
 import CodeBlock from '../../components/mdx/CodeBlock.astro';
-import Quiz from '../../components/mdx/Quiz.astro';
+import InteractiveQuiz from '../../components/mdx/InteractiveQuiz.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
 
 export async function getStaticPaths() {
@@ -29,10 +29,10 @@ const { module, prevModule, nextModule } = Astro.props;
 const { Content } = await render(module);
 
 const components = {
-  TruthTable,
+  LogicTable,
   FormalProof,
   CodeBlock,
-  Quiz,
+  InteractiveQuiz,
   Blockquote,
 };
 ---
@@ -77,7 +77,8 @@ const components = {
         prose-p:mb-8 prose-p:text-xl prose-p:text-secondary/90
         prose-a:text-primary prose-a:underline prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:text-secondary
         prose-strong:text-secondary prose-strong:font-bold
-        prose-ul:list-square prose-ul:pl-6 prose-li:mb-3 prose-li:text-xl prose-li:text-secondary/90">
+        prose-ul:list-square prose-ul:pl-6 prose-li:mb-3 prose-li:text-xl prose-li:text-secondary/90
+        prose-code:text-secondary prose-code:bg-surface-container prose-code:px-2 prose-code:py-0.5 prose-code:rounded-sm">
         <Content components={components} />
       </div>
       

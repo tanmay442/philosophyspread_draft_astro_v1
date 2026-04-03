@@ -1,0 +1,41 @@
+---
+interface Row {
+  inputs: string[];
+  result: string;
+}
+
+interface Props {
+  variables: string[];
+  rows: Row[];
+}
+
+const { variables, rows } = Astro.props;
+---
+
+<div class="my-8 overflow-x-auto">
+  <table class="w-full border-collapse border-2 border-secondary bg-surface-container-lowest">
+    <thead>
+      <tr class="bg-surface-container">
+        {variables.map((variable) => (
+          <th class="border-2 border-secondary p-3 text-center font-label text-xs uppercase tracking-widest text-primary">
+            {variable}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.inputs.map((input) => (
+            <td class="border-2 border-secondary p-3 text-center font-body text-lg text-secondary">
+              {input}
+            </td>
+          ))}
+          <td class="border-2 border-secondary p-3 text-center font-label text-sm font-bold text-secondary bg-surface-container-low">
+            {row.result}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

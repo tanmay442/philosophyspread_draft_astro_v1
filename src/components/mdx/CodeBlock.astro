@@ -7,9 +7,6 @@ interface Props {
 const { code, language = 'logic' } = Astro.props;
 ---
 
-<div class="my-8 relative group">
-  <div class="absolute top-0 right-0 bg-secondary text-surface px-3 py-1 font-label text-[10px] uppercase tracking-widest">
-    {language}
-  </div>
-  <pre class="border-2 border-secondary bg-surface-container-low p-6 overflow-x-auto"><code class="font-mono text-sm text-on-surface leading-relaxed">{code}</code></pre>
+<div class="my-8 bg-surface-container-low border-l-4 border-secondary p-6">
+  <pre class="font-mono text-lg text-secondary overflow-x-auto whitespace-pre-wrap"><code>{code}</code></pre>
 </div>

@@ -1,15 +1,9 @@
 ---
-import TruthTable from './TruthTable.astro';
-
 interface Question {
   question: string;
   options: string[];
   correctIndex: number;
-  explanation: string;
-  truthTable?: {
-    variables: string[];
-    rows: { inputs: string[]; result: string }[];
-  };
+  feedback: string;
 }
 
 interface Props {
@@ -20,35 +14,6 @@ const { questions } = Astro.props;
 const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 ---
 
-<!--
-  =====================================================================
-  HOW TO IMPLEMENT THIS IN AN MDX FILE:
-  =====================================================================
-  
-  1. Import the component at the top of your .mdx file:
-     import InteractiveQuiz from '../../components/InteractiveQuiz.astro'; // Adjust path
-  
-  2. Define your quiz data array directly in the MDX file (or import it):
-     export const myQuestions = [
-       {
-         question: "1. Consider the argument:...",
-         options: [
-           "Valid and Sound",
-           "Valid but Unsound",
-           "Invalid"
-         ],
-         correctIndex: 1, // 0-based index of the correct answer
-         explanation: "Correct. The argument is <strong>Valid</strong> because...",
-         // truthTable: { ... } // Optional
-       },
-       // Add more questions as needed...
-     ];
-  
-  3. Render the component in your MDX content:
-     <InteractiveQuiz questions={myQuestions} />
-  =====================================================================
--->
-
 <div class="my-12 space-y-12 quiz-container">
   {questions.map((q, qIndex) => (
     <div class="border-2 border-secondary p-8 bg-surface-container-lowest relative question-block" data-question-index={qIndex}>
@@ -56,19 +21,12 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
         Q{qIndex + 1}
       </div>
       
-      <!-- Using set:html allows bolding and other HTML tags like the React dangerouslySetInnerHTML -->
       <h4 class="font-headline text-2xl mb-6" set:html={q.question}></h4>
-      
-      {q.truthTable && (
-        <div class="mb-6">
-          <TruthTable variables={q.truthTable.variables} rows={q.truthTable.rows} />
-        </div>
-      )}
       
       <div class="space-y-3 options-container">
         {q.options.map((opt, oIndex) => (
           <button 
-            class="w-full text-left border-2 border-secondary p-4 flex items-center transition-all duration-200 ease-in-out transform hover:scale-[1.02] hover:bg-secondary/10 option-btn group rounded-md"
+            class="w-full text-left border-2 border-secondary p-4 flex items-center transition-all duration-200 ease-in-out transform hover:scale-[1.02] hover:bg-secondary/10 option-btn group rounded-md cursor-pointer"
             data-correct={oIndex === q.correctIndex ? 'true' : 'false'}
           >
             <span class="font-label text-xs text-primary w-8 shrink-0 group-hover:scale-110 transition-transform option-letter">{letters[oIndex]}.</span>
@@ -77,10 +35,8 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
         ))}
       </div>
       
-      <!-- Hidden template to store the correct explanation HTML for JavaScript -->
       <div class="hidden explanation-template" set:html={q.explanation}></div>
 
-      <!-- Feedback Container (React style interactions) -->
       <div class="mt-4 p-4 rounded-lg text-sm hidden feedback-container transition-all duration-300">
         <span class="feedback-content font-body text-base"></span>
       </div>
@@ -100,22 +56,18 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
       
       let isAnsweredCorrectly = false;
 
-      // Define class states to match the React interactive design
       const baseClasses = ['border-secondary', 'hover:bg-secondary/10'];
       const correctClasses = ['bg-green-500/20', 'border-green-500', 'text-green-700', 'dark:text-green-400', 'font-bold'];
       const wrongClasses = ['bg-red-500/20', 'border-red-500', 'text-red-700', 'dark:text-red-400'];
       
       options.forEach(opt => {
         opt.addEventListener('click', () => {
-          // Stop if the user already found the right answer
           if (isAnsweredCorrectly) return; 
           
-          // Reset all options visual state first (removes red from previous wrong clicks)
           options.forEach(o => {
             o.classList.remove(...correctClasses, ...wrongClasses);
             o.classList.add(...baseClasses);
             
-            // Reset text color for the letter indicator
             const letter = o.querySelector('.option-letter');
             if(letter) {
               letter.classList.remove('text-green-700', 'dark:text-green-400', 'text-red-700', 'dark:text-red-400');
@@ -129,7 +81,6 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
           if (isCorrect) {
             isAnsweredCorrectly = true;
             
-            // Apply correct styling
             opt.classList.remove(...baseClasses);
             opt.classList.add(...correctClasses);
             if (currentLetter) {
@@ -137,17 +88,14 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
               currentLetter.classList.add('text-green-700', 'dark:text-green-400');
             }
             
-            // Show correct feedback
             feedback.className = 'mt-4 p-4 rounded-lg text-sm block transition-all duration-300 bg-green-900/30 text-green-700 dark:text-green-400 feedback-container';
             feedbackContent.innerHTML = explanationHtml;
             
-            // Lock all options and disable hover effects
             options.forEach(o => {
               o.classList.remove('cursor-pointer', 'hover:scale-[1.02]', 'hover:bg-secondary/10');
-              o.disabled = true;
+              o.classList.add('cursor-not-allowed');
             });
           } else {
-            // Apply wrong styling to the clicked option
             opt.classList.remove(...baseClasses);
             opt.classList.add(...wrongClasses);
             if (currentLetter) {
@@ -155,7 +103,6 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
               currentLetter.classList.add('text-red-700', 'dark:text-red-400');
             }
             
-            // Show wrong feedback message
             feedback.className = 'mt-4 p-4 rounded-lg text-sm block transition-all duration-300 bg-red-900/30 text-red-700 dark:text-red-400 feedback-container';
             feedbackContent.innerHTML = "Not quite. Think about the structure and truth of the premises, then try again!";
           }

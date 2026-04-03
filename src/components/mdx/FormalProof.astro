@@ -1,26 +1,32 @@
 ---
+interface Step {
+  line: string;
+  formula: string;
+  justification: string;
+}
+
 interface Props {
-  steps: { line: string; formula: string; justification: string }[];
+  steps: Step[];
 }
 
 const { steps } = Astro.props;
 ---
 
-<div class="overflow-x-auto my-8">
-  <table class="w-full border-collapse border-2 border-secondary bg-surface-container-low text-on-surface">
-    <thead>
-      <tr>
-        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary w-16 text-center">#</th>
-        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary text-left">Formula</th>
-        <th class="border-2 border-secondary p-4 font-label text-xs uppercase tracking-widest text-secondary text-left">Justification</th>
+<div class="my-8 overflow-x-auto bg-surface-container-lowest border-2 border-secondary p-6">
+  <table class="w-full text-left">
+    <thead class="bg-surface-container">
+      <tr class="border-b-2 border-secondary">
+        <th class="p-3 font-label text-xs uppercase tracking-widest text-primary w-16">Line</th>
+        <th class="p-3 font-label text-xs uppercase tracking-widest text-primary">Statement</th>
+        <th class="p-3 font-label text-xs uppercase tracking-widest text-primary">Justification</th>
       </tr>
     </thead>
     <tbody>
-      {steps.map((step) => (
-        <tr class="hover:bg-secondary/5 transition-colors group">
-          <td class="border-2 border-secondary p-4 text-center font-mono text-sm text-primary">{step.line}</td>
-          <td class="border-2 border-secondary p-4 font-mono text-sm group-hover:text-primary transition-colors">{step.formula}</td>
-          <td class="border-2 border-secondary p-4 font-body text-sm italic opacity-80">{step.justification}</td>
+      {steps.map((step, index) => (
+        <tr class={`border-b border-secondary/30 ${index === steps.length - 1 ? 'bg-secondary/10' : ''}`}>
+          <td class="p-3 font-label text-sm text-secondary">{step.line}</td>
+          <td class="p-3 font-mono text-lg text-secondary">{step.formula}</td>
+          <td class="p-3 font-body text-sm text-on-surface-variant italic">{step.justification}</td>
         </tr>
       ))}
     </tbody>

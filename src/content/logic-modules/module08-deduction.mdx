@@ -1,0 +1,202 @@
+---
+moduleNumber: "L-08"
+title: "The Method of Deduction"
+description: "Master the art of formal proof. This module introduces the 19 rules of inference and replacement."
+category: "Deduction"
+difficulty: "Intermediate"
+prerequisites: ["L-01", "L-02"]
+---
+
+export const quizData = [
+  {
+    question: "You are given the premises P - Q and ~Q. What can you immediately deduce, and by which rule?",
+    options: [
+      "~P, by Disjunctive Syllogism (D.S.)",
+      "~P, by Modus Tollens (M.T.)",
+      "~Q, by Simplification (Simp.)",
+    ],
+    correctIndex: 1,
+    feedback: "Correct. This is a classic application of Modus Tollens."
+  },
+  {
+    question: "In a proof, you have the line ~(P v Q). Which rule allows you to change this to ~P * ~Q?",
+    options: [
+      "De Morgan's Theorem (De M.)",
+      "Distribution (Dist.)",
+      "Commutation (Com.)",
+    ],
+    correctIndex: 0,
+    feedback: "Correct. De Morgan's theorem provides the rule for negating conjunctions and disjunctions."
+  },
+  {
+    question: "What is the key difference between Rules of Inference and Rules of Replacement?",
+    options: [
+      "Inference rules are for disjunctions",
+      "Replacement rules can only be used at the start",
+      "Inference rules apply to whole lines only, Replacement rules can apply to parts",
+    ],
+    correctIndex: 2,
+    feedback: "Correct. This is the crucial strategic difference."
+  },
+  {
+    question: "To prove the argument A therefore A v B, which rule is required?",
+    options: [
+      "Simplification (Simp.)",
+      "Addition (Add.)",
+      "Conjunction (Conj.)",
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The rule of Addition allows you to create a disjunction from a single true statement."
+  }
+];
+
+## 1. Beyond Truth Tables: The Need for Proofs
+
+In the previous modules, you learned how truth tables can be used to determine the validity of any deductive argument. However, for an argument with five or more simple statements, a truth table would require 32 rows or more. This is not only tedious but impractical.
+
+Instead, we can prove an argument's validity by deducing its conclusion from its premises in a series of short, simple steps. This is the **method of deduction**.
+
+## 2. Understanding the Symbols
+
+<div class="space-y-6 my-8">
+  <div>
+    <p><strong>Negation: ~ (the "tilde")</strong></p>
+    <p class="pl-4 text-on-surface-variant">This means "not".</p>
+  </div>
+  <div>
+    <p><strong>Conjunction: * (the "dot")</strong></p>
+    <p class="pl-4 text-on-surface-variant">This means "and".</p>
+  </div>
+  <div>
+    <p><strong>Disjunction: v (the "wedge")</strong></p>
+    <p class="pl-4 text-on-surface-variant">This means "or".</p>
+  </div>
+  <div>
+    <p><strong>Implication: - (the arrow)</strong></p>
+    <p class="pl-4 text-on-surface-variant">This means "if... then...".</p>
+  </div>
+  <div>
+    <p><strong>Equivalence: = (the equals sign)</strong></p>
+    <p class="pl-4 text-on-surface-variant">This means "if and only if".</p>
+  </div>
+</div>
+
+## 3. The First 9 Tools: Rules of Inference
+
+The **Rules of Inference** are the fundamental, valid moves you are allowed to make.
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">1. Modus Ponens (M.P.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">If P then Q
+P
+ therefore Q</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">2. Modus Tollens (M.T.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">If P then Q
+Not Q
+ therefore Not P</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">3. Hypothetical Syllogism (H.S.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">If P then Q
+If Q then R
+ therefore If P then R</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">4. Disjunctive Syllogism (D.S.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">P or Q
+Not P
+ therefore Q</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">5. Constructive Dilemma (C.D.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">(If P then Q) and (If R then S)
+P or R
+ therefore Q or S</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">6. Simplification (Simp.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">P and Q
+ therefore P</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">7. Conjunction (Conj.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">P
+Q
+ therefore P and Q</pre>
+  </div>
+  <div class="bg-surface-container-low border-2 border-secondary p-4">
+    <h4 class="font-bold text-lg mb-2">8. Addition (Add.)</h4>
+    <pre class="bg-surface-container p-2 font-mono text-sm">P
+ therefore P or Q</pre>
+  </div>
+</div>
+
+## 4. Formal Proofs in Action
+
+A **formal proof of validity** is a sequence of statements where each step is either a premise or follows from the preceding steps by one of the valid rules.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 mt-8">
+  <p class="text-primary mb-2 font-semibold">Example Proof</p>
+  <p>If it is a tree, it has roots. If it has roots, it absorbs minerals. It is a tree. Therefore, it absorbs minerals.</p>
+  <FormalProof 
+    steps={[
+      { line: "1", formula: "T - R", justification: "Premise" },
+      { line: "2", formula: "R - M", justification: "Premise" },
+      { line: "3", formula: "T", justification: "Premise" },
+      { line: "4", formula: "T - M", justification: "1, 2, H.S." },
+      { line: "5", formula: "M", justification: "4, 3, M.P." }
+    ]}
+  />
+</div>
+
+## 5. Rules of Replacement
+
+The Rules of Replacement are based on logical equivalence.
+
+<div class="space-y-6 my-8">
+  <div>
+    <h4 class="font-bold text-lg mb-2">1. De Morgan's Theorems (De M.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">~(P * Q) = (~P v ~Q)
+~(P v Q) = (~P * ~Q)</pre>
+  </div>
+  <div>
+    <h4 class="font-bold text-lg mb-2">2. Commutation (Com.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">(P v Q) = (Q v P)
+(P * Q) = (Q * P)</pre>
+  </div>
+  <div>
+    <h4 class="font-bold text-lg mb-2">3. Double Negation (D.N.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">P = ~~P</pre>
+  </div>
+  <div>
+    <h4 class="font-bold text-lg mb-2">4. Transposition (Trans.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">(P - Q) = (~Q - ~P)</pre>
+  </div>
+  <div>
+    <h4 class="font-bold text-lg mb-2">5. Material Implication (Impl.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">(P - Q) = (~P v Q)</pre>
+  </div>
+  <div>
+    <h4 class="font-bold text-lg mb-2">6. Tautology (Taut.)</h4>
+    <pre class="bg-surface-container p-3 font-mono text-sm">P = (P v P)
+P = (P * P)</pre>
+  </div>
+</div>
+
+## 6. Strategy and Technique
+
+<ul class="list-disc pl-8 space-y-2 mt-6">
+  <li><strong>Start Simple:</strong> Look for immediate sub-conclusions from premises.</li>
+  <li><strong>Work Backwards:</strong> Look at your conclusion and work backwards.</li>
+  <li><strong>Eliminate Mismatches:</strong> Remove letters in premises but not in conclusion.</li>
+  <li><strong>Introduce What's Missing:</strong> Add letters in conclusion but not in premises.</li>
+</ul>
+
+## 7. Test Your Skills
+
+Apply what you have learned about the rules of deduction.
+
+<InteractiveQuiz questions={quizData} />
