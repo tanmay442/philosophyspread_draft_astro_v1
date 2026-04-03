@@ -7,6 +7,7 @@ import TruthTable from '../../components/mdx/TruthTable.astro';
 import FormalProof from '../../components/mdx/FormalProof.astro';
 import CodeBlock from '../../components/mdx/CodeBlock.astro';
 import Quiz from '../../components/mdx/Quiz.astro';
+import Blockquote from '../../components/mdx/Blockquote.astro';
 
 export async function getStaticPaths() {
   const modules = await getCollection('logicModules');
@@ -32,6 +33,7 @@ const components = {
   FormalProof,
   CodeBlock,
   Quiz,
+  Blockquote,
 };
 ---
 
