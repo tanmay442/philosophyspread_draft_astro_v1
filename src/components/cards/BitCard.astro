@@ -15,12 +15,12 @@ const {
   content, 
   href = "#",
   bgClass = "bg-white",
-  contentClass = "font-headline text-2xl leading-tight text-secondary font-semibold group-hover:italic transition-all",
+  contentClass = "font-headline text-2xl leading-tight text-secondary font-semibold origin-left transition-transform duration-200 group-hover:[transform:skewX(-6deg)]",
   icon
 } = Astro.props;
 ---
 
-<div class={`relative break-inside-avoid border-2 border-secondary p-8 transition-all duration-200 hard-offset-teal hover:bg-tertiary-fixed cursor-pointer group mb-8 ${bgClass}`}>
+<div class={`relative break-inside-avoid border-2 border-secondary p-8 transition-[transform,box-shadow,background-color] duration-200 hard-offset-teal hover:bg-tertiary-fixed cursor-pointer group mb-8 ${bgClass}`}>
   <a href={href} class="absolute inset-0 z-10"></a>
   <div class="flex justify-between items-start border-b border-outline-variant pb-4 mb-4">
     <span class="font-label text-[10px] font-bold text-primary">{tag}</span>
