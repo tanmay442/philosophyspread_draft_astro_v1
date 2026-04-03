@@ -16,28 +16,28 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 <div class="my-12 space-y-12 quiz-container">
   {questions.map((q, qIndex) => (
-    <div class="border-2 border-secondary p-8 bg-surface-container-lowest relative question-block" data-question-index={qIndex}>
-      <div class="absolute -top-3 -left-3 bg-primary text-on-primary font-label text-xs px-3 py-1 border-2 border-secondary">
+    <div class="border-2 border-outline p-8 bg-white relative question-block" data-question-index={qIndex}>
+      <div class="absolute -top-3 -left-3 bg-secondary text-on-secondary font-label text-xs px-3 py-1 border-2 border-outline">
         Q{qIndex + 1}
       </div>
       
-      <h4 class="font-headline text-2xl mb-6" set:html={q.question}></h4>
+      <h4 class="font-headline text-2xl mb-6 text-on-surface" set:html={q.question}></h4>
       
       <div class="space-y-3 options-container">
         {q.options.map((opt, oIndex) => (
           <button 
-            class="w-full text-left border-2 border-secondary p-4 flex items-center transition-all duration-200 ease-in-out transform hover:scale-[1.02] hover:bg-secondary/10 option-btn group rounded-md cursor-pointer"
+            class="w-full text-left border-2 border-outline p-4 flex items-center transition-all duration-200 ease-in-out transform hover:scale-[1.02] hover:bg-surface-container-low option-btn group cursor-pointer"
             data-correct={oIndex === q.correctIndex ? 'true' : 'false'}
           >
             <span class="font-label text-xs text-primary w-8 shrink-0 group-hover:scale-110 transition-transform option-letter">{letters[oIndex]}.</span>
-            <span class="font-body text-lg" set:html={opt}></span>
+            <span class="font-body text-lg text-on-surface" set:html={opt}></span>
           </button>
         ))}
       </div>
       
-      <div class="hidden explanation-template" set:html={q.explanation}></div>
+      <div class="hidden explanation-template" set:html={q.feedback}></div>
 
-      <div class="mt-4 p-4 rounded-lg text-sm hidden feedback-container transition-all duration-300">
+      <div class="mt-4 p-4 text-sm hidden feedback-container transition-all duration-300">
         <span class="feedback-content font-body text-base"></span>
       </div>
     </div>
@@ -56,9 +56,9 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
       
       let isAnsweredCorrectly = false;
 
-      const baseClasses = ['border-secondary', 'hover:bg-secondary/10'];
-      const correctClasses = ['bg-green-500/20', 'border-green-500', 'text-green-700', 'dark:text-green-400', 'font-bold'];
-      const wrongClasses = ['bg-red-500/20', 'border-red-500', 'text-red-700', 'dark:text-red-400'];
+      const baseClasses = ['border-outline', 'hover:bg-surface-container-low'];
+      const correctClasses = ['bg-green-100', 'border-green-600', 'text-green-800', 'font-bold'];
+      const wrongClasses = ['bg-red-100', 'border-red-600', 'text-red-800'];
       
       options.forEach(opt => {
         opt.addEventListener('click', () => {
@@ -70,7 +70,7 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
             
             const letter = o.querySelector('.option-letter');
             if(letter) {
-              letter.classList.remove('text-green-700', 'dark:text-green-400', 'text-red-700', 'dark:text-red-400');
+              letter.classList.remove('text-green-800', 'text-red-800');
               letter.classList.add('text-primary');
             }
           });
@@ -85,14 +85,14 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
             opt.classList.add(...correctClasses);
             if (currentLetter) {
               currentLetter.classList.remove('text-primary');
-              currentLetter.classList.add('text-green-700', 'dark:text-green-400');
+              currentLetter.classList.add('text-green-800');
             }
             
-            feedback.className = 'mt-4 p-4 rounded-lg text-sm block transition-all duration-300 bg-green-900/30 text-green-700 dark:text-green-400 feedback-container';
+            feedback.className = 'mt-4 p-4 text-sm block transition-all duration-300 bg-green-100 text-green-800 feedback-container';
             feedbackContent.innerHTML = explanationHtml;
             
             options.forEach(o => {
-              o.classList.remove('cursor-pointer', 'hover:scale-[1.02]', 'hover:bg-secondary/10');
+              o.classList.remove('cursor-pointer', 'hover:scale-[1.02]', 'hover:bg-surface-container-low');
               o.classList.add('cursor-not-allowed');
             });
           } else {
@@ -100,10 +100,10 @@ const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
             opt.classList.add(...wrongClasses);
             if (currentLetter) {
               currentLetter.classList.remove('text-primary');
-              currentLetter.classList.add('text-red-700', 'dark:text-red-400');
+              currentLetter.classList.add('text-red-800');
             }
             
-            feedback.className = 'mt-4 p-4 rounded-lg text-sm block transition-all duration-300 bg-red-900/30 text-red-700 dark:text-red-400 feedback-container';
+            feedback.className = 'mt-4 p-4 text-sm block transition-all duration-300 bg-red-100 text-red-800 feedback-container';
             feedbackContent.innerHTML = "Not quite. Think about the structure and truth of the premises, then try again!";
           }
         });

@@ -12,10 +12,10 @@ interface Props {
 const { steps } = Astro.props;
 ---
 
-<div class="my-8 overflow-x-auto bg-surface-container-lowest border-2 border-secondary p-6">
+<div class="my-8 overflow-x-auto bg-white border-2 border-outline p-6">
   <table class="w-full text-left">
     <thead class="bg-surface-container">
-      <tr class="border-b-2 border-secondary">
+      <tr class="border-b-2 border-outline">
         <th class="p-3 font-label text-xs uppercase tracking-widest text-primary w-16">Line</th>
         <th class="p-3 font-label text-xs uppercase tracking-widest text-primary">Statement</th>
         <th class="p-3 font-label text-xs uppercase tracking-widest text-primary">Justification</th>
@@ -23,9 +23,9 @@ const { steps } = Astro.props;
     </thead>
     <tbody>
       {steps.map((step, index) => (
-        <tr class={`border-b border-secondary/30 ${index === steps.length - 1 ? 'bg-secondary/10' : ''}`}>
+        <tr class={`border-b border-outline/30 ${index === steps.length - 1 ? 'bg-surface-container-low' : ''}`}>
           <td class="p-3 font-label text-sm text-secondary">{step.line}</td>
-          <td class="p-3 font-mono text-lg text-secondary">{step.formula}</td>
+          <td class="p-3 font-mono text-lg text-on-surface">{step.formula}</td>
           <td class="p-3 font-body text-sm text-on-surface-variant italic">{step.justification}</td>
         </tr>
       ))}

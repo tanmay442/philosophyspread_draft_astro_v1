@@ -14,7 +14,7 @@ const trendingEssays = essays
   <h2 class="font-label text-xs text-secondary mb-8 uppercase tracking-[0.4em]">Trending Now</h2>
   <div class="space-y-12 mb-16">
     {trendingEssays.map((essay, index) => (
-      <a href={`/essays/${essay.id}`} class="block group">
+      <a href={`/essays/${essay.id}`} class="block group no-underline hover:no-underline focus:no-underline">
         <TrendingArticle 
           number={`0${index + 1}`}
           category={essay.data.category.toUpperCase()}

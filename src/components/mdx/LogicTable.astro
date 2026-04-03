@@ -13,11 +13,11 @@ const { variables, rows } = Astro.props;
 ---
 
 <div class="my-8 overflow-x-auto">
-  <table class="w-full border-collapse border-2 border-secondary bg-surface-container-lowest">
+  <table class="w-full border-collapse border-2 border-outline bg-white">
     <thead>
       <tr class="bg-surface-container">
         {variables.map((variable) => (
-          <th class="border-2 border-secondary p-3 text-center font-label text-xs uppercase tracking-widest text-primary">
+          <th class="border-2 border-outline p-3 text-center font-label text-xs uppercase tracking-widest text-primary">
             {variable}
           </th>
         ))}
@@ -27,11 +27,11 @@ const { variables, rows } = Astro.props;
       {rows.map((row) => (
         <tr>
           {row.inputs.map((input) => (
-            <td class="border-2 border-secondary p-3 text-center font-body text-lg text-secondary">
+            <td class="border-2 border-outline p-3 text-center font-body text-lg text-on-surface">
               {input}
             </td>
           ))}
-          <td class="border-2 border-secondary p-3 text-center font-label text-sm font-bold text-secondary bg-surface-container-low">
+          <td class="border-2 border-outline p-3 text-center font-label text-sm font-bold text-secondary bg-surface-container-low">
             {row.result}
           </td>
         </tr>

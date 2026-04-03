@@ -8,22 +8,28 @@ const { icon = 'format_quote', variant = 'default' } = Astro.props;
 
 const variantStyles = {
   default: 'border-secondary bg-surface-container-low text-on-surface',
-  info: 'border-primary bg-primary/5 text-on-surface',
-  warning: 'border-[#d95c32] bg-[#d95c32]/5 text-on-surface',
+  info: 'border-primary bg-blue-50 text-on-surface',
+  warning: 'border-orange-600 bg-orange-50 text-on-surface',
 };
 
 const iconColors = {
   default: 'text-secondary',
   info: 'text-primary',
-  warning: 'text-[#d95c32]',
+  warning: 'text-orange-600',
+};
+
+const iconBgColors = {
+  default: 'bg-surface-container',
+  info: 'bg-blue-50',
+  warning: 'bg-orange-50',
 };
 ---
 
 <blockquote class={`my-8 p-6 md:p-8 border-l-4 border-y-2 border-r-2 relative ${variantStyles[variant]}`}>
-  <span class={`material-symbols-outlined absolute -top-4 -left-4 bg-surface p-1 border-2 ${variantStyles[variant].split(' ')[0]} ${iconColors[variant]} text-2xl`}>
+  <span class={`material-symbols-outlined absolute -top-4 -left-4 bg-surface p-1 border-2 border-outline ${iconBgColors[variant]} ${iconColors[variant]} text-2xl`}>
     {icon}
   </span>
-  <div class="font-body text-xl italic leading-relaxed ml-4">
+  <div class="font-body text-xl italic leading-relaxed ml-4 text-on-surface">
     <slot />
   </div>
 </blockquote>

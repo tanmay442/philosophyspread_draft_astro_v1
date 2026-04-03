@@ -1,8 +1,9 @@
 ---
 ---
 
-<div id="scroll-trigger" class="h-1 w-full"></div>
-<footer class="bg-[#eff4ff] dark:bg-slate-900 border-t-2 border-secondary grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16">
+<footer class="relative bg-surface-container-low dark:bg-slate-900 border-t-2 border-secondary grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16">
+  
+  <!-- Column 1 -->
   <div class="space-y-6">
     <div class="font-headline italic text-2xl text-secondary">Philosophy Spread</div>
     <p class="font-body text-lg opacity-80 italic">
@@ -13,45 +14,37 @@
     </p>
   </div>
   
+  <!-- Column 2 -->
   <div class="space-y-6">
     <h4 class="font-label uppercase tracking-widest text-xs font-bold text-primary">Navigation</h4>
     <ul class="space-y-2 flex flex-col">
-      <li><a href="#" class="font-body text-lg text-secondary opacity-80 hover:text-primary transition-all underline decoration-primary decoration-2">Privacy Policy</a></li>
+      <li><a href="#" class="font-body text-lg text-secondary opacity-80 hover:text-primary transition-all">Privacy Policy</a></li>
       <li><a href="#" class="font-body text-lg text-secondary opacity-80 hover:text-primary transition-all">Terms of Service</a></li>
       <li><a href="#" class="font-body text-lg text-secondary opacity-80 hover:text-primary transition-all">Contact</a></li>
-      <li><a href="#" class="font-body text-lg text-secondary opacity-80 hover:text-primary transition-all">Back to Top</a></li>
     </ul>
   </div>
   
+  <!-- Column 3 -->
   <div class="space-y-6">
     <h4 class="font-label uppercase tracking-widest text-xs font-bold text-primary">Connect</h4>
     <div class="flex space-x-4">
-      <a href="#" class="text-secondary hover:text-primary transition-all underline decoration-1">Twitter</a>
-      <a href="#" class="text-secondary hover:text-primary transition-all underline decoration-1">Substack</a>
-      <a href="#" class="text-secondary hover:text-primary transition-all underline decoration-1">RSS</a>
+      <a href="#" class="text-secondary hover:text-primary transition-all">Twitter</a>
+      <a href="#" class="text-secondary hover:text-primary transition-all">Substack</a>
+      <a href="#" class="text-secondary hover:text-primary transition-all">RSS</a>
     </div>
     <div class="pt-8 font-label uppercase tracking-tighter text-[10px] text-secondary">
-      © 2024 Philosophy Spread. All rights reserved.
+      © 2025 Philosophy Spread. All rights reserved.
     </div>
   </div>
+
+  <!-- 
+    THE FIX: Added 'hover:text-on-secondary' to ensure the icon color
+    is correct on hover.
+  -->
+  <a 
+    href="#top" 
+    class="absolute bottom-8 right-8 bg-primary text-on-primary p-4 z-10 hover:bg-secondary hover:text-on-secondary transition-colors border-2 border-white"
+  >
+    <span class="material-symbols-outlined block">arrow_upward</span>
+  </a>
 </footer>
-
-<!-- Floating Top Arrow -->
-<a href="#" id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-on-primary p-4 z-50 hover:bg-secondary transition-colors border-2 border-white hard-offset-teal opacity-0 pointer-events-none transition-opacity duration-500">
-  <span class="material-symbols-outlined block">arrow_upward</span>
-</a>
-
-<script>
-  const backToTopBtn = document.getElementById('back-to-top');
-  if (backToTopBtn) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 1000) {
-        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-        backToTopBtn.classList.add('opacity-100');
-      } else {
-        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-        backToTopBtn.classList.remove('opacity-100');
-      }
-    });
-  }
-</script>
