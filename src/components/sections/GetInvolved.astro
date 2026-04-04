@@ -17,6 +17,8 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
       <SignInButton
         asChild
         mode="modal"
+        forceRedirectUrl={returnTo}
+        signUpForceRedirectUrl={returnTo}
         fallbackRedirectUrl={returnTo}
         signUpFallbackRedirectUrl={returnTo}
       >
