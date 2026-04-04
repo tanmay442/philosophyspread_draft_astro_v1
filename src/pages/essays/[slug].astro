@@ -1,19 +1,23 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
 
-export async function getStaticPaths() {
-  const essays = await getCollection('essays');
-  return essays.map(essay => ({
-    params: { slug: essay.id },
-    props: { essay },
-  }));
+const slug = Astro.params.slug;
+
+if (slug && /^\d+$/.test(slug)) {
+  return Astro.redirect(`/essays/page/${slug}`);
 }
 
-const { essay } = Astro.props;
+const essays = await getCollection('essays');
+const essay = essays.find((entry: CollectionEntry<'essays'>) => entry.id === slug);
+
+if (!essay) {
+  return new Response('Not found', { status: 404 });
+}
+
 const { Content } = await render(essay);
 
 const components = {
@@ -72,7 +76,7 @@ const components = {
       
       {essay.data.tags.length > 0 && (
         <div class="mt-16 pt-8 border-t-2 border-secondary flex flex-wrap gap-2">
-          {essay.data.tags.map(tag => (
+          {essay.data.tags.map((tag: string) => (
             <span class="font-label text-[10px] uppercase tracking-widest border border-secondary px-3 py-1 text-secondary">
               #{tag}
             </span>
@@ -81,7 +85,7 @@ const components = {
       )}
 
       <div class="mt-12 pt-8 border-t border-outline-variant text-center">
-        <a href="/essays/1" class="font-label text-xs text-primary uppercase tracking-widest hover:text-secondary transition-colors">
+        <a href="/essays/page/1" class="font-label text-xs text-primary uppercase tracking-widest hover:text-secondary transition-colors">
           &lt;- Back to Essays
         </a>
       </div>

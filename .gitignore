@@ -3,3 +3,5 @@ node_modules
 dist
 examplefiles
 .env
+# clerk configuration (can include secrets)
+/.clerk/

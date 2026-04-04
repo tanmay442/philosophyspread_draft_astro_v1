@@ -1,9 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BitCard from '../cards/BitCard.astro';
 
 const bits = await getCollection('bits');
-const sortedBits = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf()).slice(0, 5);
+const sortedBits = bits
+  .sort((a: CollectionEntry<'bits'>, b: CollectionEntry<'bits'>) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf())
+  .slice(0, 5);
 ---
 
 <section id="bits" class="py-24 px-8 md:px-12 bg-surface-container-low border-y-2 border-secondary">
@@ -13,11 +15,11 @@ const sortedBits = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.times
         <h2 class="font-headline text-5xl mb-4">48hrs-bits</h2>
         <p class="font-label text-sm text-secondary uppercase tracking-widest">Dense fragments of wisdom updated bi-daily.</p>
       </div>
-      <a href="/bits/1" class="hidden md:inline-block font-label text-xs bg-primary text-on-primary px-3 py-1 hover:bg-secondary transition-colors">LIVE FEED</a>
+      <a href="/bits/page/1" class="hidden md:inline-block font-label text-xs bg-primary text-on-primary px-3 py-1 hover:bg-secondary transition-colors">LIVE FEED</a>
     </div>
     
     <div class="columns-1 md:columns-2 lg:columns-3 gap-8">
-      {sortedBits.map((bit) => (
+      {sortedBits.map((bit: CollectionEntry<'bits'>) => (
         <BitCard 
           tag={`#${bit.data.bitNumber} / ${bit.data.category.toUpperCase()}`} 
           content={bit.data.content} 
@@ -27,7 +29,7 @@ const sortedBits = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.times
     </div>
 
     <div class="mt-8 flex md:hidden justify-center">
-      <a href="/bits/1" class="font-label text-xs bg-primary text-on-primary px-4 py-2 hover:bg-secondary transition-colors">LIVE FEED</a>
+      <a href="/bits/page/1" class="font-label text-xs bg-primary text-on-primary px-4 py-2 hover:bg-secondary transition-colors">LIVE FEED</a>
     </div>
   </div>
 </section>

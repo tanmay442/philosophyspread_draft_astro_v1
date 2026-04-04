@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -9,23 +9,18 @@ import CodeBlock from '../../components/mdx/CodeBlock.astro';
 import InteractiveQuiz from '../../components/mdx/InteractiveQuiz.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
 
-export async function getStaticPaths() {
-  const modules = await getCollection('logicModules');
-  
-  // Sort modules by moduleNumber
-  const sortedModules = modules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
-  
-  return sortedModules.map((module, index) => ({
-    params: { slug: module.id },
-    props: { 
-      module,
-      prevModule: index > 0 ? sortedModules[index - 1] : null,
-      nextModule: index < sortedModules.length - 1 ? sortedModules[index + 1] : null,
-    },
-  }));
+const slug = Astro.params.slug;
+const modules = await getCollection('logicModules');
+const sortedModules = modules.sort((a: CollectionEntry<'logicModules'>, b: CollectionEntry<'logicModules'>) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
+const moduleIndex = sortedModules.findIndex((entry: CollectionEntry<'logicModules'>) => entry.id === slug);
+
+if (moduleIndex === -1) {
+  return new Response('Not found', { status: 404 });
 }
 
-const { module, prevModule, nextModule } = Astro.props;
+const module = sortedModules[moduleIndex];
+const prevModule = moduleIndex > 0 ? sortedModules[moduleIndex - 1] : null;
+const nextModule = moduleIndex < sortedModules.length - 1 ? sortedModules[moduleIndex + 1] : null;
 const { Content } = await render(module);
 
 const components = {
@@ -62,7 +57,7 @@ const components = {
           <div class="mt-8 p-4 bg-surface-container-low border-l-4 border-secondary">
             <h3 class="font-label text-xs uppercase tracking-widest text-secondary mb-2">Prerequisites:</h3>
             <ul class="flex flex-wrap gap-4">
-              {module.data.prerequisites.map(prereq => (
+              {module.data.prerequisites.map((prereq: string) => (
                 <li class="font-body text-sm italic">{prereq}</li>
               ))}
             </ul>

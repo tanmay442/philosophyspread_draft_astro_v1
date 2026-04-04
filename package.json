@@ -12,8 +12,9 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
+    "@astrojs/node": "^10.0.4",
     "@astrojs/tailwind": "^6.0.2",
-    "@google/genai": "^1.29.0",
+    "@clerk/astro": "^3.0.8",
     "astro": "^6.1.1",
     "dotenv": "^17.2.3",
     "express": "^4.21.2"

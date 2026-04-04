@@ -1,5 +1,8 @@
 ---
 import Button from '../ui/Button.astro';
+import { SignInButton } from '@clerk/astro/components';
+
+const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
 ---
 
 <section class="py-32 px-8 md:px-12 bg-secondary text-white [&_h2]:!text-white [&_p]:!text-white">
@@ -10,7 +13,14 @@ import Button from '../ui/Button.astro';
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-6">
       <Button variant="tertiary">Learn How to Contribute</Button>
-      <Button variant="secondary">Subscribe</Button>
+      <SignInButton
+        asChild
+        mode="modal"
+        fallbackRedirectUrl={returnTo}
+        signUpFallbackRedirectUrl={returnTo}
+      >
+        <Button variant="secondary">Subscribe</Button>
+      </SignInButton>
     </div>
   </div>
 </section>

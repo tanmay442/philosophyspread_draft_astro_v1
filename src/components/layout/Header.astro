@@ -1,8 +1,10 @@
 ---
 import Button from '../ui/Button.astro';
+import { SignInButton } from '@clerk/astro/components';
 
 const pathname = Astro.url.pathname;
 const currentPath = pathname.slice(1); // remove leading slash
+const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
 ---
 
 <header class="fixed top-0 w-full z-50 bg-surface dark:bg-slate-950 border-b-2 border-secondary shadow-[1px_1px_0px_#245ba7]">
@@ -52,12 +54,19 @@ const currentPath = pathname.slice(1); // remove leading slash
     <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center space-x-8">
       <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('bits') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/bits/1">48hrs-bits</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('bits') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">48hrs-bits</a>
       <a class="font-label text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('essays') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays/1">Essays</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('essays') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
     </nav>
     <div class="hidden lg:flex items-center space-x-4">
-      <Button variant="primary">SUBSCRIBE</Button>
+      <SignInButton
+        asChild
+        mode="modal"
+        fallbackRedirectUrl={returnTo}
+        signUpFallbackRedirectUrl={returnTo}
+      >
+        <Button variant="primary">SUBSCRIBE</Button>
+      </SignInButton>
     </div>
 
     <!-- Mobile Menu Toggle -->
@@ -73,12 +82,19 @@ const currentPath = pathname.slice(1); // remove leading slash
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] md:w-[60vw] bg-surface z-40 hidden flex-col pt-24 px-6 pb-8 overflow-y-auto border-l-2 border-secondary shadow-2xl">
     <nav class="flex flex-col space-y-6 mt-4 flex-grow">
       <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('bits') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/bits/1">48hrs-bits</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('bits') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">48hrs-bits</a>
       <a class="font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('essays') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays/1">Essays</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('essays') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
     </nav>
     <div class="mt-auto pt-8">
-      <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
+      <SignInButton
+        asChild
+        mode="modal"
+        fallbackRedirectUrl={returnTo}
+        signUpFallbackRedirectUrl={returnTo}
+      >
+        <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
+      </SignInButton>
     </div>
   </div>
 </header>

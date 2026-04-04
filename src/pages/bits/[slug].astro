@@ -1,18 +1,22 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 
-export async function getStaticPaths() {
-  const bits = await getCollection('bits');
-  return bits.map(bit => ({
-    params: { slug: bit.id },
-    props: { bit },
-  }));
+const slug = Astro.params.slug;
+
+if (slug && /^\d+$/.test(slug)) {
+  return Astro.redirect(`/bits/page/${slug}`);
 }
 
-const { bit } = Astro.props;
+const bits = await getCollection('bits');
+const bit = bits.find((entry: CollectionEntry<'bits'>) => entry.id === slug);
+
+if (!bit) {
+  return new Response('Not found', { status: 404 });
+}
+
 const { Content } = await render(bit);
 ---
 
@@ -44,7 +48,7 @@ const { Content } = await render(bit);
       </div>
       
       <div class="flex justify-center border-t-2 border-secondary pt-12">
-        <a href="/bits/1" class="font-label text-sm text-primary uppercase tracking-widest hover:text-secondary transition-colors flex items-center group">
+        <a href="/bits/page/1" class="font-label text-sm text-primary uppercase tracking-widest hover:text-secondary transition-colors flex items-center group">
           <span class="material-symbols-outlined mr-2 text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
           Back to Feed
         </a>
