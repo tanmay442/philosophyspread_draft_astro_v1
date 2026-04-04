@@ -1,6 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
-import { SignInButton } from '@clerk/astro/components';
+import { SignInButton, Show, UserButton } from '@clerk/astro/components';
 
 const pathname = Astro.url.pathname;
 const currentPath = pathname.slice(1); // remove leading slash
@@ -53,20 +53,25 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
     
     <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center space-x-8">
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules/page/1">Logic and Reasoning</a>
       <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('bits') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">48hrs-bits</a>
       <a class="font-label text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
       <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('essays') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
     </nav>
     <div class="hidden lg:flex items-center space-x-4">
-      <SignInButton
-        asChild
-        mode="modal"
-        fallbackRedirectUrl={returnTo}
-        signUpFallbackRedirectUrl={returnTo}
-      >
-        <Button variant="primary">SUBSCRIBE</Button>
-      </SignInButton>
+      <Show when="signed-out">
+        <SignInButton
+          asChild
+          mode="modal"
+          fallbackRedirectUrl={returnTo}
+          signUpFallbackRedirectUrl={returnTo}
+        >
+          <Button variant="primary">SUBSCRIBE</Button>
+        </SignInButton>
+      </Show>
+      <Show when="signed-in">
+        <UserButton afterSignOutUrl="/" />
+      </Show>
     </div>
 
     <!-- Mobile Menu Toggle -->
@@ -81,20 +86,25 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
   <!-- Mobile Menu Overlay -->
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] md:w-[60vw] bg-surface z-40 hidden flex-col pt-24 px-6 pb-8 overflow-y-auto border-l-2 border-secondary shadow-2xl">
     <nav class="flex flex-col space-y-6 mt-4 flex-grow">
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
+      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules/page/1">Logic and Reasoning</a>
       <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('bits') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">48hrs-bits</a>
       <a class="font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
       <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('essays') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
     </nav>
     <div class="mt-auto pt-8">
-      <SignInButton
-        asChild
-        mode="modal"
-        fallbackRedirectUrl={returnTo}
-        signUpFallbackRedirectUrl={returnTo}
-      >
-        <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
-      </SignInButton>
+      <Show when="signed-out">
+        <SignInButton
+          asChild
+          mode="modal"
+          fallbackRedirectUrl={returnTo}
+          signUpFallbackRedirectUrl={returnTo}
+        >
+          <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
+        </SignInButton>
+      </Show>
+      <Show when="signed-in">
+        <UserButton afterSignOutUrl="/" />
+      </Show>
     </div>
   </div>
 </header>
@@ -130,3 +140,37 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
     link.addEventListener('click', toggleMenu);
   });
 </script>
+
+<style is:global>
+  /* Clerk UserButton rounded styling */
+  .clerk-user-button {
+    border: 2px solid #006b5f !important;
+    border-radius: 9999px !important;
+    padding: 2px !important;
+    overflow: hidden;
+  }
+  
+  .clerk-user-button:hover {
+    background-color: #006b5f !important;
+  }
+  
+  .clerk-user-button svg {
+    border-radius: 9999px !important;
+  }
+  
+  /* Clerk dropdown styling */
+  .clerk-dropdown {
+    border: 2px solid #006b5f !important;
+    border-radius: 8px !important;
+  }
+  
+  .clerk-popover {
+    border: 2px solid #006b5f !important;
+    border-radius: 8px !important;
+  }
+  
+  .clerk-popover a,
+  .clerk-popover button {
+    border-radius: 4px !important;
+  }
+</style>
