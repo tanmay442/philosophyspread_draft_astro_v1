@@ -39,4 +39,12 @@ const bits = defineCollection({
   }),
 });
 
-export const collections = { essays, logicModules, bits };
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/pages" }),
+  schema: z.object({
+    title: z.string(),
+    lastUpdated: z.string(),
+  }),
+});
+
+export const collections = { essays, logicModules, bits, pages };
