@@ -3,9 +3,10 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'tertiary';
   href?: string;
   class?: string;
+  'data-modal'?: string;
 }
 
-const { variant = 'primary', href, class: className = '' } = Astro.props;
+const { variant = 'primary', href, class: className = '', ...rest } = Astro.props;
 
 const baseStyles = "font-label text-xs uppercase transition-all duration-200 border-2 active:translate-y-1 active:shadow-none";
 
@@ -19,11 +20,11 @@ const classes = `${baseStyles} ${variants[variant]} ${className}`;
 ---
 
 {href ? (
-  <a href={href} class={classes}>
+  <a href={href} class={classes} {...rest}>
     <slot />
   </a>
 ) : (
-  <button class={classes}>
+  <button class={classes} {...rest}>
     <slot />
   </button>
 )}

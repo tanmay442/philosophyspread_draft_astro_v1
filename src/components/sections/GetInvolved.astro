@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import ContributeModal from '../ui/ContributeModal.astro';
 import { SignInButton } from '@clerk/astro/components';
 
 const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
@@ -12,7 +13,7 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
       Your support is vital to our mission of fostering a thoughtful world. Join our network of thinkers, writers, and students dedicated to the rigorous pursuit of wisdom.
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-6">
-      <Button variant="tertiary">Learn How to Contribute</Button>
+      <Button variant="tertiary" data-modal="contribute">Learn How to Contribute</Button>
       <SignInButton
         asChild
         mode="modal"
@@ -24,3 +25,5 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
     </div>
   </div>
 </section>
+
+<ContributeModal />

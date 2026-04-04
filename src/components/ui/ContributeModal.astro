@@ -1,0 +1,213 @@
+---
+interface Props {
+  isOpen?: boolean;
+}
+
+const { isOpen = false } = Astro.props;
+---
+
+<dialog 
+  id="contribute-modal"
+  class="modal-backdrop bg-secondary/80 backdrop-blur-sm p-4 md:p-8 border-none"
+>
+  <div class="modal-content relative w-full max-w-2xl lg:max-w-3xl bg-surface-container-lowest border-2 border-secondary rounded-lg shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+    <button 
+      class="modal-close absolute top-3 right-3 p-2 rounded hover:bg-secondary hover:text-white transition-colors z-10"
+      aria-label="Close"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="p-6 md:p-8 text-center bg-gradient-to-br from-secondary/10 to-secondary/5">
+      <div class="flex justify-center mb-3">
+        <div class="p-4 rounded-full bg-secondary/20 border border-secondary/30">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </div>
+      </div>
+      <h3 class="font-headline text-2xl md:text-3xl mb-2 text-secondary">
+        Support Our Initiative
+      </h3>
+      <p class="text-secondary/80 text-base md:text-lg">
+        Your support helps us keep the philosophical journey alive
+      </p>
+    </div>
+
+    <div class="p-6 md:p-8 pt-4 space-y-6">
+      <div class="space-y-4 text-center">
+        <p class="text-secondary/90 leading-relaxed">
+          We appreciate your enthusiasm to join our philosophical journey. Your support reflects the spirit of curiosity and collaborative learning we value.
+        </p>
+        
+        <div class="p-4 md:p-6 rounded-lg bg-secondary/10 border-2 border-secondary/30 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+          <div class="flex-1 text-left">
+            <p class="text-secondary font-medium mb-2 flex items-center gap-2">
+              <span class="text-xl">☕</span> Support via Buy Me a Coffee
+            </p>
+            <p class="text-sm text-secondary/80 mb-4">
+              If you find value in our work, consider supporting us. Your contribution goes directly towards maintaining the platform and creating more deep-dive content.
+            </p>
+            <a 
+              href="https://buymeacoffee.com/gtanmay" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#FFDD00] text-black font-bold hover:bg-[#FFDD00]/90 transition-colors"
+            >
+              <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me a Coffee" class="h-5 w-5" />
+              <span>Buy me a coffee</span>
+            </a>
+          </div>
+          
+          <div class="w-40 h-40 md:w-48 md:h-48 bg-white rounded p-2 flex items-center justify-center border-2 border-secondary/30 flex-shrink-0">
+            <img 
+              src="/bmc_qr.png" 
+              alt="Buy Me a Coffee QR Code" 
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
+        <p class="text-secondary/90 leading-relaxed text-sm">
+          Meanwhile, explore our resources. Every contributor starts as a learner, and your growth will enrich our community.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/logic-modules" class="block p-4 rounded border-2 border-secondary/30 hover:bg-[#00887A] hover:text-white transition-all group">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="p-2 rounded bg-secondary/20 border border-secondary/30">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h4 class="font-medium group-hover:text-white transition-colors">
+              Logic Modules
+            </h4>
+          </div>
+          <p class="text-sm text-secondary/70 group-hover:text-white/80 transition-opacity">
+            Master critical thinking and logical reasoning skills
+          </p>
+          <div class="flex items-center gap-1 mt-2 text-secondary text-sm group-hover:text-white">
+            <span>Start learning</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+
+        <a href="/essays" class="block p-4 rounded border-2 border-secondary/30 hover:bg-[#00887A] hover:text-white transition-all group">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="p-2 rounded bg-secondary/20 border border-secondary/30">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h4 class="font-medium group-hover:text-white transition-colors">
+              Explore Our Essays
+            </h4>
+          </div>
+          <p class="text-sm text-secondary/70 group-hover:text-white/80 transition-opacity">
+            Dive into profound philosophical insights and articles
+          </p>
+          <div class="flex items-center gap-1 mt-2 text-secondary text-sm group-hover:text-white">
+            <span>Read more</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <div class="text-center pt-4">
+        <a href="mailto:contribute@philosophyspread.com?subject=Contributing to Philosophy Spread" class="inline-flex items-center gap-2 text-sm text-secondary hover:text-[#00887A] transition-colors underline underline-offset-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Send your writing to contribute to the collection
+        </a>
+      </div>
+
+      <div class="text-center pt-4 border-t-2 border-secondary/20">
+        <p class="text-xs text-secondary/70 mb-3 italic">
+          "The best way to find yourself is to lose yourself in the service of others." - Gandhi
+        </p>
+        <button class="modal-close px-6 py-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-colors">
+          Continue Exploring
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .modal-backdrop[open],
+  .modal-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-content {
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.2s ease;
+  }
+
+  .modal-backdrop[open] .modal-content,
+  .modal-backdrop.show .modal-content {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-backdrop::backdrop {
+    background: rgba(12, 28, 46, 0.8);
+  }
+
+  @media (max-width: 640px) {
+    .modal-content {
+      max-width: calc(100% - 1rem);
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('contribute-modal') as HTMLDialogElement;
+  const openButtons = document.querySelectorAll('[data-modal="contribute"]');
+  const closeButtons = modal?.querySelectorAll('.modal-close');
+
+  openButtons?.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal?.showModal();
+    });
+  });
+
+  closeButtons?.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal?.close();
+    });
+  });
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.close();
+    }
+  });
+
+  modal?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modal.close();
+    }
+  });
+</script>
