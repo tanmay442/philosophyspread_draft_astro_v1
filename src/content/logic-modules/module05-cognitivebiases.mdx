@@ -1,0 +1,183 @@
+---
+moduleNumber: "L-05"
+title: "Heuristics & Cognitive Biases"
+description: "Explore the mental shortcuts (heuristics) and biases that shape our everyday judgments. Understand concepts like representativeness, availability, anchoring, and the powerful framing effect."
+category: "Psychology"
+difficulty: "Intermediate"
+prerequisites: []
+---
+
+export const quizData = [
+  {
+    question: "1. In a series of six fair roulette spins (Red/Black), which sequence is the most probable?",
+    options: [
+      "R B R B R B",
+      "R R R R R R",
+      "Both sequences are equally probable."
+    ],
+    correctIndex: 2,
+    feedback: "Correct. Each spin is an independent event with a 1/2 probability. Any specific sequence of six has a probability of (1/2)⁶, or 1 in 64. The first sequence just <strong>looks</strong> more random, an illusion created by the representativeness heuristic."
+  },
+  {
+    question: "2. A car salesman starts negotiations at a very high price. Even though you negotiate a large discount, you still pay more than the car is worth. This is a classic example of:",
+    options: [
+      "The Availability Heuristic",
+      "The Anchoring and Adjustment Heuristic",
+      "Confirmation Bias"
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The initial high price acted as an \"anchor,\" making the subsequent (but still high) price seem reasonable. Your \"adjustment\" from the anchor was insufficient."
+  },
+  {
+    question: "3. A startup continues to pour money into a failing project because they have \"already invested so much.\" What bias is at play?",
+    options: [
+      "Escalation of Commitment (Sunken Costs Fallacy)",
+      "Hindsight Bias",
+      "The Framing Effect"
+    ],
+    correctIndex: 0,
+    feedback: "Correct. The past investment (\"sunken costs\") is irrelevant to the future prospects of the project, but they are using it to justify continued investment, throwing good money after bad."
+  },
+  {
+    question: "4. Your coworker misses a critical deadline. You immediately think, 'They are so lazy and unreliable.' Which bias are you demonstrating?",
+    options: [
+      "Illusory Correlation",
+      "Hindsight Bias",
+      "Correspondence Bias (Fundamental Attribution Error)"
+    ],
+    correctIndex: 2,
+    feedback: "Correct. This is the FAE in action. You attribute their behavior to their personality ('lazy') instead of considering possible situational causes (e.g., family emergency, IT failure)."
+  },
+  {
+    question: "5. News outlets heavily report on a rare crime committed by a member of a small, unfamiliar community. People then begin to associate that entire community with criminality. This is an example of:",
+    options: [
+      "Illusory Correlation",
+      "The Framing Effect",
+      "Escalation of Commitment"
+    ],
+    correctIndex: 0,
+    feedback: "Correct. The two distinctive elements (the rare crime and the unfamiliar community) are linked in people's minds, creating a false association where none statistically exists."
+  }
+];
+
+## 1. What Are Heuristics? The Mind's Shortcuts
+
+**Heuristics** (from the Greek *heurisko*, "I find") are mental shortcuts, rules of thumb, or educated guesses our brains use for rapid problem-solving and decision-making. In a complex world with incomplete information, we rarely have time for a full, logical analysis. Heuristics are the efficient, "good enough" tools we use to navigate everyday judgments.
+
+<br/>
+
+Judea Pearl provided a more formal definition: "Heuristics are strategies using readily accessible, though loosely applicable, information to control problem solving in human beings and machines."
+
+<Callout type="info">
+  <strong>The Double-Edged Sword:</strong> Heuristics are incredibly useful for saving time and mental energy, but this efficiency comes at a cost. They are far more prone to systematic errors, or <strong>cognitive biases</strong>, than deliberate, logical reasoning.
+</Callout>
+
+<br/>
+
+## 2. The Representativeness Heuristic: Judging by Similarity
+
+Proposed by Amos Tversky and Daniel Kahneman, this is our tendency to judge the likelihood of something by how well it matches a prototype or stereotype in our minds. We ask, "How much does this look like what I expect?"
+
+<Callout type="example" title="Example: Product Quality Control">
+  <p>A machine with a 50% error rate tests six products (S = Success, F = Failure). Which sequence is more likely?</p>
+  <ul class="list-none p-0 mt-2 space-y-1">
+    <li><strong>Line A:</strong> <span class="text-green-500 font-bold">S</span> <span class="text-red-500 font-bold">F</span> <span class="text-green-500 font-bold">S</span> <span class="text-red-500 font-bold">F</span> <span class="text-green-500 font-bold">S</span> <span class="text-red-500 font-bold">F</span></li>
+    <li><strong>Line B:</strong> <span class="text-green-500 font-bold">S</span> <span class="text-red-500 font-bold">F</span> <span class="text-red-500 font-bold">F</span> <span class="text-red-500 font-bold">F</span> <span class="text-red-500 font-bold">F</span> <span class="text-red-500 font-bold">F</span></li>
+  </ul>
+  <p class="mt-4"><strong>Explanation:</strong> Most people say Line A is more likely because it <strong>looks</strong> more random and representative of a 50/50 chance. However, both sequences are <strong>equally probable</strong>. Any specific sequence of six independent events has a probability of (1/2)⁶, or 1 in 64.</p>
+</Callout>
+
+### 2.1 The Gambler's Fallacy & Hot-Hand Fallacy
+
+The **Gambler's Fallacy** is the mistaken belief that if something happens more frequently than normal during a random process, it will happen less frequently in the future. For instance, after a series of 'heads' in coin tosses, we feel a 'tails' is "due." In reality, each toss is independent. 
+
+<br/>
+
+A related error is the **Hot-Hand Fallacy**, which is the **opposite** belief: that a person on a 'hot streak' of successes is **more** likely to succeed on their next attempt, even in a random process.
+
+<br/>
+
+### 2.2 Ignoring the Base Rate
+
+A critical error of this heuristic is ignoring the **base rate**—the underlying statistical frequency of an event.
+
+<Callout type="example" title="Example: The 'TalentFind' Software">
+  <ol class="list-decimal pl-6 space-y-2">
+    <li><strong>The Pitch:</strong> "Our AI recommended 50 candidates who were hired!"</li>
+    <li><strong>The Base Rate:</strong> Those 50 were from a pool of 5,000 recommendations (a 1% success rate).</li>
+    <li><strong>The Control Group:</strong> Meanwhile, 10% of candidates the AI <b>rejected</b> were hired by human recruiters.</li>
+  </ol>
+  <p class="mt-4"><strong>Conclusion:</strong> Without the base rate and control group, the initial number sounds impressive. With them, we see the software is actually worse than ineffective.</p>
+</Callout>
+
+<br/>
+
+## 3. The Availability Heuristic: Judging by Recall
+
+This heuristic involves judging the frequency or likelihood of an event based on how easily an example comes to mind. If we can recall it vividly and quickly, we assume it's more common than it actually is.
+
+<Callout type="info">
+  <strong>Example:</strong> We overestimate the frequency of dramatic but rare events (like plane crashes) because they are heavily reported in the media and easy to recall, while underestimating common but less vivid risks (like car accidents).
+</Callout>
+
+<Callout type="example" title="Practical Test: The Project Contribution List">
+  If you and a colleague separately list your individual contributions to a shared project, the sum of your perceived contributions will almost certainly exceed 100%. This is because your own efforts are far more 'available' in your memory than your colleague's.
+</Callout>
+
+<br/>
+
+## 4. The Anchoring & Adjustment Heuristic
+
+This bias describes our tendency to rely too heavily on the first piece of information offered (the "anchor") when making decisions. We then adjust from that anchor, but our adjustments are almost always insufficient.
+
+<Callout type="example" title="Example: Salary Negotiation">
+  A company offers a job for $50,000, even if the market rate is $70,000. You might negotiate up to $55,000 and feel successful because you moved the number. However, you've been "anchored" to the low initial offer and likely settled for far less than your worth.
+</Callout>
+
+<br/>
+
+## 5. Other Major Cognitive Biases
+
+### Escalation of Commitment (Sunken Costs Fallacy)
+
+This is our tendency to justify increased investment in a decision, based on the cumulative prior investment ("sunken costs"), despite new evidence suggesting that the cost of continuing the decision outweighs the expected benefit.
+
+<Callout type="info">
+  <strong>Example:</strong> Marco, a coder, refuses to abandon his increasingly complex theory for a bug, despite evidence refuting it at every turn. He's so invested in being right that he'd rather invent an impossible scenario than admit his initial "sunk cost" (his time and ego) was a loss.
+</Callout>
+
+### The Framing Effect
+
+People react to a particular choice in different ways depending on how it is presented or "framed"—as a loss or as a gain.
+
+<Callout type="example">
+  <strong>Example:</strong> A medical treatment described as having a <strong>"90% survival rate"</strong> receives much higher public approval than one described with the identical statistic of a <strong>"10% mortality rate."</strong> The positive frame (gain) is more persuasive than the negative one (loss).
+</Callout>
+
+### Illusory Correlation
+
+This is the tendency to perceive a relationship between two variables where none exists, especially when both variables are distinctive or unusual. Our minds incorrectly link two salient things together, forming the basis of many stereotypes and superstitions (e.g., a "lucky shirt").
+
+<Callout type="example" title="Example: Formation of Stereotypes">
+  In a classic study (Hamilton & Gifford, 1976), participants read statements about a large "Group A" and a small "Group B." Negative behaviors were statistically proportional for both. Yet, participants later overestimated the negative behaviors of Group B. Why? Because Group B (a minority) and the negative behaviors were both less frequent and thus more distinctive, creating a false mental association.
+</Callout>
+
+### Correspondence Bias (Fundamental Attribution Error)
+
+This is the tendency to over-emphasize personality-based (dispositional) explanations for behaviors observed in others, while under-emphasizing situational factors. In short, we blame their character, not their circumstances (Gilbert & Malone, 1995).
+
+<Callout type="example" title="Example: The Erratic Driver">
+  Someone cuts you off in traffic. Your immediate reaction is, "What a reckless jerk!"—a judgment of their character. You have attributed their action to their disposition. However, you fail to consider situational factors: perhaps they were rushing to the hospital for an emergency. If you were in their shoes, you would attribute your own driving to the situation, not to being a 'jerk'.
+</Callout>
+
+### Confirmation Bias & Hindsight Bias
+
+**Confirmation Bias** is the tendency to search for, interpret, and recall information in a way that confirms one's preexisting beliefs. **Hindsight Bias** is the "I-knew-it-all-along" effect, or the tendency to perceive past events as having been more predictable than they actually were.
+
+<br/>
+
+## 6. Test Your Understanding
+
+Let's see if you can spot these cognitive shortcuts and biases in action. Analyze the scenarios below.
+
+<InteractiveQuiz questions={quizData} />
