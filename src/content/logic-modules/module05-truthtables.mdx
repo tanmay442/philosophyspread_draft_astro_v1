@@ -1,0 +1,181 @@
+---
+moduleNumber: "L-05"
+title: "Complex Statements & Truth Tables"
+description: "Move beyond simple propositions. Learn to analyze complex statements using logical connectives like 'and', 'or', and 'if...then', and use truth tables to systematically determine their truth-values."
+category: "Deduction"
+difficulty: "Beginner"
+prerequisites: []
+---
+
+export const quizData = [
+  {
+    question: "1. A disjunction (A v B) is only false under what condition?",
+    options: [
+      "When A is true and B is false.",
+      "When both A and B are true.",
+      "When both A and B are false."
+    ],
+    correctIndex: 2,
+    feedback: "Correct. The inclusive 'or' (v) means \"at least one is true,\" so it's only false when that condition isn't met—that is, when both components are false."
+  },
+  {
+    question: "2. Under what single condition is a conditional statement (A ⊃ B) false?",
+    options: [
+      "When A is true and B is false.",
+      "When A is false and B is true.",
+      "When both A and B are false."
+    ],
+    correctIndex: 0,
+    feedback: "Correct. This is the defining rule of material implication. A true antecedent leading to a false consequent is the only scenario that makes the 'if-then' promise false."
+  },
+  {
+    question: "3. How would you symbolize the statement: \"You can watch the movie only if you finish your homework\"? (Let M = You can watch the movie; H = You finish your homework)",
+    options: [
+      "H ⊃ M",
+      "M ⊃ H",
+      "M • H"
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The phrase \"A only if B\" translates to A ⊃ B. Finishing your homework is a necessary condition for watching the movie. So, IF you watched the movie, it must be true that you finished your homework."
+  },
+  {
+    question: "4. A statement whose final column in a truth table contains only 'T's is called a:",
+    options: [
+      "Contradiction",
+      "Contingent statement",
+      "Tautology"
+    ],
+    correctIndex: 2,
+    feedback: "Correct. A tautology is a statement that is true by virtue of its logical form alone, regardless of the truth of its components."
+  }
+];
+
+## 1. From Simple to Complex Statements
+
+So far, we have dealt with simple, atomic statements like "The sun is a star." Now, we move to **complex statements**, which are built by combining simple statements using special words called **logical connectives**. The real power of logic lies in its ability to analyze the structure of these complex claims, which form the backbone of all sophisticated arguments.
+
+<br/>
+
+Just as a few mathematical operations (+, -, ×, ÷) can create an infinite number of equations, a handful of logical connectives—'and', 'or', 'not', and 'if...then'—allow us to construct and analyze an infinite variety of complex logical statements.
+
+<br/>
+
+## 2. The Logical Connectives
+
+To analyze complex statements, we first symbolize simple statements with capital letters (A, B, C, etc.) and use special symbols for the connectives. This symbolic language strips away the ambiguity of everyday language, revealing the pure logical structure.
+
+<br/>
+
+### 2.1 Conjunction (and)
+
+A conjunction joins two statements and asserts that both are true. We use the dot symbol (•) to represent 'and' (as well as 'but', 'while', 'however').
+
+<Callout type="info">
+  <strong>A and B</strong> is symbolized as <strong>A • B</strong>. The conjunction is true <strong>only if both A and B are true</strong>.
+</Callout>
+
+**Example:** "The project is challenging, **but** it is also rewarding." This is only true if "The project is challenging" is true AND "it is also rewarding" is true.
+
+<br/>
+
+### 2.2 Disjunction (or)
+
+A disjunction joins two statements and asserts that at least one of them is true. We use the wedge symbol (v) for the inclusive 'or'.
+
+<Callout type="info">
+  <strong>A or B</strong> is symbolized as <strong>A v B</strong>. The disjunction is true if A is true, or if B is true, <strong>or if both are true</strong>. It is only false when both A and B are false.
+</Callout>
+
+**Example:** "To qualify, you need a degree **or** five years of experience." An applicant qualifies if they have the degree, the experience, or both.
+
+<br/>
+
+### 2.3 Negation (not)
+
+Negation simply reverses the truth value of a statement. We use the tilde symbol (~) to represent 'not' or 'it is not the case that...'.
+
+<Callout type="info">
+  <strong>Not A</strong> is symbolized as <strong>~A</strong>. If A is true, ~A is false. If A is false, ~A is true.
+</Callout>
+
+
+**Double Negation:** Just like in grammar, two negatives cancel each other out. `~~A` is logically equivalent to `A`.
+
+<br/>
+
+### 2.4 Conditional (if...then...)
+
+The conditional statement is one of the most important in logic. It posits a relationship where the truth of the first part (the antecedent) is a condition for the truth of the second part (the consequent).
+
+<Callout type="info">
+  <strong>If A, then B</strong> is symbolized as <strong>A ⊃ B</strong>. The conditional is false <strong>only in one specific case: when the antecedent (A) is true and the consequent (B) is false</strong>. In all other cases, it is true.
+</Callout>
+
+This rule can seem odd. Why is the statement true when the 'if' part is false? Think of it as a promise. If I say "**If** you get an A on the final, **then** I will buy you a car," I only break my promise (making the statement false) if you get an A and I *don't* buy you a car. If you don't get an A, I haven't broken my promise, regardless of whether I buy you a car or not.
+
+<br/>
+
+## 3. Truth Tables: The Ultimate Lie Detector
+
+A **truth table** is a diagram that provides a complete breakdown of a complex statement's truth value under every possible combination of truth values for its simple components. It's a systematic way to determine when a statement is true or false without any guesswork.
+
+<br/>
+
+### How to Build a Truth Table
+
+1. **Count the variables:** Count the number of unique simple statements (e.g., A, B, C). Let's call this number 'n'.
+2. **Determine the rows:** You will need **2<sup>n</sup>** rows to cover all possibilities (1 variable = 2 rows, 2 variables = 4 rows, 3 variables = 8 rows).
+3. **Set up columns:** Create a column for each simple statement and for each logical operator, working from the inside out of any parentheses.
+4. **Fill the values:** Systematically fill in the T/F values for the simple statements, then use the rules of the connectives to fill in the rest of the columns.
+
+<Callout type="example" title="Truth Table for the Conditional (A ⊃ B)">
+  <TruthTable 
+    variables={['A', 'B', 'A ⊃ B']}
+    rows={[
+      { inputs: ['T', 'T'], result: 'T' },
+      { inputs: ['T', 'F'], result: 'F' },
+      { inputs: ['F', 'T'], result: 'T' },
+      { inputs: ['F', 'F'], result: 'T' }
+    ]}
+  />
+  <p class="text-sm text-on-surface-variant">Notice the single 'F' in the second row—this is the defining feature of a conditional.</p>
+</Callout>
+
+<br/>
+
+## 4. Tautologies, Contradictions, and Equivalence
+
+Truth tables allow us to classify complex statements into powerful categories.
+
+<br/>
+
+- **Tautology (or Theorem):** A statement that is true under every possible truth-value combination. The final column of its truth table is all 'T's. Tautologies are truths of logic itself. Example: "Either it is raining or it is not raining" (P v ~P).
+<br/>
+- **Contradiction:** A statement that is false under every possible truth-value combination. The final column is all 'F's. Example: "It is raining and it is not raining" (P • ~P).
+<br/>
+- **Contingent Statement:** A statement that is true in some cases and false in others. Most everyday statements are contingent.
+<br/>
+- **Logical Equivalence:** Two statements are logically equivalent if they have the exact same truth table outcomes for every row. This means they mean the same thing, logically.
+
+<Callout type="example" title="Proving Equivalence: De Morgan's Theorem">
+  <p>Let's prove that <strong>~(A • B)</strong> is logically equivalent to <strong>~A v ~B</strong>. In words: "It is not the case that both A and B are true" is the same as "Either A is not true, or B is not true."</p>
+  
+  <TruthTable 
+    variables={['A', 'B', 'A • B', '~(A • B)', '~A', '~B', '~A v ~B']}
+    rows={[
+      { inputs: ['T', 'T', 'T', 'F', 'F', 'F'], result: 'F' },
+      { inputs: ['T', 'F', 'F', 'T', 'F', 'T'], result: 'T' },
+      { inputs: ['F', 'T', 'F', 'T', 'T', 'F'], result: 'T' },
+      { inputs: ['F', 'F', 'F', 'T', 'T', 'T'], result: 'T' }
+    ]}
+  />
+  <p class="text-sm text-on-surface-variant">Since the columns for <strong>~(A • B)</strong> and <strong>~A v ~B</strong> are identical (F, T, T, T), the statements are logically equivalent.</p>
+</Callout>
+
+<br/>
+
+## 5. Test Your Skills: Evaluate the Statements
+
+Apply what you've learned. Analyze the following questions about logical connectives and truth tables.
+
+<InteractiveQuiz questions={quizData} />
