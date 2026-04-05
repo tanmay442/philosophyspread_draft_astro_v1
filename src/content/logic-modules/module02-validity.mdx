@@ -44,19 +44,21 @@ export const quizData = [
 
 In deductive reasoning, we move from general premises to a specific, certain conclusion. The most important feature of a deductive argument is its **validity**.
 
-<div class="bg-primary/10 border-l-4 border-primary p-6 my-8">
-  <p>An argument is <strong>valid</strong> if and only if it is <strong>impossible</strong> for all of its premises to be true and its conclusion to be false at the same time. Validity is about the argument's <strong>structure</strong>, not the actual truth of its premises.</p>
-</div>
+<Callout type="info">
+An argument is **valid** if and only if it is **impossible** for all of its premises to be true and its conclusion to be false at the same time. Validity is about the argument's **structure**, not the actual truth of its premises.
+</Callout>
 
 If an argument's structure is valid, it guarantees that if you start with truth, you will end with truth. Consider this classic structure:
 
-<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
-  <p><span class="text-primary">1. All ancient Greeks were thinkers.</span> (Major Premise)</p>
-  <p><span class="text-primary">2. Archimedes was an ancient Greek.</span> (Minor Premise)</p>
-  <p><strong class="text-secondary">∴ 3. Archimedes was a thinker.</strong></p>
-</div>
+<Callout type="example" title="Classic Structure">
+1. All ancient Greeks were thinkers. (Major Premise)
+
+2. Archimedes was an ancient Greek. (Minor Premise)
+
+∴ 3. Archimedes was a thinker.
 
 The structure here is flawless. If premises 1 and 2 are true, the conclusion *must* be true.
+</Callout>
 
 <br/>
 
@@ -110,27 +112,37 @@ Formal fallacies are errors in the logical structure of an argument. Two of the 
 
 This fallacy happens when you assume that because the "then" part of a rule is true, the "if" part must also be true. It wrongly reverses the direction of the rule. The core error is assuming a specific cause just because you see the expected effect, when many other causes could have produced the same effect.
 
-<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
-  <p><strong>Structure:</strong> If P, then Q. Q is true. Therefore, P is true. (Incorrect!)</p>
-  <p class="mt-4"><strong>Example:</strong></p>
-  <p><span class="text-primary">1. If a person is a famous tech CEO, then they are wealthy.</span></p>
-  <p><span class="text-primary">2. Elon Musk is wealthy.</span></p>
-  <p><strong class="text-secondary">∴ 3. Elon Musk is a famous tech CEO.</strong></p>
-  <p class="mt-4 text-sm text-on-surface-variant"><strong>Explanation:</strong> While the conclusion happens to be true in reality, the <b>reasoning</b> is flawed. The premises do not logically force the conclusion. A person could be wealthy from inheritance, winning the lottery, or being a movie star. The argument wrongly concludes that being a tech CEO is the only path to wealth.</p>
-</div>
+<Callout type="example" title="Affirming the Consequent">
+**Structure:** If P, then Q. Q is true. Therefore, P is true. (Incorrect!)
+
+**Example:**
+
+1. If a person is a famous tech CEO, then they are wealthy.
+
+2. Elon Musk is wealthy.
+
+∴ 3. Elon Musk is a famous tech CEO.
+
+**Explanation:** While the conclusion happens to be true in reality, the **reasoning** is flawed. The premises do not logically force the conclusion. A person could be wealthy from inheritance, winning the lottery, or being a movie star. The argument wrongly concludes that being a tech CEO is the only path to wealth.
+</Callout>
 
 ### Denying the Antecedent
 
 This fallacy happens when you assume that because the "if" part of a rule is false, the "then" part must also be false. An "if-then" rule only tells you what happens when the "if" condition is met; it makes no promises about what happens when it's not met.
 
-<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
-  <p><strong>Structure:</strong> If P, then Q. P is not true. Therefore, Q is not true. (Incorrect!)</p>
-  <p class="mt-4"><strong>Example:</strong></p>
-  <p><span class="text-primary">1. If an animal is a penguin, then it cannot fly.</span></p>
-  <p><span class="text-primary">2. An ostrich is not a penguin.</span></p>
-  <p><strong class="text-secondary">∴ 3. An ostrich can fly.</strong></p>
-  <p class="mt-4 text-sm text-on-surface-variant"><strong>Explanation:</strong> This conclusion is false. The rule is only about penguins. Since an ostrich is not a penguin, the rule doesn't apply to it at all. We can't conclude anything about an ostrich's ability to fly based on a rule about penguins. The argument is invalid because it tries to apply the rule where it's not relevant.</p>
-</div>
+<Callout type="example" title="Denying the Antecedent">
+**Structure:** If P, then Q. P is not true. Therefore, Q is not true. (Incorrect!)
+
+**Example:**
+
+1. If an animal is a penguin, then it cannot fly.
+
+2. An ostrich is not a penguin.
+
+∴ 3. An ostrich can fly.
+
+**Explanation:** This conclusion is false. The rule is only about penguins. Since an ostrich is not a penguin, the rule doesn't apply to it at all. We can't conclude anything about an ostrich's ability to fly based on a rule about penguins. The argument is invalid because it tries to apply the rule where it's not relevant.
+</Callout>
 
 ## 4. Elementary Rules of Inference
 

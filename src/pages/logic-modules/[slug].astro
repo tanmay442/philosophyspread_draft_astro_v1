@@ -8,6 +8,7 @@ import FormalProof from '../../components/mdx/FormalProof.astro';
 import CodeBlock from '../../components/mdx/CodeBlock.astro';
 import InteractiveQuiz from '../../components/mdx/InteractiveQuiz.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
+import Callout from '../../components/mdx/callout.astro';
 
 const slug = Astro.params.slug;
 const modules = await getCollection('logicModules');
@@ -29,6 +30,7 @@ const components = {
   CodeBlock,
   InteractiveQuiz,
   Blockquote,
+  Callout,
 };
 ---
 
