@@ -1,0 +1,148 @@
+---
+moduleNumber: "L-03"
+title: "Cogency & Analogy"
+description: "Explore the world beyond deductive certainty. Learn to evaluate the strength of inductive arguments and the power of reasoning by analogy."
+category: "Inductive Reasoning"
+difficulty: "Beginner"
+prerequisites: []
+---
+
+export const quizData = [
+  {
+    question: "1. \"My grandfather smoked a pack a day and lived to be 95. Therefore, the health risks of smoking are clearly exaggerated.\" What is the best description of this argument?",
+    options: [
+      "A strong inductive argument.",
+      "A weak inductive argument based on anecdotal evidence.",
+      "A cogent argument from analogy."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. This is a classic weak inductive argument. It makes a broad generalization about the health risks for a whole population based on a single, exceptional case (an anecdote). It ignores the overwhelming statistical evidence to the contrary."
+  },
+  {
+    question: "2. \"Every U.S. presidential election in history has been held on a Tuesday. Therefore, the 2028 U.S. presidential election will be held on a Tuesday.\" Assuming the premise is true, this argument is:",
+    options: [
+      "Weak and not cogent.",
+      "An invalid deductive argument.",
+      "Strong and cogent."
+    ],
+    correctIndex: 2,
+    feedback: "Correct. This is a strong inductive argument. The premise isn't just a random pattern; it's based on an established and codified system (federal law). Because the pattern is consistent and has a reason behind it, the conclusion is highly probable. Since the premise is true, the argument is also cogent."
+  },
+  {
+    question: "3. \"You can't blame a lion for hunting a gazelle; that's just its nature. Likewise, you can't blame a powerful corporation for trying to eliminate its competition; that's just the nature of capitalism.\" This argument is best described as:",
+    options: [
+      "A cogent inductive argument.",
+      "An argument from analogy that may be weak.",
+      "A valid deductive argument."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. This is an argument from analogy (lion:gazelle :: corporation:competitor). It is likely weak because it compares an animal acting on instinct (the source) with human agents making complex moral and strategic choices (the target). The question of moral responsibility is a key dissimilarity that weakens the analogy."
+  },
+  {
+    question: "4. A quality control inspector tests every 1,000th microchip from an assembly line. After 5 million chips have been produced, every single chip tested has been flawless. The inspector concludes, \"The next microchip we test will also be flawless.\" This is a:",
+    options: [
+      "Strong inductive argument.",
+      "Weak inductive argument.",
+      "Argument from analogy."
+    ],
+    correctIndex: 0,
+    feedback: "Correct. This is a very strong inductive argument. It's based on a large and systematic sample of past observations (5,000 tested chips) to make a prediction about a future instance. This is the foundation of statistical quality control. It's not guaranteed, but it is highly probable."
+  }
+];
+
+## 1. Beyond Certainty: The World of Inductive Reasoning
+
+In previous modules, we focused on deductive arguments, where true premises **guarantee** a true conclusion. This provides certainty, but most real-world reasoning—from scientific discovery to everyday decision-making—doesn't work that way. Instead, we use **inductive reasoning**, where premises make a conclusion probable, but not certain.
+
+<br/>
+
+An inductive argument moves from specific observations to broader generalizations. The goal is not to be valid, but to be **strong**.
+
+<br/>
+
+### Strong Inductive Arguments
+
+A **strong** inductive argument is one where the truth of the premises would make the conclusion highly likely to be true. The more evidence you have, the stronger the argument becomes.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: The Reliable Commute</p>
+  <p><span class="text-primary">1.1: Every weekday for the last 10 years, the 8:05 AM train has arrived on time.</span><br/>
+  <span class="text-primary">... (representing over 2,500 instances) ...</span></p>
+  <p class="mt-2"><strong class="text-secondary">∴ 2. Therefore, the 8:05 AM train will be on time tomorrow morning.</strong></p>
+</div>
+
+This argument is very strong. Based on the overwhelming past evidence, any reasonable person would be persuaded. However, it's not deductively valid. A sudden mechanical failure or a workers' strike could make the conclusion false, even though the premise is true. We trade absolute certainty for practical probability.
+
+<br/>
+
+## 2. The Quality of Induction: Cogency
+
+Strength is only half the story. A strong argument can still lead to a nonsensical conclusion if its premises are false. This brings us to the concept of **cogency**, which is the inductive equivalent of "soundness" in deductive logic.
+
+<div class="bg-primary/10 border-l-4 border-primary p-6 my-8">
+  <p><strong>A Cogent Argument = A Strong Argument + True Premises</strong></p>
+</div>
+
+### Cogent vs. Non-Cogent Arguments
+
+The train argument above is **cogent** because it is strong AND its premise (let's assume) is factually true. But consider an argument that is strong in structure but built on a foundation of falsehoods.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: The UFO Conspiracy</p>
+  <p><span class="text-primary">1.1: Eyewitnesses in Roswell reported seeing alien bodies in 1947.</span><br/>
+  <span class="text-primary">1.2: The Nazca lines in Peru are clearly ancient landing strips for alien spacecraft.</span><br/>
+  <span class="text-primary">1.3: The Egyptian pyramids could not have been built without extraterrestrial technology.</span></p>
+  <p class="mt-2"><strong class="text-secondary">∴ 2. Therefore, Earth has been visited by aliens.</strong></p>
+</div>
+
+This argument has a **strong structure**; if all those premises were true, the conclusion would be quite probable. However, since the premises are demonstrably false or highly unsubstantiated, the argument is **not cogent**. Believing the conclusion doesn't make the premises true.
+
+<br/>
+
+## 3. Weak Inductive Arguments
+
+The opposite of a strong argument is a **weak** one. In a weak inductive argument, the premises provide very little support for the conclusion, even if they are true. A common source of weakness is mistaking correlation for causation or relying on a tiny, unrepresentative sample.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Example: The Video Game Fallacy</p>
+  <p><span class="text-primary">1. Person A committed a violent crime and was known to play video games.</span><br/>
+  <span class="text-primary">2. Person B committed a violent crime and was also known to play video games.</span></p>
+  <p class="mt-2"><strong class="text-secondary">∴ 3. Therefore, playing video games leads to violent crime.</strong></p>
+</div>
+
+This argument is incredibly **weak**. It cherry-picks two examples while completely ignoring the crucial context: millions of people play the same video games and never commit any violent acts. It confuses a correlation (which might not even be statistically significant) with a causal link.
+
+<br/>
+
+## 4. A Different Path: Reasoning by Analogy
+
+Besides deduction and induction, we often reason using **analogy**. An argument from analogy claims that because two things are similar in some known respects, they are likely similar in some other, unknown respect.
+
+The structure is: **A is to B as C is to D**. The strength of an analogy depends on how relevant the similarities are.
+
+<br/>
+
+### Strong vs. Weak Analogies
+
+A **strong analogy** relies on deep, structural similarities. A **weak analogy** relies on superficial similarities that are irrelevant to the conclusion.
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Strong Analogy: The Ship of State</p>
+  <p class="italic">"A CEO is to a company as a captain is to a ship. Just as the captain is responsible for the ship's course and the safety of the crew, the CEO is ultimately responsible for the company's direction and employee well-being."</p>
+  <p class="mt-4"><strong>Analysis:</strong> This is a strong analogy because the core relationship—a single leader with ultimate authority and responsibility for a complex system—is highly relevant and similar in both cases (the source and the target).</p>
+</div>
+
+<div class="bg-surface-container-low border-2 border-secondary p-6 my-8">
+  <p class="text-primary mb-2 font-semibold">Weak Analogy: The National Budget</p>
+  <p class="italic">"A nation must balance its budget, just like a family must. A family can't spend more than it earns, and neither can a country."</p>
+  <p class="mt-4"><strong>Analysis:</strong> This is a very common but weak analogy. The similarities are superficial. A nation is unlike a family in critically relevant ways: it can issue its own currency, set interest rates, and its spending directly creates income for its citizens. These differences undermine the conclusion.</p>
+</div>
+
+<br/>
+
+## 5. Test Your Skills: Evaluate the Arguments
+
+Apply what you've learned. Analyze the following arguments and identify their type and quality.
+
+<InteractiveQuiz questions={quizData} />
+

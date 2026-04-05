@@ -3,7 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
-import LogicTable from '../../components/mdx/LogicTable.astro';
+import TruthTable from '../../components/mdx/TruthTable.astro';
 import FormalProof from '../../components/mdx/FormalProof.astro';
 import CodeBlock from '../../components/mdx/CodeBlock.astro';
 import InteractiveQuiz from '../../components/mdx/InteractiveQuiz.astro';
@@ -24,7 +24,7 @@ const nextModule = moduleIndex < sortedModules.length - 1 ? sortedModules[module
 const { Content } = await render(module);
 
 const components = {
-  LogicTable,
+  TruthTable,
   FormalProof,
   CodeBlock,
   InteractiveQuiz,

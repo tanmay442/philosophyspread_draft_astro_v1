@@ -1,0 +1,52 @@
+---
+interface Row {
+  inputs: string[];
+  result: string;
+}
+
+interface Props {
+  variables: string[];
+  rows: Row[];
+}
+
+const { variables, rows } = Astro.props;
+
+function getColor(value: string): string {
+  const normalized = value.trim().toUpperCase();
+  if (normalized === 'T' || normalized === 'TRUE') {
+    return 'text-green-700 bg-green-100';
+  }
+  if (normalized === 'F' || normalized === 'FALSE') {
+    return 'text-red-700 bg-red-100';
+  }
+  return 'text-secondary bg-surface-container-low';
+}
+---
+
+<div class="my-8 overflow-x-auto">
+  <table class="w-full text-left border-collapse border-2 border-secondary">
+    <thead>
+      <tr class="bg-surface-container">
+        {variables.map((variable) => (
+          <th class="p-2 md:p-3 font-label text-xs uppercase tracking-widest text-primary text-center border border-secondary/50">
+            {variable}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.inputs.map((input) => (
+            <td class={`p-2 md:p-3 font-mono text-center text-lg border border-secondary/50 ${getColor(input)}`}>
+              {input}
+            </td>
+          ))}
+          <td class={`p-2 md:p-3 font-mono text-center text-lg border border-secondary/50 ${getColor(row.result)}`}>
+            {row.result}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
