@@ -1,0 +1,15 @@
+{
+  "name": "Philosophy Spread",
+  "short_name": "PhilSpread",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#245ba7",
+  "background_color": "#f8f9ff",
+  "display": "standalone",
+  "start_url": "/"
+}

@@ -11,4 +11,24 @@ export default defineConfig({
     prerenderEnvironment: 'node',
   }),
   output: 'server',
+  vite: {
+    ssr: {
+      external: [
+        'node:async_hooks', 
+        'node:fs', 
+        'node:path', 
+        'node:crypto', 
+        'node:os', 
+        'node:stream', 
+        'node:buffer',
+        'async_hooks', 
+        'fs', 
+        'path', 
+        'crypto', 
+        'os', 
+        'stream', 
+        'buffer'
+      ],
+    },
+  },
 });
