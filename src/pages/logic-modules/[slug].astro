@@ -79,23 +79,23 @@ const components = {
         <Content components={components} />
       </div>
       
-      <nav class="mt-20 md:mt-24 pt-8 border-t-2 border-secondary grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+      <nav class="mt-20 md:mt-24 pt-8 border-t-2 border-secondary flex gap-3 sm:gap-4 md:gap-8">
         {prevModule ? (
-          <a href={`/logic-modules/${prevModule.id}`} class="group flex min-h-[9.25rem] md:min-h-[10rem] flex-col justify-between items-start w-full p-4 sm:p-5 md:p-6 border-2 border-secondary/30 hover:border-secondary bg-surface-container-low/30 transition-colors">
-            <span class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">&lt;- Previous Module</span>
-            <span class="font-headline text-xl sm:text-2xl leading-tight group-hover:italic transition-all">{prevModule.data.title}</span>
+          <a href={`/logic-modules/${prevModule.id}`} class="group flex flex-1 min-w-0 h-[8.5rem] sm:h-[9.25rem] md:h-[10rem] flex-col justify-between items-start p-3 sm:p-4 md:p-6 border-2 border-secondary/30 hover:border-secondary bg-surface-container-low/30 transition-colors">
+            <span class="font-label text-[9px] sm:text-[10px] uppercase tracking-widest text-primary">&lt;- Previous Module</span>
+            <span class="font-headline text-base sm:text-lg md:text-2xl leading-tight break-words group-hover:italic transition-all">{prevModule.data.title}</span>
           </a>
         ) : (
-          <div class="hidden md:block min-h-[10rem] border-2 border-secondary/10 bg-surface-container-low/10"></div>
+          <div class="flex-1 h-[8.5rem] sm:h-[9.25rem] md:h-[10rem] border-2 border-secondary/10 bg-surface-container-low/10"></div>
         )}
         
         {nextModule ? (
-          <a href={`/logic-modules/${nextModule.id}`} class="group flex min-h-[9.25rem] md:min-h-[10rem] flex-col justify-between items-start md:items-end text-left md:text-right w-full p-4 sm:p-5 md:p-6 border-2 border-secondary/30 hover:border-secondary bg-surface-container-low/30 transition-colors">
-            <span class="font-label text-[10px] uppercase tracking-widest text-primary mb-3">Next Module -&gt;</span>
-            <span class="font-headline text-xl sm:text-2xl leading-tight group-hover:italic transition-all">{nextModule.data.title}</span>
+          <a href={`/logic-modules/${nextModule.id}`} class="group flex flex-1 min-w-0 h-[8.5rem] sm:h-[9.25rem] md:h-[10rem] flex-col justify-between items-start md:items-end text-left md:text-right p-3 sm:p-4 md:p-6 border-2 border-secondary/30 hover:border-secondary bg-surface-container-low/30 transition-colors">
+            <span class="font-label text-[9px] sm:text-[10px] uppercase tracking-widest text-primary">Next Module -&gt;</span>
+            <span class="font-headline text-base sm:text-lg md:text-2xl leading-tight break-words group-hover:italic transition-all">{nextModule.data.title}</span>
           </a>
         ) : (
-          <div class="hidden md:block min-h-[10rem] border-2 border-secondary/10 bg-surface-container-low/10"></div>
+          <div class="flex-1 h-[8.5rem] sm:h-[9.25rem] md:h-[10rem] border-2 border-secondary/10 bg-surface-container-low/10"></div>
         )}
       </nav>
     </article>
