@@ -6,9 +6,6 @@ import clerk from '@clerk/astro';
 
 export default defineConfig({
   integrations: [tailwind(), mdx(), clerk()],
-  adapter: cloudflare({
-    configPath: './wrangler.jsonc',
-    prerenderEnvironment: 'node',
-  }),
+  adapter: cloudflare(),
   output: 'server',
 });
