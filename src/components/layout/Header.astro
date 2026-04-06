@@ -1,7 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
 import { SignInButton, Show, UserButton } from '@clerk/astro/components';
-import { Image } from 'astro:assets';
 import logoRemoveBg from '../../assets/logo-removebg.png';
 
 const pathname = Astro.url.pathname;
@@ -13,14 +12,13 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
   <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2 w-full relative z-50 bg-surface">
     <a href="/" class="flex items-center hover:opacity-90 transition-opacity shrink-0">
       <span class="block h-10 w-[200px] sm:h-12 sm:w-[240px]">
-        <Image
-          src={logoRemoveBg}
+        <img
+          src={logoRemoveBg.src}
           alt="Philosophy Spread"
           width={594}
           height={109}
           loading="eager"
           fetchpriority="high"
-          sizes="(min-width: 640px) 240px, 200px"
           class="h-full w-full object-contain"
         />
       </span>
