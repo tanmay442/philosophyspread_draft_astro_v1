@@ -7,7 +7,6 @@ const essays = defineCollection({
     title: z.string(),
     description: z.string(),
     author: z.string().default("Anonymous"),
-    readTime: z.string(),
     category: z.string(),
     tags: z.array(z.string()).default([]),
     imageSrc: z.string(),

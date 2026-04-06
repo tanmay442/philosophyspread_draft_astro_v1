@@ -43,7 +43,6 @@ const components = {
         <div class="flex items-center justify-center space-x-4 font-label text-xs uppercase tracking-widest text-secondary">
           <span>By {essay.data.author}</span>
           <span>&bull;</span>
-          <span>{essay.data.readTime}</span>
           <span>&bull;</span>
           <time datetime={essay.data.pubDate.toISOString()}>
             {essay.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
