@@ -11,6 +11,7 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.1.7",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/node": "^10.0.4",
     "@astrojs/tailwind": "^6.0.2",
