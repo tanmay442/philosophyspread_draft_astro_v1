@@ -1,19 +1,24 @@
 # Philosophy Spread
 
 <p align="center">
-  <img src="./public/favicon.svg" width="120" alt="Philosophy Spread Logo" />
-</p>
+  <img src="src/assets/logo.png" width="360" alt="Philosophy Spread Logo" />
+</p> 
 
 Philosophy Spread is an open community platform dedicated to exploring philosophy, logic, and critical thinking. We believe wisdom should be accessible, collaborative, and continuously evolving.
 
+Live site: https://philosophyspread.live
+
 ## Why We Exist
 
-In an age of hot takes and surface-level discourse, Philosophy Spread exists as a space for deeper inquiry. Our mission is to:
+Philosophy Spread is a small effort by me to follow a personal passion for philosophy and grow it into a thoughtful community.
 
-- **Democratize philosophy** — Make philosophical thinking accessible to curious minds regardless of background
-- **Foster community** — Create a collaborative environment where ideas can be examined, challenged, and refined
-- **Bridge ancient and modern** — Connect timeless wisdom with contemporary problems
-- **Practice thinking** — Treat philosophy not as abstract theory but as a practical skill for living well
+In the age of AI, many people are reading less deeply and engaging less with literature and long-form thought. This project advocates for the human mind: it should still be trained, challenged, and sharpened, even when AI tools are everywhere.
+
+That is exactly why this platform focuses on:
+
+- **Essays** — To encourage deep reading, reflection, and long-form thinking
+- **Logic Modules** — To train clear reasoning and disciplined thought
+- **Community discussion** — To keep philosophy alive through shared inquiry
 
 ## What We Publish
 
@@ -48,6 +53,11 @@ Philosophy Spread is an open community project. We welcome:
 - **Writers** — Submit essays and contribute to our philosophical discussions
 - **Feedback** — Share your thoughts on what we publish and how we can improve
 - **Ideas** — Propose topics, suggest improvements, or collaborate on new features
+
+Useful links:
+
+- Terms and Policy: https://philosophyspread.live/terms
+- How to Contribute: https://philosophyspread.live/contribute
 
 ## Hosting
 
