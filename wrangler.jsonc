@@ -4,7 +4,7 @@
 		"global_fetch_strictly_public",
 		"nodejs_compat"
 	],
-	"name": "philosophyspread",
+	"name": "philosophy-spread",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",
