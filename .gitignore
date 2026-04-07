@@ -5,3 +5,4 @@ examplefiles
 .env
 # clerk configuration (can include secrets)
 /.clerk/
+.wrangler
