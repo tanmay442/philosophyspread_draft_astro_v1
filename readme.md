@@ -1,73 +1,60 @@
-# PhilosophySpread
+# Philosophy Spread
 
-An Astro-based site for publishing philosophy essays, daily bits, and logic modules.
+<p align="center">
+  <img src="./public/favicon.svg" width="120" alt="Philosophy Spread Logo" />
+</p>
 
-## Stack
+Philosophy Spread is an open community platform dedicated to exploring philosophy, logic, and critical thinking. We believe wisdom should be accessible, collaborative, and continuously evolving.
 
-- Astro
-- TypeScript
-- Tailwind CSS
-- MDX content collections
+## Why We Exist
 
-## Project Structure
+In an age of hot takes and surface-level discourse, Philosophy Spread exists as a space for deeper inquiry. Our mission is to:
 
-- `src/pages/`: Route entries and listing pages
-- `src/components/`: UI components and section layouts
-- `src/content/`: MDX content (bits, essays, logic modules, pages)
-- `src/layouts/`: Base layouts
-- `public/`: Static assets
+- **Democratize philosophy** — Make philosophical thinking accessible to curious minds regardless of background
+- **Foster community** — Create a collaborative environment where ideas can be examined, challenged, and refined
+- **Bridge ancient and modern** — Connect timeless wisdom with contemporary problems
+- **Practice thinking** — Treat philosophy not as abstract theory but as a practical skill for living well
 
-## Requirements
+## What We Publish
 
-- Node.js 18+
-- pnpm 8+
+### Essays
+Long-form philosophical explorations covering topics from ethics and epistemology to existential questions and modern philosophy. Our essays aim to present ideas with rigor while remaining accessible to thoughtful readers.
 
-## Setup
+### Daily Bits
+Bite-sized philosophical morsels delivered daily. These short-form pieces offer quick insights, thought experiments, quotes, and mental exercises designed to spark curiosity and keep philosophical thinking a daily habit.
 
-1) Install dependencies
+### Logic Modules
+Formal logic tools and explanations for developing reasoning skills. From truth tables to formal proofs, these modules help readers develop clear, rigorous thinking — a foundation for good philosophy.
 
-```bash
-pnpm install
-```
+## Architecture
 
-Expected output: `node_modules/` created and `pnpm-lock.yaml` respected.
+Philosophy Spread is built as a modern, performant web platform:
 
-2) Start the dev server
+- **Astro** — Static-first framework for optimal performance and SEO
+- **TypeScript** — Type-safe code for maintainability
+- **Tailwind CSS** — Utility-first styling with a cohesive design system
+- **MDX** — Markdown with component support for rich, interactive content
+- **Cloudflare Workers** — Edge-hosted for global performance and low latency
+- **Clerk** — Authentication for community features
+- **Vercel/Cloudflare Sitemap** — Automatic sitemap generation for search engines
 
-```bash
-pnpm dev
-```
+The site uses Astro's server-side rendering (SSR) mode, enabling dynamic features while maintaining excellent performance through edge caching.
 
-Expected output: a local URL is printed, usually `http://localhost:4321`.
+## Community
 
-3) Build for production
+Philosophy Spread is an open community project. We welcome:
 
-```bash
-pnpm build
-```
+- **Readers** — Engage with our content, think along, and apply ideas to your life
+- **Writers** — Submit essays and contribute to our philosophical discussions
+- **Feedback** — Share your thoughts on what we publish and how we can improve
+- **Ideas** — Propose topics, suggest improvements, or collaborate on new features
 
-Expected output: `dist/` folder with the production build.
+## Hosting
 
-4) Preview the production build
+The platform is hosted on **Cloudflare Workers**, leveraging edge computing to deliver content with minimal latency worldwide. This architecture ensures fast page loads regardless of visitor location while maintaining the ability to serve dynamic, personalized content.
 
-```bash
-pnpm preview
-```
+---
 
-Expected output: a local preview URL is printed.
-
-## Content Editing
-
-- Essays live in `src/content/essays/` (MDX)
-- Daily bits live in `src/content/bits/` (MDX)
-- Logic modules live in `src/content/logic-modules/` (MDX)
-
-## Scripts
-
-- `pnpm dev`: Run the local dev server
-- `pnpm build`: Create a production build
-- `pnpm preview`: Preview the production build locally
-
-## Notes
-
-- If you add new MDX files, ensure frontmatter matches the content config in `src/content.config.ts`.
+<p align="center">
+  <em>Exploring wisdom. Inspiring minds.</em>
+</p>
