@@ -64,6 +64,7 @@ Useful links:
 If this project resonates with you, please consider supporting it through GitHub Sponsors:
 
 - Sponsor here: https://github.com/sponsors/tanmay442
+- and cawfee here :https://buymeacoffee.com/gtanmay
 
 Your support helps me:
 
