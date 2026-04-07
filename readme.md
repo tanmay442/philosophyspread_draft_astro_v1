@@ -59,6 +59,22 @@ Useful links:
 - Terms and Policy: https://philosophyspread.live/terms
 - How to Contribute: https://philosophyspread.live/contribute
 
+## GitHub Sponsors
+
+If this project resonates with you, please consider supporting it through GitHub Sponsors:
+
+- Sponsor here: https://github.com/sponsors/tanmay442
+
+Your support helps me:
+
+- Cover platform costs like hosting and domain renewal for philosophyspread.live
+- Keep improving essays, logic modules, and the codebase behind the platform
+- Fuel late-night coffee sessions that keep this work moving
+- Stay motivated to continue this passion for philosophy and not leave it behind
+
+If you find even a little value in the philosophical work, your contribution means a lot.
+And if philosophy is not your area but you appreciate the engineering and code work, your support still helps deeply.
+
 ## Hosting
 
 The platform is hosted on **Cloudflare Workers**, leveraging edge computing to deliver content with minimal latency worldwide. This architecture ensures fast page loads regardless of visitor location while maintaining the ability to serve dynamic, personalized content.
