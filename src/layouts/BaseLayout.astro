@@ -1,9 +1,17 @@
 ---
+import { SEOMetadata } from 'astro-seo-metadata';
+
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title = "Philosophy Spread | Exploring Wisdom , Inspiring Minds" } = Astro.props;
+const { 
+  title = "Philosophy Spread | Exploring Wisdom , Inspiring Minds",
+  description = "Philosophy Spread explores timeless wisdom, logic modules, and philosophical insights. Join our community of thinkers.",
+  image = "/image.avif"
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -11,7 +19,21 @@ const { title = "Philosophy Spread | Exploring Wisdom , Inspiring Minds" } = Ast
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    
+    <SEOMetadata
+      siteName={'Philosophy Spread'}
+      title={title}
+      description={description}
+      image={image}
+      favicon={'/favicon.svg'}
+      author="Philosophy Spread"
+      copyright="2026"
+      astroSitemap={true}
+      canonicalUrl={Astro.url.toString()}
+      type={'website'}
+      astroGenerator={true}
+    />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

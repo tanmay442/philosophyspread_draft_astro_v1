@@ -16,6 +16,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@clerk/astro": "^3.0.8",
     "astro": "^6.1.1",
+    "astro-seo-metadata": "^0.6.0",
     "dotenv": "^17.2.3",
     "express": "^4.21.2"
   },

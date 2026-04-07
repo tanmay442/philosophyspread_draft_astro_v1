@@ -23,6 +23,9 @@ importers:
       astro:
         specifier: ^6.1.1
         version: 6.1.3(@types/node@22.19.15)(jiti@1.21.7)(rollup@4.60.1)(tsx@4.21.0)(typescript@5.8.3)(yaml@2.8.3)
+      astro-seo-metadata:
+        specifier: ^0.6.0
+        version: 0.6.0
       dotenv:
         specifier: ^17.2.3
         version: 17.4.0
@@ -774,6 +777,9 @@ packages:
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
+
+  astro-seo-metadata@0.6.0:
+    resolution: {integrity: sha512-2wN3kHy4KOorieZxvzYdnXl8h3imUrZdKE+N5xLA3T9/fxHXqNXtXEuJSYFSLU+EfpUcdS6jMncuBC4nQpAIuA==}
 
   astro@6.1.3:
     resolution: {integrity: sha512-FUKbBYOdYYrRNZwDd9I5CVSfR6Nj9aZeNzcjcvh1FgHwR0uXawkYFR3HiGxmdmAB2m8fs0iIkDdsiUfwGeO8qA==}
@@ -2931,6 +2937,8 @@ snapshots:
   array-iterate@2.0.1: {}
 
   astring@1.9.0: {}
+
+  astro-seo-metadata@0.6.0: {}
 
   astro@6.1.3(@types/node@22.19.15)(jiti@1.21.7)(rollup@4.60.1)(tsx@4.21.0)(typescript@5.8.3)(yaml@2.8.3):
     dependencies:
