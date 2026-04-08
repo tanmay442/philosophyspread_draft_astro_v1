@@ -25,6 +25,18 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const resolvedImageUrl = image.startsWith('http://') || image.startsWith('https://')
   ? image
   : new URL(image, siteUrl).toString();
+const imagePathname = new URL(resolvedImageUrl).pathname.toLowerCase();
+const imageType = imagePathname.endsWith('.png')
+  ? 'image/png'
+  : imagePathname.endsWith('.jpg') || imagePathname.endsWith('.jpeg')
+    ? 'image/jpeg'
+    : imagePathname.endsWith('.webp')
+      ? 'image/webp'
+      : imagePathname.endsWith('.gif')
+        ? 'image/gif'
+        : imagePathname.endsWith('.avif')
+          ? 'image/avif'
+          : undefined;
 const keywordsContent = keywords.join(', ');
 const shouldNoindex = Astro.url.hostname !== siteUrl.hostname;
 
@@ -76,6 +88,9 @@ const combinedStructuredData = [...defaultStructuredData, ...additionalStructure
       type={type}
       astroGenerator={true}
     />
+    <meta property="og:image:secure_url" content={resolvedImageUrl} />
+    {imageType && <meta property="og:image:type" content={imageType} />}
+    <meta name="twitter:image" content={resolvedImageUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
     {shouldNoindex && (
