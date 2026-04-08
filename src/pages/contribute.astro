@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Blockquote from '../components/mdx/Blockquote.astro';
-import Icon from '../components/ui/Icon.astro';
 
 const pages = await getCollection('pages');
 const contributePage = pages.find((entry) => entry.id === 'contribute');
@@ -31,7 +30,7 @@ const components = {
     <article>
       <header class="mb-12">
         <a href="/" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-6 font-label text-xs uppercase tracking-widest">
-          <Icon name="arrow_back" class="h-4 w-4" />
+          <span class="material-symbols-outlined text-sm">arrow_back</span>
           Back to Home
         </a>
         

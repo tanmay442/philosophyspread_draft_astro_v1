@@ -1,6 +1,5 @@
 ---
 import HardOffsetCard from '../ui/HardOffsetCard.astro';
-import Icon from '../ui/Icon.astro';
 
 interface Props {
   title: string;
@@ -25,7 +24,7 @@ const {
   {moduleNumber && (
     <div class="flex justify-between items-start border-b border-outline-variant pb-4 mb-4">
       <span class="font-label text-[10px] font-bold text-primary tracking-widest uppercase">[{moduleNumber}]</span>
-      {icon && <Icon name={icon} class="h-5 w-5 text-secondary opacity-40 group-hover:opacity-100 transition-opacity" />}
+      {icon && <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" data-icon={icon}>{icon}</span>}
     </div>
   )}
   <h4 class={`font-headline font-bold text-secondary mb-4 ${titleClass ? titleClass : (moduleNumber ? 'text-3xl' : 'text-2xl')}`}>{title}</h4>

@@ -1,7 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
 import { SignInButton, Show, UserButton } from '@clerk/astro/components';
-import Icon from '../ui/Icon.astro';
 import logoRemoveBg from '../../assets/logo-removebg.avif';
 
 const pathname = Astro.url.pathname;
@@ -62,7 +61,7 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
 
     <!-- Mobile Menu Toggle -->
     <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center p-2 text-secondary hover:text-primary transition-colors" aria-label="Toggle Menu">
-      <Icon name="menu" class="menu-icon h-8 w-8" />
+      <span class="material-symbols-outlined text-3xl menu-icon">menu</span>
     </button>
   </div>
 
@@ -115,19 +114,13 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
       mobileMenu?.classList.remove('hidden');
       mobileMenu?.classList.add('flex');
       backdrop?.classList.remove('hidden');
-      if (menuIcon) {
-        menuIcon.setAttribute('data-icon', 'close');
-        menuIcon.innerHTML = '<path d="M6 6L18 18"></path><path d="M18 6L6 18"></path>';
-      }
+      if (menuIcon) menuIcon.textContent = 'close';
       document.body.style.overflow = 'hidden';
     } else {
       mobileMenu?.classList.add('hidden');
       mobileMenu?.classList.remove('flex');
       backdrop?.classList.add('hidden');
-      if (menuIcon) {
-        menuIcon.setAttribute('data-icon', 'menu');
-        menuIcon.innerHTML = '<path d="M4 6H20"></path><path d="M4 12H20"></path><path d="M4 18H20"></path>';
-      }
+      if (menuIcon) menuIcon.textContent = 'menu';
       document.body.style.overflow = '';
     }
   }
