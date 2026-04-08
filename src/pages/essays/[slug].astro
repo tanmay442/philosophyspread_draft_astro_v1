@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
+import siteLogo from '../../assets/logo.png';
 
 const slug = Astro.params.slug;
 
@@ -21,9 +22,12 @@ if (!essay) {
 const { Content } = await render(essay);
 const siteUrl = Astro.site ?? new URL('https://philosophyspread.live');
 const essayUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const essayImageUrl = essay.data.imageSrc.startsWith('http://') || essay.data.imageSrc.startsWith('https://')
-  ? essay.data.imageSrc
-  : new URL(essay.data.imageSrc, siteUrl).toString();
+const socialImagePath = essay.data.imageSrc.endsWith('.avif')
+  ? siteLogo.src
+  : essay.data.imageSrc;
+const socialImageUrl = socialImagePath.startsWith('http://') || socialImagePath.startsWith('https://')
+  ? socialImagePath
+  : new URL(socialImagePath, siteUrl).toString();
 
 const articleStructuredData = {
   '@context': 'https://schema.org',
@@ -35,7 +39,7 @@ const articleStructuredData = {
     '@type': 'Person',
     name: essay.data.author,
   },
-  image: [essayImageUrl],
+  image: [socialImageUrl],
   mainEntityOfPage: essayUrl,
   publisher: {
     '@type': 'Organization',
@@ -55,7 +59,7 @@ const components = {
 <BaseLayout
   title={`${essay.data.title} | Philosophy Spread`}
   description={essay.data.description}
-  image={essay.data.imageSrc}
+  image={socialImagePath}
   keywords={['philosophy essay', 'critical thinking', essay.data.category, ...essay.data.tags]}
   type="article"
   structuredData={articleStructuredData}
