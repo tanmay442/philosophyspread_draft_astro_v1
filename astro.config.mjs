@@ -7,6 +7,7 @@ import clerk from '@clerk/astro';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
+  site: 'https://philosophyspread.live',
   integrations: [tailwind(), mdx(), clerk()],
   adapter: cloudflare(),
   output: 'server',

@@ -8,7 +8,7 @@ import Blockquote from '../../components/mdx/Blockquote.astro';
 const slug = Astro.params.slug;
 
 if (slug && /^\d+$/.test(slug)) {
-  return Astro.redirect(`/essays/page/${slug}`);
+  return Astro.redirect(`/essays/page/${slug}`, 301);
 }
 
 const essays = await getCollection('essays');
@@ -19,13 +19,47 @@ if (!essay) {
 }
 
 const { Content } = await render(essay);
+const siteUrl = Astro.site ?? new URL('https://philosophyspread.live');
+const essayUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const essayImageUrl = essay.data.imageSrc.startsWith('http://') || essay.data.imageSrc.startsWith('https://')
+  ? essay.data.imageSrc
+  : new URL(essay.data.imageSrc, siteUrl).toString();
+
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: essay.data.title,
+  description: essay.data.description,
+  datePublished: essay.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: essay.data.author,
+  },
+  image: [essayImageUrl],
+  mainEntityOfPage: essayUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Philosophy Spread',
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/favicon.svg', siteUrl).toString(),
+    },
+  },
+};
 
 const components = {
   Blockquote,
 };
 ---
 
-<BaseLayout title={`${essay.data.title} | Philosophy Spread`}>
+<BaseLayout
+  title={`${essay.data.title} | Philosophy Spread`}
+  description={essay.data.description}
+  image={essay.data.imageSrc}
+  keywords={['philosophy essay', 'critical thinking', essay.data.category, ...essay.data.tags]}
+  type="article"
+  structuredData={articleStructuredData}
+>
   <Header />
   
   <main class="pt-32 px-6 md:px-12 pb-20 max-w-4xl mx-auto">

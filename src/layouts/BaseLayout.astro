@@ -1,17 +1,61 @@
 ---
 import { SEOMetadata } from 'astro-seo-metadata';
+import siteLogo from '../assets/logo.png';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  keywords?: string[];
+  type?: 'website' | 'article';
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { 
+const {
   title = "Philosophy Spread | Exploring Wisdom , Inspiring Minds",
   description = "Philosophy Spread explores timeless wisdom, logic modules, and philosophical insights. Join our community of thinkers.",
-  image = "/image.avif"
-} = Astro.props;
+  image = siteLogo.src,
+  keywords = [],
+  type = 'website',
+  structuredData = [],
+} = Astro.props as Props;
+
+const siteUrl = Astro.site ?? new URL('https://philosophyspread.live');
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const resolvedImageUrl = image.startsWith('http://') || image.startsWith('https://')
+  ? image
+  : new URL(image, siteUrl).toString();
+const keywordsContent = keywords.join(', ');
+const shouldNoindex = Astro.url.hostname !== siteUrl.hostname;
+
+const defaultStructuredData: Array<Record<string, unknown>> = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Philosophy Spread',
+    url: siteUrl.toString(),
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Philosophy Spread',
+    url: siteUrl.toString(),
+    logo: new URL('/favicon.svg', siteUrl).toString(),
+    sameAs: [
+      'https://www.linkedin.com/in/goeltanmay442/',
+      'https://www.instagram.com/gtanmay442',
+      'https://x.com/TanmayGoel442',
+    ],
+  },
+];
+
+const additionalStructuredData = Array.isArray(structuredData)
+  ? structuredData
+  : structuredData
+    ? [structuredData]
+    : [];
+const combinedStructuredData = [...defaultStructuredData, ...additionalStructuredData];
 ---
 
 <!DOCTYPE html>
@@ -24,15 +68,25 @@ const {
       siteName={'Philosophy Spread'}
       title={title}
       description={description}
-      image={image}
+      image={resolvedImageUrl}
       favicon={'/favicon.svg'}
       author="Philosophy Spread"
       copyright="2026"
-      astroSitemap={true}
-      canonicalUrl={Astro.url.toString()}
-      type={'website'}
+      canonicalUrl={canonicalUrl}
+      type={type}
       astroGenerator={true}
     />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    {keywordsContent && <meta name="keywords" content={keywordsContent} />}
+    {shouldNoindex && (
+      <>
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+      </>
+    )}
+    {combinedStructuredData.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

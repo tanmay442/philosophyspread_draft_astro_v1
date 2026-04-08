@@ -35,7 +35,11 @@ const page = {
 };
 ---
 
-<BaseLayout title={`Essays - Page ${page.currentPage} | Philosophy Spread`}>
+<BaseLayout
+  title={`Essays - Page ${page.currentPage} | Philosophy Spread`}
+  description={`Browse page ${page.currentPage} of Philosophy Spread essays: long-form philosophical writing on logic, ethics, and critical thought.`}
+  keywords={['philosophy essays', 'critical thinking', 'long-form philosophy', 'logic']}
+>
   <Header />
   
   <main class="pt-32 px-6 md:px-12 pb-20">
