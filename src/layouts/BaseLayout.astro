@@ -92,6 +92,8 @@ const combinedStructuredData = [...defaultStructuredData, ...additionalStructure
     {imageType && <meta property="og:image:type" content={imageType} />}
     <meta name="twitter:image" content={resolvedImageUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
     {shouldNoindex && (
       <>
