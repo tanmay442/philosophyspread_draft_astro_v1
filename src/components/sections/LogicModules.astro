@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import LogicCard from '../cards/LogicCard.astro';
+import Icon from '../ui/Icon.astro';
 
 const logicModules = await getCollection('logicModules');
 const sortedModules = logicModules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber)).slice(0, 4);
@@ -15,7 +16,7 @@ const sortedModules = logicModules.sort((a, b) => a.data.moduleNumber.localeComp
       </div>
       <a href="/logic-modules" class="hidden md:flex font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors items-center group">
         View All Modules 
-        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <Icon name="arrow_forward" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
     
@@ -34,7 +35,7 @@ const sortedModules = logicModules.sort((a, b) => a.data.moduleNumber.localeComp
     <div class="mt-8 flex md:hidden justify-center">
       <a href="/logic-modules" class="font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors flex items-center group">
         View All Modules 
-        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <Icon name="arrow_forward" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
   </div>

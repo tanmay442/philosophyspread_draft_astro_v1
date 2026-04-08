@@ -2,6 +2,7 @@
 import FeaturedEssay from '../cards/FeaturedEssay.astro';
 import TrendingList from './TrendingList.astro';
 import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
+import Icon from '../ui/Icon.astro';
 ---
 
 <section id="essays" class="py-24 px-8 md:px-12 bg-surface-container-low border-t-2 border-secondary">
@@ -10,7 +11,7 @@ import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
       <h2 class="font-headline text-5xl">Essays</h2>
       <a href="/essays/page/1" class="hidden md:flex font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors items-center group">
         View All Essays 
-        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <Icon name="arrow_forward" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
 
@@ -26,7 +27,7 @@ import SubmitEssayCard from '../cards/SubmitEssayCard.astro';
     <div class="mt-12 flex md:hidden justify-center">
       <a href="/essays/page/1" class="font-label text-xs text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors flex items-center group">
         View All Essays 
-        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <Icon name="arrow_forward" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
   </div>
