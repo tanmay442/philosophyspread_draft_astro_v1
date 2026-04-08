@@ -1,4 +1,6 @@
 ---
+import Icon from '../ui/Icon.astro';
+
 interface Props {
   icon?: string;
   variant?: 'default' | 'info' | 'warning';
@@ -26,8 +28,8 @@ const iconBgColors = {
 ---
 
 <blockquote class={`my-8 p-6 md:p-8 border-l-4 border-y-2 border-r-2 relative ${variantStyles[variant]}`}>
-  <span class={`material-symbols-outlined absolute -top-4 -left-4 bg-surface p-1 border-2 border-outline ${iconBgColors[variant]} ${iconColors[variant]} text-2xl`}>
-    {icon}
+  <span class={`absolute -top-4 -left-4 bg-surface p-1 border-2 border-outline ${iconBgColors[variant]} ${iconColors[variant]}`}>
+    <Icon name={icon} class="h-6 w-6" />
   </span>
   <div class="font-body text-xl italic leading-relaxed ml-4 text-on-surface">
     <slot />
