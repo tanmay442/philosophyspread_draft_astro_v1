@@ -34,6 +34,7 @@ const bits = defineCollection({
     bitNumber: z.string(),
     category: z.string(),
     content: z.string(),
+    author: z.string(),
     timestamp: z.coerce.date(),
   }),
 });
