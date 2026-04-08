@@ -58,9 +58,9 @@ export default {
         'scholar-teal': '#006b5f',
       },
       fontFamily: {
-        headline: ['Newsreader', 'serif'],
-        body: ['Newsreader', 'serif'],
-        label: ['JetBrains Mono', 'monospace'],
+        headline: ['var(--font-newsreader)', 'serif'],
+        body: ['var(--font-newsreader)', 'serif'],
+        label: ['var(--font-jetbrains-mono)', 'monospace'],
       },
       borderRadius: {
         none: '0px',

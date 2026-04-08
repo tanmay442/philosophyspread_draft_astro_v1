@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import Icon from '../components/ui/Icon.astro';
 import { Content } from '../content/pages/terms.mdx';
 
 const title = "Terms of Service & Privacy Policy";
@@ -19,7 +20,7 @@ const lastUpdated = "April 4, 2026";
     <article>
       <header class="mb-12">
         <a href="/" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-6 font-label text-xs uppercase tracking-widest">
-          <span class="material-symbols-outlined text-sm">arrow_back</span>
+          <Icon name="arrow_back" class="h-4 w-4" />
           Back to Home
         </a>
         

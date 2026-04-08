@@ -1,5 +1,6 @@
 ---
 import { SEOMetadata } from 'astro-seo-metadata';
+import { Font } from 'astro:assets';
 import siteLogo from '../assets/logo.png';
 
 interface Props {
@@ -105,25 +106,16 @@ const combinedStructuredData = [...defaultStructuredData, ...additionalStructure
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
     
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
+    <link rel="preconnect" href="https://clerk.philosophyspread.live" crossorigin />
+    <Font
+      cssVariable="--font-newsreader"
+      preload={[
+        { weight: 700, style: 'normal' },
+        { weight: 400, style: 'normal' },
+      ]}
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+    <Font cssVariable="--font-jetbrains-mono" preload={[{ weight: 400, style: 'normal' }]} />
     <style is:global>
-      .material-symbols-outlined {
-        font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24;
-      }
-      
       .hard-offset {
         box-shadow: 4px 4px 0px 0px #245ba7;
         transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -144,7 +136,7 @@ const combinedStructuredData = [...defaultStructuredData, ...additionalStructure
 
       /* Base Typography */
       body {
-        font-family: 'Newsreader', serif;
+        font-family: var(--font-newsreader), serif;
         background-color: #f8f9ff;
         color: #0c1c2e;
         line-height: 1.7;
