@@ -11,6 +11,6 @@ const { number, category, title, description } = Astro.props;
 
 <article class="group cursor-pointer">
   <span class="font-label text-[10px] text-primary">{number} / {category}</span>
-  <h4 class="font-headline text-2xl leading-tight mt-2 origin-left transition-[transform,color] duration-200 group-hover:[transform:skewX(-6deg)] group-hover:text-secondary">{title}</h4>
+  <h3 class="font-headline text-2xl leading-tight mt-2 origin-left transition-[transform,color] duration-200 group-hover:[transform:skewX(-6deg)] group-hover:text-secondary">{title}</h3>
   <p class="font-body text-lg opacity-70 mt-2 line-clamp-2 transition-opacity duration-200 group-hover:opacity-90">{description}</p>
 </article>

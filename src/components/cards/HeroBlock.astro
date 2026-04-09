@@ -18,6 +18,6 @@ const Element = href ? 'a' : 'div';
 
 <Element href={href} class={`block flex-1 p-8 border-b-2 border-secondary transition-all duration-300 cursor-pointer group ${bgClass} ${hoverBgClass} ${hoverTextClass}`}>
   <SectionTag class={`block mb-4 text-primary ${hoverTextClass ? 'group-hover:text-white transition-colors' : ''}`}>{tag}</SectionTag>
-  <h3 class="font-headline text-3xl mb-4 group-hover:italic">{title}</h3>
+  <h2 class="font-headline text-3xl mb-4 group-hover:italic">{title}</h2>
   <p class={`font-body text-lg opacity-80 ${hoverTextClass ? 'group-hover:opacity-100' : ''}`}>{description}</p>
 </Element>
