@@ -12,12 +12,12 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.1.7",
+    "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/node": "^10.0.4",
     "@astrojs/tailwind": "^6.0.2",
-    "@clerk/astro": "^3.0.11",
-    "astro": "^6.1.4",
+    "@clerk/astro": "^3.0.12",
+    "astro": "^6.1.5",
     "astro-seo-metadata": "^0.6.0",
     "dotenv": "^17.4.1",
     "express": "^4.22.1"
@@ -29,7 +29,7 @@
     "tailwindcss": "^3.4.19",
     "tsx": "^4.21.0",
     "typescript": "~5.8.3",
-    "wrangler": "^4.81.0"
+    "wrangler": "^4.81.1"
   },
   "overrides": {
     "vite": "^7"
