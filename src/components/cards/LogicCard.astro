@@ -19,6 +19,12 @@ const {
   class: className = '',
   titleClass = ''
 } = Astro.props;
+
+const MAX_DESCRIPTION_WORDS = 20;
+const descriptionWords = description.trim().split(/\s+/).filter(Boolean);
+const displayDescription = descriptionWords.length > MAX_DESCRIPTION_WORDS
+  ? `${descriptionWords.slice(0, MAX_DESCRIPTION_WORDS).join(' ')}.....`
+  : description;
 ---
 
 <HardOffsetCard class={`group relative break-inside-avoid transition-all duration-200 ${className}`}>
@@ -29,8 +35,8 @@ const {
     </div>
   )}
   <h4 class={`font-headline font-bold text-secondary mb-4 ${titleClass ? titleClass : (moduleNumber ? 'text-3xl' : 'text-2xl')}`}>{title}</h4>
-  <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-6 flex-grow">
-    {description}
+  <p class="font-body text-lg text-on-surface-variant leading-relaxed mb-6 flex-grow min-h-[5.5rem]">
+    {displayDescription}
   </p>
   <div class="pt-4 border-t border-outline-variant flex justify-between items-center mt-auto">
     <span class="font-label text-[10px] text-primary uppercase tracking-widest">Expand Module -&gt;</span>
