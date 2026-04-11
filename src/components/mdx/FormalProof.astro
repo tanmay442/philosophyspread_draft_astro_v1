@@ -4,13 +4,30 @@ interface Step {
   formula: string;
   justification: string;
   isConclusion?: boolean;
+  scopeDepth?: number;
 }
 
 interface Props {
   steps: Step[];
+  showScope?: boolean;
 }
 
-const { steps } = Astro.props;
+const { steps, showScope = false } = Astro.props;
+
+const SCOPE_GAP_PX = 14;
+const SCOPE_PADDING_PX = 10;
+
+const getScopeDepth = (step: Step) => {
+  if (!showScope || step.scopeDepth === undefined) return 0;
+  return Math.max(0, Math.floor(step.scopeDepth));
+};
+
+const getScopePaddingStyle = (depth: number) => {
+  if (depth === 0) return '';
+  return `padding-left: ${depth * SCOPE_GAP_PX + SCOPE_PADDING_PX}px;`;
+};
+
+const getScopeLineStyle = (scopeIndex: number) => `left: ${scopeIndex * SCOPE_GAP_PX}px;`;
 ---
 
 <div class="my-8 overflow-x-auto bg-surface-container-low border-2 border-secondary p-4 md:p-6">
@@ -26,7 +43,22 @@ const { steps } = Astro.props;
       {steps.map((step, index) => (
         <tr class={`border-b border-secondary/30 ${step.isConclusion ? 'bg-secondary/10' : ''}`}>
           <td class="p-2 md:p-3 font-label text-sm text-secondary">{step.line}</td>
-          <td class={`p-2 md:p-3 font-mono text-lg ${step.isConclusion ? 'text-secondary font-bold' : 'text-on-surface'}`}>{step.formula}</td>
+          <td class={`p-2 md:p-3 font-mono text-lg ${step.isConclusion ? 'text-secondary font-bold' : 'text-on-surface'}`}>
+            {showScope ? (
+              <div class="relative" style={getScopePaddingStyle(getScopeDepth(step))}>
+                {Array.from({ length: getScopeDepth(step) }).map((_, scopeIndex) => (
+                  <span
+                    aria-hidden="true"
+                    class="absolute top-0 bottom-0 w-[2px] bg-primary/60"
+                    style={getScopeLineStyle(scopeIndex)}
+                  ></span>
+                ))}
+                <span>{step.formula}</span>
+              </div>
+            ) : (
+              step.formula
+            )}
+          </td>
           <td class="p-2 md:p-3 font-body text-sm text-on-surface-variant italic">{step.justification}</td>
         </tr>
       ))}

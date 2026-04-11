@@ -1,0 +1,177 @@
+---
+moduleNumber: "L-09"
+title: "Conditional & Indirect Proofs"
+description: "Go beyond basic deduction. Learn the powerful techniques of Conditional Proof and Reductio ad Absurdum to solve complex arguments and test for validity with speed and elegance."
+category: "Deduction"
+difficulty: "Advanced"
+prerequisites: ["L-08"]
+---
+
+export const quizData = [
+  {
+    question: "1. When starting a Conditional Proof to prove the conclusion <code class='font-mono text-yellow-400'>R ⊃ S</code>, what is your very first step inside the proof?",
+    options: [
+      "Assume ~S with justification AIP.",
+      "Assume R with justification ACP.",
+      "Use the rule of Addition to create R v S."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. The strategy for Conditional Proof is to assume the antecedent of the conditional you want to prove."
+  },
+  {
+    question: "2. The method of Indirect Proof (RAA) aims to derive what from an assumption?",
+    options: [
+      "The consequent of a conditional.",
+      "A tautology, like P v ~P.",
+      "A contradiction, like Q • ~Q."
+    ],
+    correctIndex: 2,
+    feedback: "Correct. An indirect proof works by assuming the opposite of your goal and showing that this assumption leads to a logical impossibility (a contradiction)."
+  },
+  {
+    question: "3. You use the shorter truth table method and discover it's impossible to assign values without a contradiction. What does this mean?",
+    options: [
+      "The argument is valid.",
+      "The argument is invalid.",
+      "The argument has too many variables to test."
+    ],
+    correctIndex: 0,
+    feedback: "Correct. The contradiction shows that the initial assumption (that the argument was invalid) must be false. Therefore, the argument must be valid."
+  },
+  {
+    question: "4. After you finish a sub-proof for CP and write the final conditional line (e.g., <code class='font-mono text-yellow-400'>A ⊃ C</code>), can you use the individual line <code class='font-mono text-yellow-400'>C</code> from inside the sub-proof later on?",
+    options: [
+      "Yes, because you proved it's true.",
+      "No, because that line was within the scope of an assumption that has been discharged.",
+      "Only if you also used an Indirect Proof."
+    ],
+    correctIndex: 1,
+    feedback: "Correct. Lines derived within a sub-proof depend on the assumption. Once the assumption is discharged, those dependent lines are no longer available. You only proved C <strong>on the condition</strong> that A was true."
+  }
+];
+
+export const proofHypotheticalSyllogism = [
+  { line: "1", formula: "A ⊃ B", justification: "Premise", scopeDepth: 0 },
+  { line: "2", formula: "B ⊃ C", justification: "Premise /∴ A ⊃ C", scopeDepth: 0 },
+  { line: "3", formula: "A", justification: "ACP", scopeDepth: 1 },
+  { line: "4", formula: "B", justification: "1, 3, M.P.", scopeDepth: 1 },
+  { line: "5", formula: "C", justification: "2, 4, M.P.", scopeDepth: 1 },
+  { line: "6", formula: "A ⊃ C", justification: "3-5, C.P.", isConclusion: true, scopeDepth: 0 }
+];
+
+export const proofNested = [
+  { line: "1", formula: "L ⊃ [M ⊃ (N v O)]", justification: "Premise", scopeDepth: 0 },
+  { line: "2", formula: "M ⊃ ~N", justification: "Premise /∴ L ⊃ (~M v O)", scopeDepth: 0 },
+  { line: "3", formula: "L", justification: "ACP", scopeDepth: 1 },
+  { line: "4", formula: "M ⊃ (N v O)", justification: "1, 3, M.P.", scopeDepth: 1 },
+  { line: "5", formula: "M", justification: "ACP", scopeDepth: 2 },
+  { line: "6", formula: "N v O", justification: "4, 5, M.P.", scopeDepth: 2 },
+  { line: "7", formula: "~N", justification: "2, 5, M.P.", scopeDepth: 2 },
+  { line: "8", formula: "O", justification: "6, 7, D.S.", scopeDepth: 2 },
+  { line: "9", formula: "M ⊃ O", justification: "5-8, C.P.", scopeDepth: 1 },
+  { line: "10", formula: "~M v O", justification: "9, Impl.", scopeDepth: 1 },
+  { line: "11", formula: "L ⊃ (~M v O)", justification: "3-10, C.P.", isConclusion: true, scopeDepth: 0 }
+];
+
+## 1. A More Powerful Tool for Proofs
+
+While the 19 rules of inference and replacement from [Module 8](/logic-hub/module8) are powerful, some valid arguments are incredibly difficult—or even impossible—to prove with them alone. This is especially true for arguments whose conclusions are conditional statements (e.g., of the form `P ⊃ Q`).
+
+<br/>
+
+The **Conditional Proof (CP)** method provides a new, elegant strategy. Instead of working directly from premises to a conditional conclusion, we can make a temporary, strategic assumption.
+
+<Callout type="info" title="The Core Idea of Conditional Proof">
+  To prove a conditional statement like `A ⊃ C`, you temporarily **assume the antecedent (A)** is true. Then, using the standard rules of deduction, you derive the **consequent (C)**. If you succeed, you have proven that if A were true, C would necessarily follow. You can then discharge your assumption and formally conclude `A ⊃ C`.
+</Callout>
+
+The justification for the temporary assumption is called the **Conditional Proof Assumption**, abbreviated as **CPA** or, more commonly, **ACP**.
+
+<br/>
+
+## 2. The Mechanics of Conditional Proof
+
+To keep track of our temporary assumptions, we use a special notation to clearly define their **scope**. The scope includes the assumption itself and all the lines derived from it. Once we discharge the assumption, we can no longer refer to any lines inside its scope.
+<br/>
+We'll visualize this with a vertical scope line. Everything inside this line depends on the temporary assumption.
+
+<Callout type="example" title="Example: Proving a Hypothetical Syllogism">
+  Let's prove `A ⊃ C` from the premises `A ⊃ B` and `B ⊃ C` without using the H.S. rule itself.
+
+  <FormalProof steps={proofHypotheticalSyllogism} />
+
+  At line 3, we assume `A`. We use it to derive `C` at line 5. Having achieved our goal, we end the scope, "discharge" the assumption, and conclude `A ⊃ C` on line 6, justifying it by the entire sub-proof (lines 3 through 5) and the rule of **Conditional Proof (C.P.)**.
+</Callout>
+
+### Nested Conditional Proofs
+
+The power of CP becomes even more apparent when we nest assumptions. We can make a new assumption inside the scope of another one. However, we must discharge them in the reverse order they were made—you must close an inner scope before closing the outer scope it's in.
+
+<Callout type="example" title="A Nested Proof">
+  This complex proof requires assuming `L`, and then, within that scope, assuming `M`.
+
+  <FormalProof steps={proofNested} showScope />
+</Callout>
+
+## 3. Reductio ad Absurdum (Indirect Proof)
+
+Closely related to CP is another powerful technique: **Reductio ad Absurdum** ("reduction to absurdity"), also known as Indirect Proof (I.P.). This method has been used for centuries in logic and mathematics.
+
+<Callout type="info" title="The Core Idea of Reductio ad Absurdum">
+  To prove a statement `P` is true, you temporarily **assume it is false (`~P`)**. You then use this assumption to derive an explicit contradiction (e.g., `Q • ~Q`). Since your assumption led to an absurdity, the assumption itself must be false, meaning the original statement `P` must be true.
+</Callout>
+
+This is the logical engine behind the **shorter truth table technique**, which provides a fast way to test an argument for validity.
+
+<br/>
+
+## 4. Practical Application: The Shorter Truth Table
+
+The shorter truth table technique is a quick and powerful way to test an argument's validity, building directly on the principles of truth tables we explored in [Module 5](/logic-hub/module5). It's a practical application of the Reductio ad Absurdum method. Instead of building a full truth table, you try to find a single "counterexample" row—a scenario where all premises are true and the conclusion is false.
+
+<br/>
+
+The strategy is to **assume the argument is invalid** and see if that assumption leads to a logical contradiction.
+
+<Callout type="info" title="Shorter Truth Table Logic">
+  1. Assume the argument is **invalid** (True premises, False conclusion).
+  2. Work backwards to find the required truth values for the simple statements.
+  3. If you find a contradiction (e.g., a statement must be both T and F), the assumption was impossible. The argument is **VALID**.
+  4. If you find a consistent set of values, you've found a counterexample. The argument is **INVALID**.
+</Callout>
+
+<Callout type="example" title="Example 1: Proving a Valid Argument">
+  Let's test `A ⊃ B, ~B /∴ ~A` using the shorter truth table method.
+
+  First, write it as a single conditional: `[(A ⊃ B) • ~B] ⊃ ~A`. Now, let's assume this can be FALSE.
+
+  1. For the main `⊃` to be F, the antecedent `[(A ⊃ B) • ~B]` must be T and the consequent `~A` must be F.
+  2. If `~A` is F, then **A must be T**.
+  3. Now look at the antecedent. For `[(A ⊃ B) • ~B]` to be T, both parts must be T.
+     - `(A ⊃ B)` must be T.
+     - `~B` must be T, which means **B must be F**.
+  4. Finally, let's check for a contradiction. We have determined that `A` is T and `B` is F. Does this work with our requirement that `(A ⊃ B)` is T?
+  5. Let's substitute: `(T ⊃ F)`. But a conditional with a true antecedent and a false consequent is **FALSE**.
+  6. **CONTRADICTION!** We needed `(A ⊃ B)` to be T, but the values we were forced to assign make it F. Our initial assumption was impossible. Therefore, the argument is **VALID**.
+</Callout>
+
+<Callout type="example" title="Example 2: Proving an Invalid Argument">
+  Let's test: `A ⊃ B, B /∴ A` (This is the fallacy of Affirming the Consequent).
+
+  Statement form: `[(A ⊃ B) • B] ⊃ A`. Assume it's FALSE.
+
+  1. For the main `⊃` to be F, `[(A ⊃ B) • B]` must be T and `A` must be F.
+  2. We now know that **A must be F**.
+  3. For the antecedent `[(A ⊃ B) • B]` to be T, both parts must be T.
+     - `(A ⊃ B)` must be T.
+     - `B` must be T.
+  4. Let's check for a contradiction. We have determined that **A is F** and **B is T**.
+  5. Substitute these values into `(A ⊃ B)`. This gives us `(F ⊃ T)`, which is **TRUE**.
+  6. **NO CONTRADICTION!** We have found a consistent assignment of truth values (`A`=F, `B`=T) that makes both premises true but the conclusion false. Therefore, the argument is **INVALID**.
+</Callout>
+
+## 5. Test Your Understanding
+
+Apply these advanced strategies to analyze the following questions.
+
+<InteractiveQuiz questions={quizData} />
