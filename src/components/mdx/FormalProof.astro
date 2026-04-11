@@ -14,8 +14,9 @@ interface Props {
 
 const { steps, showScope = false } = Astro.props;
 
-const SCOPE_GAP_PX = 14;
-const SCOPE_PADDING_PX = 10;
+const SCOPE_COLUMN_WIDTH_PX = 28;
+const SCOPE_TEXT_GAP_PX = 10;
+const SCOPE_LINE_OFFSET_PX = 14;
 
 const getScopeDepth = (step: Step) => {
   if (!showScope || step.scopeDepth === undefined) return 0;
@@ -24,10 +25,10 @@ const getScopeDepth = (step: Step) => {
 
 const getScopePaddingStyle = (depth: number) => {
   if (depth === 0) return '';
-  return `padding-left: ${depth * SCOPE_GAP_PX + SCOPE_PADDING_PX}px;`;
+  return `padding-left: ${depth * SCOPE_COLUMN_WIDTH_PX + SCOPE_TEXT_GAP_PX}px;`;
 };
 
-const getScopeLineStyle = (scopeIndex: number) => `left: ${scopeIndex * SCOPE_GAP_PX}px;`;
+const getScopeLineStyle = (scopeIndex: number) => `left: ${scopeIndex * SCOPE_COLUMN_WIDTH_PX + SCOPE_LINE_OFFSET_PX}px;`;
 ---
 
 <div class="my-8 overflow-x-auto bg-surface-container-low border-2 border-secondary p-4 md:p-6">
@@ -40,7 +41,7 @@ const getScopeLineStyle = (scopeIndex: number) => `left: ${scopeIndex * SCOPE_GA
       </tr>
     </thead>
     <tbody>
-      {steps.map((step, index) => (
+      {steps.map((step) => (
         <tr class={`border-b border-secondary/30 ${step.isConclusion ? 'bg-secondary/10' : ''}`}>
           <td class="p-2 md:p-3 font-label text-sm text-secondary">{step.line}</td>
           <td class={`p-2 md:p-3 font-mono text-lg ${step.isConclusion ? 'text-secondary font-bold' : 'text-on-surface'}`}>
@@ -49,11 +50,11 @@ const getScopeLineStyle = (scopeIndex: number) => `left: ${scopeIndex * SCOPE_GA
                 {Array.from({ length: getScopeDepth(step) }).map((_, scopeIndex) => (
                   <span
                     aria-hidden="true"
-                    class="absolute top-0 bottom-0 w-[2px] bg-primary/60"
+                    class="absolute -top-3 -bottom-3 w-[2px] bg-primary/70"
                     style={getScopeLineStyle(scopeIndex)}
                   ></span>
                 ))}
-                <span>{step.formula}</span>
+                <span class="relative z-10">{step.formula}</span>
               </div>
             ) : (
               step.formula

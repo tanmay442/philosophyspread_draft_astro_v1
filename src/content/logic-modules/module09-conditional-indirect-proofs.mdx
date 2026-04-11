@@ -4,7 +4,7 @@ title: "Conditional & Indirect Proofs"
 description: "Go beyond basic deduction. Learn the powerful techniques of Conditional Proof and Reductio ad Absurdum to solve complex arguments and test for validity with speed and elegance."
 category: "Deduction"
 difficulty: "Advanced"
-prerequisites: ["L-08"]
+prerequisites: ["L-08" , "L-07"]
 ---
 
 export const quizData = [
@@ -75,7 +75,7 @@ export const proofNested = [
 
 ## 1. A More Powerful Tool for Proofs
 
-While the 19 rules of inference and replacement from [Module 8](/logic-hub/module8) are powerful, some valid arguments are incredibly difficult—or even impossible—to prove with them alone. This is especially true for arguments whose conclusions are conditional statements (e.g., of the form `P ⊃ Q`).
+While the 19 rules of inference and replacement from [Module 8](/logic-modules/module08-deduction) are powerful, some valid arguments are incredibly difficult—or even impossible—to prove with them alone. This is especially true for arguments whose conclusions are conditional statements (e.g., of the form `P ⊃ Q`).
 
 <br/>
 
@@ -110,6 +110,8 @@ The power of CP becomes even more apparent when we nest assumptions. We can make
 <Callout type="example" title="A Nested Proof">
   This complex proof requires assuming `L`, and then, within that scope, assuming `M`.
 
+  We begin by opening a first assumption scope with `L` (line 3). Inside that scope, we open a second nested scope by assuming `M` (line 5). After deriving `O` within the inner scope, we discharge it to infer `M ⊃ O` (line 9). We then continue in the outer scope and finally discharge that first assumption to conclude `L ⊃ (~M v O)` on line 11.
+
   <FormalProof steps={proofNested} showScope />
 </Callout>
 
@@ -127,7 +129,7 @@ This is the logical engine behind the **shorter truth table technique**, which p
 
 ## 4. Practical Application: The Shorter Truth Table
 
-The shorter truth table technique is a quick and powerful way to test an argument's validity, building directly on the principles of truth tables we explored in [Module 5](/logic-hub/module5). It's a practical application of the Reductio ad Absurdum method. Instead of building a full truth table, you try to find a single "counterexample" row—a scenario where all premises are true and the conclusion is false.
+The shorter truth table technique is a quick and powerful way to test an argument's validity, building directly on the principles of truth tables we explored in [Module 7](/logic-modules/module07-truthtables). It's a practical application of the Reductio ad Absurdum method. Instead of building a full truth table, you try to find a single "counterexample" row—a scenario where all premises are true and the conclusion is false.
 
 <br/>
 
