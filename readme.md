@@ -18,7 +18,7 @@ That is exactly why this platform focuses on:
 
 - **Essays** — To encourage deep reading, reflection, and long-form thinking
 - **Logic Modules** — To train clear reasoning and disciplined thought
-- **Community discussion** — To keep philosophy alive through shared inquiry
+- **Idea Bits** - Quick thought provoking ideas that force you to think 
 
 ## What We Publish
 
