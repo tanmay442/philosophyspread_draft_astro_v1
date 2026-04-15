@@ -97,6 +97,10 @@ export async function GET() {
       loc: toAbsolute('/contribute'),
       lastmod: parseDate(pages.find((entry: CollectionEntry<'pages'>) => entry.id === 'contribute')?.data.lastUpdated),
     },
+    {
+      loc: toAbsolute('/authors'),
+      lastmod: parseDate(pages.find((entry: CollectionEntry<'pages'>) => entry.id === 'authors')?.data.lastUpdated),
+    },
   ];
 
   const essayDates = essays
