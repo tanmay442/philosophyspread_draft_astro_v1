@@ -17,9 +17,14 @@ type PaginateItemsOptions = {
 };
 
 export function parsePageNumber(rawPageNumber: string | undefined): number | null {
-  const pageNumber = Number.parseInt(rawPageNumber ?? '1', 10);
+  const pageToken = rawPageNumber ?? '1';
+  if (!/^[1-9]\d*$/.test(pageToken)) {
+    return null;
+  }
 
-  if (!Number.isInteger(pageNumber) || pageNumber < 1) {
+  const pageNumber = Number(pageToken);
+
+  if (!Number.isSafeInteger(pageNumber)) {
     return null;
   }
 

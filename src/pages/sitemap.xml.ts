@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 const SITE_URL = 'https://philosophyspread.live';
 const ESSAYS_PAGE_SIZE = 9;
@@ -63,16 +63,6 @@ const buildPaginationEntries = (
   }));
 };
 
-const buildDetailEntries = <T extends string>(
-  items: CollectionEntry<T>[],
-  basePath: string,
-  getLastMod?: (entry: CollectionEntry<T>) => string | undefined,
-) =>
-  items.map((entry) => ({
-    loc: toAbsolute(`${basePath}/${entry.id}`),
-    lastmod: getLastMod?.(entry),
-  }));
-
 export async function GET() {
   const [essays, bits, modules, pages] = await Promise.all([
     getCollection('essays'),
@@ -83,6 +73,7 @@ export async function GET() {
 
   const termsPage = pages.find((entry) => entry.id === 'terms');
   const contributePage = pages.find((entry) => entry.id === 'contribute');
+  const authorsPage = pages.find((entry) => entry.id === 'authors');
 
   const staticEntries: SitemapEntry[] = [
     { loc: toAbsolute('/') },
@@ -96,7 +87,7 @@ export async function GET() {
     },
     {
       loc: toAbsolute('/authors'),
-      lastmod: parseDate(pages.find((entry: CollectionEntry<'pages'>) => entry.id === 'authors')?.data.lastUpdated),
+      lastmod: parseDate(authorsPage?.data.lastUpdated),
     },
   ];
 
@@ -112,9 +103,17 @@ export async function GET() {
     ...buildPaginationEntries('/essays', essays.length, ESSAYS_PAGE_SIZE, latestDate(essayDates)),
     ...buildPaginationEntries('/bits', bits.length, BITS_PAGE_SIZE, latestDate(bitDates)),
     ...buildPaginationEntries('/logic-modules', modules.length, MODULES_PAGE_SIZE),
-    ...buildDetailEntries(essays, '/essays', (entry) => parseDate(entry.data.pubDate)),
-    ...buildDetailEntries(bits, '/bits', (entry) => parseDate(entry.data.timestamp)),
-    ...buildDetailEntries(modules, '/logic-modules'),
+    ...essays.map((entry) => ({
+      loc: toAbsolute(`/essays/${entry.id}`),
+      lastmod: parseDate(entry.data.pubDate),
+    })),
+    ...bits.map((entry) => ({
+      loc: toAbsolute(`/bits/${entry.id}`),
+      lastmod: parseDate(entry.data.timestamp),
+    })),
+    ...modules.map((entry) => ({
+      loc: toAbsolute(`/logic-modules/${entry.id}`),
+    })),
   ];
 
   const xml = [

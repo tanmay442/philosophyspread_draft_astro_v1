@@ -2,8 +2,16 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import HeroBlock from '../cards/HeroBlock.astro';
 
-const pickLatest = <T>(items: T[], compareFn: (a: T, b: T) => number) =>
-  [...items].sort(compareFn)[0];
+const pickLatest = <T,>(items: T[], compareFn: (a: T, b: T) => number): T | undefined => {
+  if (!items.length) {
+    return undefined;
+  }
+
+  return items.slice(1).reduce(
+    (latestItem, item) => (compareFn(item, latestItem) < 0 ? item : latestItem),
+    items[0],
+  );
+};
 
 const logicModules = await getCollection('logicModules');
 const latestLogic = pickLatest(
