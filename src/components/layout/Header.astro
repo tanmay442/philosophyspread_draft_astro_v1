@@ -1,17 +1,41 @@
 ---
-import Button from '../ui/Button.astro';
 import { SignInButton, Show, UserButton } from '@clerk/astro/components';
-import Icon from '../ui/Icon.astro';
 import logoRemoveBg from '../../assets/logo-removebg.avif';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
 
-const pathname = Astro.url.pathname;
-const currentPath = pathname.slice(1); // remove leading slash
+const currentPath = Astro.url.pathname.replace(/^\//, '');
 const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
+
+const navigationLinks = [
+  { href: '/logic-modules', label: 'Logic and Reasoning', segment: 'logic-modules' },
+  { href: '/bits/page/1', label: 'Idea-Bits', segment: 'bits' },
+  { href: '/essays/page/1', label: 'Essays', segment: 'essays' },
+];
+
+const signInRedirectProps = {
+  forceRedirectUrl: returnTo,
+  signUpForceRedirectUrl: returnTo,
+  fallbackRedirectUrl: returnTo,
+  signUpFallbackRedirectUrl: returnTo,
+};
+
+const desktopLinkClass = (segment: string) =>
+  `font-label text-xs uppercase tracking-widest transition-colors ${
+    currentPath.startsWith(segment)
+      ? 'text-primary border-b-2 border-primary font-bold'
+      : 'text-secondary hover:text-primary'
+  }`;
+
+const mobileLinkClass = (segment: string) =>
+  `font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${
+    currentPath.startsWith(segment) ? 'text-primary italic' : 'text-secondary hover:text-primary'
+  }`;
 ---
 
-<header class="fixed top-0 w-full z-50 bg-surface dark:bg-slate-950 border-b-2 border-secondary shadow-[1px_1px_0px_#245ba7]">
-  <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-2 w-full relative z-50 bg-surface">
-    <a href="/" class="flex items-center hover:opacity-90 transition-opacity shrink-0">
+<header class="fixed top-0 z-50 w-full border-b-2 border-secondary bg-surface shadow-[1px_1px_0px_#245ba7]">
+  <div class="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between bg-surface px-4 py-2">
+    <a href="/" class="shrink-0 transition-opacity hover:opacity-90" aria-label="Philosophy Spread home">
       <span class="block h-10 w-[200px] sm:h-12 sm:w-[240px]">
         <img
           src={logoRemoveBg.src}
@@ -24,79 +48,68 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
         />
       </span>
     </a>
-    
-    <!-- Desktop Navigation -->
-    <nav class="hidden lg:flex items-center space-x-8">
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('bits') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">Idea-bits</a>
-      <!-- <a class="font-label text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a> -->
-      <a class={`font-label text-xs tracking-widest uppercase transition-colors ${currentPath.startsWith('essays') ? 'text-primary border-b-2 border-primary font-bold' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
+
+    <nav class="hidden items-center space-x-8 lg:flex">
+      {navigationLinks.map(({ href, label, segment }) => (
+        <a class={desktopLinkClass(segment)} href={href}>{label}</a>
+      ))}
     </nav>
-    <div class="hidden lg:flex items-center space-x-3">
+
+    <div class="hidden items-center space-x-3 lg:flex">
       <Show when="signed-out">
-        <SignInButton
-          asChild
-          mode="modal"
-          forceRedirectUrl={returnTo}
-          signUpForceRedirectUrl={returnTo}
-          fallbackRedirectUrl={returnTo}
-          signUpFallbackRedirectUrl={returnTo}
-        >
+        <SignInButton asChild mode="modal" {...signInRedirectProps}>
           <Button variant="primary">SUBSCRIBE</Button>
         </SignInButton>
       </Show>
       <Show when="signed-in">
         <div class="flex items-center gap-2">
-          <!-- Compact Thank You Message -->
-          <div class="flex flex-col items-end justify-center w-[70px]">
-            <span class="text-[9px] font-bold uppercase tracking-widest text-primary leading-tight">Thank you</span>
-            <span class="text-[10px] italic text-secondary font-medium leading-tight">for joining!</span>
+          <div class="flex w-[70px] flex-col items-end justify-center">
+            <span class="text-[9px] font-bold uppercase leading-tight tracking-widest text-primary">Thank you</span>
+            <span class="text-[10px] font-medium italic leading-tight text-secondary">for joining!</span>
           </div>
-          <!-- Clerk Component -->
-          <UserButton 
-            appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} 
-          />
+          <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-8 h-8' } }} />
         </div>
       </Show>
     </div>
 
-    <!-- Mobile Menu Toggle -->
-    <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center p-2 text-secondary hover:text-primary transition-colors" aria-label="Toggle Menu">
+    <button
+      id="mobile-menu-toggle"
+      class="flex items-center justify-center p-2 text-secondary transition-colors hover:text-primary lg:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      type="button"
+    >
       <Icon name="menu" class="menu-icon h-8 w-8" />
+      <Icon name="close" class="close-icon hidden h-8 w-8" />
     </button>
   </div>
 
-  <!-- Mobile Menu Backdrop -->
-  <div id="mobile-menu-backdrop" class="fixed inset-0 bg-secondary/20 backdrop-blur-sm z-30 hidden"></div>
+  <div id="mobile-menu-backdrop" class="fixed inset-0 z-30 hidden bg-secondary/20 backdrop-blur-sm" aria-hidden="true"></div>
 
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] md:w-[60vw] bg-surface z-40 hidden flex-col pt-24 px-6 pb-8 overflow-y-auto border-l-2 border-secondary shadow-2xl">
-    <nav class="flex flex-col space-y-6 mt-4 flex-grow">
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('logic-modules') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/logic-modules">Logic and Reasoning</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('bits') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/bits/page/1">48hrs-bits</a>
-      <a class="font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 text-secondary hover:text-primary transition-colors" href="/#trials">Idea Trials</a>
-      <a class={`font-headline text-3xl uppercase tracking-widest border-b-2 border-secondary pb-4 transition-colors ${currentPath.startsWith('essays') ? 'text-primary italic' : 'text-secondary hover:text-primary'}`} href="/essays/page/1">Essays</a>
+  <div
+    id="mobile-menu"
+    class="fixed right-0 top-0 z-40 hidden h-full w-[85vw] flex-col overflow-y-auto border-l-2 border-secondary bg-surface px-6 pb-8 pt-24 shadow-2xl md:w-[60vw]"
+  >
+    <nav class="mt-4 flex flex-grow flex-col space-y-6">
+      {navigationLinks.map(({ href, label, segment }) => (
+        <a class={mobileLinkClass(segment)} href={href}>{label}</a>
+      ))}
     </nav>
+
     <div class="mt-auto pt-8">
       <Show when="signed-out">
-        <SignInButton
-          asChild
-          mode="modal"
-          forceRedirectUrl={returnTo}
-          signUpForceRedirectUrl={returnTo}
-          fallbackRedirectUrl={returnTo}
-          signUpFallbackRedirectUrl={returnTo}
-        >
-          <Button variant="primary" class="w-full flex justify-center text-lg py-4">SUBSCRIBE</Button>
+        <SignInButton asChild mode="modal" {...signInRedirectProps}>
+          <Button variant="primary" class="flex w-full justify-center py-4 text-lg">SUBSCRIBE</Button>
         </SignInButton>
       </Show>
       <Show when="signed-in">
-        <div class="flex items-center justify-between border-2 border-secondary/20 bg-secondary/5 rounded-2xl p-4 w-full">
+        <div class="flex w-full items-center justify-between border-2 border-secondary/20 bg-secondary/5 p-4">
           <div class="flex flex-col">
-            <span class="text-[11px] font-bold uppercase tracking-widest text-primary leading-tight">Thank you</span>
-            <span class="text-sm italic text-secondary font-medium leading-tight mt-1">for joining!</span>
+            <span class="text-[11px] font-bold uppercase leading-tight tracking-widest text-primary">Thank you</span>
+            <span class="mt-1 text-sm font-medium italic leading-tight text-secondary">for joining!</span>
           </div>
-          <UserButton appearance={{ elements: { userButtonAvatarBox: "w-10 h-10" } }} />
+          <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
         </div>
       </Show>
     </div>
@@ -104,79 +117,68 @@ const returnTo = `${Astro.url.pathname}${Astro.url.search}`;
 </header>
 
 <script>
-  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const toggleButton = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const backdrop = document.getElementById('mobile-menu-backdrop');
-  const menuIcon = toggleBtn?.querySelector('.menu-icon');
+  const menuIcon = toggleButton?.querySelector('.menu-icon');
+  const closeIcon = toggleButton?.querySelector('.close-icon');
 
-  function toggleMenu() {
-    const isHidden = mobileMenu?.classList.contains('hidden');
-    if (isHidden) {
-      mobileMenu?.classList.remove('hidden');
-      mobileMenu?.classList.add('flex');
-      backdrop?.classList.remove('hidden');
-      if (menuIcon) {
-        menuIcon.setAttribute('data-icon', 'close');
-        menuIcon.innerHTML = '<path d="M6 6L18 18"></path><path d="M18 6L6 18"></path>';
-      }
-      document.body.style.overflow = 'hidden';
-    } else {
-      mobileMenu?.classList.add('hidden');
-      mobileMenu?.classList.remove('flex');
-      backdrop?.classList.add('hidden');
-      if (menuIcon) {
-        menuIcon.setAttribute('data-icon', 'menu');
-        menuIcon.innerHTML = '<path d="M4 6H20"></path><path d="M4 12H20"></path><path d="M4 18H20"></path>';
-      }
-      document.body.style.overflow = '';
+  const setMenuOpen = (isOpen: boolean) => {
+    if (!mobileMenu || !backdrop || !toggleButton) {
+      return;
     }
-  }
 
-  toggleBtn?.addEventListener('click', toggleMenu);
-  backdrop?.addEventListener('click', toggleMenu);
+    mobileMenu.classList.toggle('hidden', !isOpen);
+    mobileMenu.classList.toggle('flex', isOpen);
+    backdrop.classList.toggle('hidden', !isOpen);
+    menuIcon?.classList.toggle('hidden', isOpen);
+    closeIcon?.classList.toggle('hidden', !isOpen);
+    toggleButton.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
 
-  const mobileLinks = mobileMenu?.querySelectorAll('a');
-  mobileLinks?.forEach(link => {
-    link.addEventListener('click', toggleMenu);
+  const toggleMenu = () => {
+    const isOpen = mobileMenu?.classList.contains('flex') ?? false;
+    setMenuOpen(!isOpen);
+  };
+
+  toggleButton?.addEventListener('click', toggleMenu);
+  backdrop?.addEventListener('click', () => setMenuOpen(false));
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false));
   });
 </script>
 
 <style is:global>
-  /* Clerk UserButton perfectly round styling */
   .clerk-user-button {
+    display: flex !important;
+    aspect-ratio: 1 / 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
     border: 2px solid #006b5f !important;
     border-radius: 9999px !important;
     padding: 2px !important;
-    overflow: hidden !important;
-    aspect-ratio: 1 / 1 !important; /* Force a perfect square wrapper to prevent stretching */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
   }
-  
+
   .clerk-user-button:hover {
     background-color: #006b5f !important;
   }
-  
+
   .clerk-user-button svg,
   .clerk-user-button img {
-    border-radius: 9999px !important;
     width: 100% !important;
     height: 100% !important;
+    border-radius: 9999px !important;
     object-fit: cover !important;
   }
-  
-  /* Clerk dropdown styling */
-  .clerk-dropdown {
-    border: 2px solid #006b5f !important;
-    border-radius: 8px !important;
-  }
-  
+
+  .clerk-dropdown,
   .clerk-popover {
     border: 2px solid #006b5f !important;
     border-radius: 8px !important;
   }
-  
+
   .clerk-popover a,
   .clerk-popover button {
     border-radius: 4px !important;

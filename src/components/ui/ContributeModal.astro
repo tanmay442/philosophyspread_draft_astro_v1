@@ -1,9 +1,4 @@
 ---
-interface Props {
-  isOpen?: boolean;
-}
-
-const { isOpen = false } = Astro.props;
 ---
 
 <dialog 
@@ -187,13 +182,13 @@ const { isOpen = false } = Astro.props;
   const openButtons = document.querySelectorAll('[data-modal="contribute"]');
   const closeButtons = modal?.querySelectorAll('.modal-close');
 
-  openButtons?.forEach(btn => {
+  openButtons?.forEach((btn) => {
     btn.addEventListener('click', () => {
       modal?.showModal();
     });
   });
 
-  closeButtons?.forEach(btn => {
+  closeButtons?.forEach((btn) => {
     btn.addEventListener('click', () => {
       modal?.close();
     });

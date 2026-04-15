@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 
 const essays = await getCollection('essays');
-const featuredEssay = essays.find(essay => essay.data.featured) || essays[0];
+const featuredEssay = essays.find((essay) => essay.data.featured) ?? essays[0];
 ---
 
 <div class="md:col-span-8">

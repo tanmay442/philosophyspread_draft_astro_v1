@@ -1,0 +1,27 @@
+---
+interface Props {
+  type?: 'example' | 'info' | 'warning';
+  title?: string;
+}
+
+const { type = 'example', title } = Astro.props as Props;
+
+const containerClassByType = {
+  example: 'bg-surface-container-low border-2 border-secondary',
+  info: 'bg-primary/10 border-l-4 border-primary',
+  warning: 'bg-error/10 border-l-4 border-error',
+};
+
+const titleClassByType = {
+  example: 'text-primary',
+  info: 'text-primary',
+  warning: 'text-error',
+};
+---
+
+<div class={`my-8 p-6 ${containerClassByType[type]}`}>
+  {title && <p class={`mb-2 font-semibold ${titleClassByType[type]}`}>{title}</p>}
+  <div class="space-y-4">
+    <slot />
+  </div>
+</div>

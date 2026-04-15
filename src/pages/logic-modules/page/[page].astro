@@ -1,38 +1,28 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/layout/Header.astro';
 import Footer from '../../../components/layout/Footer.astro';
 import LogicCard from '../../../components/cards/LogicCard.astro';
+import { paginateItems, parsePageNumber } from '../../../utils/pagination';
 
-const pageNumber = Number.parseInt(Astro.params.page ?? '1', 10);
-
-if (!Number.isInteger(pageNumber) || pageNumber < 1) {
+const pageNumber = parsePageNumber(Astro.params.page);
+if (!pageNumber) {
   return new Response('Not found', { status: 404 });
 }
 
 const modules = await getCollection('logicModules');
-const sortedModules = modules.sort((a: CollectionEntry<'logicModules'>, b: CollectionEntry<'logicModules'>) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
-const pageSize = 4;
-const lastPage = Math.max(1, Math.ceil(sortedModules.length / pageSize));
+const sortedModules = modules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
 
-if (pageNumber > lastPage) {
+const page = paginateItems(sortedModules, {
+  pageNumber,
+  pageSize: 4,
+  basePath: '/logic-modules',
+});
+
+if (!page) {
   return new Response('Not found', { status: 404 });
 }
-
-const start = (pageNumber - 1) * pageSize;
-const end = start + pageSize;
-const pageData: CollectionEntry<'logicModules'>[] = sortedModules.slice(start, end);
-
-const page = {
-  data: pageData,
-  currentPage: pageNumber,
-  lastPage,
-  url: {
-    prev: pageNumber > 1 ? `/logic-modules/page/${pageNumber - 1}` : null,
-    next: pageNumber < lastPage ? `/logic-modules/page/${pageNumber + 1}` : null,
-  },
-};
 ---
 
 <BaseLayout
@@ -55,7 +45,7 @@ const page = {
 
     <section class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {page.data.map((module: CollectionEntry<'logicModules'>) => (
+        {page.items.map((module) => (
           <a href={`/logic-modules/${module.id}`} class="block group">
             <LogicCard 
               moduleNumber={module.data.moduleNumber}

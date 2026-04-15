@@ -1,83 +1,77 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+const SITE_URL = 'https://philosophyspread.live';
 const ESSAYS_PAGE_SIZE = 9;
 const BITS_PAGE_SIZE = 12;
 const MODULES_PAGE_SIZE = 4;
-const SITE_URL = 'https://philosophyspread.live';
 
 type SitemapEntry = {
   loc: string;
   lastmod?: string;
 };
 
-function parseDate(value: unknown): string | undefined {
-  if (!value) {
-    return undefined;
-  }
-
-  const date = value instanceof Date ? value : new Date(String(value));
-  if (Number.isNaN(date.valueOf())) {
-    return undefined;
-  }
-
-  return date.toISOString();
-}
-
-function toAbsolute(pathname: string): string {
-  return new URL(pathname, SITE_URL).toString();
-}
-
-function buildUrlTag(entry: SitemapEntry): string {
-  const escapedLoc = entry.loc
+const escapeXml = (value: string) =>
+  value
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&apos;');
 
-  const escapedLastMod = entry.lastmod
-    ? entry.lastmod
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&apos;')
-    : undefined;
+const toAbsolute = (pathname: string) => new URL(pathname, SITE_URL).toString();
 
-  return [
-    '  <url>',
-    `    <loc>${escapedLoc}</loc>`,
-    escapedLastMod ? `    <lastmod>${escapedLastMod}</lastmod>` : null,
-    '  </url>',
-  ]
-    .filter(Boolean)
-    .join('\n');
-}
-
-function latestDate(entries: string[]): string | undefined {
-  if (entries.length === 0) {
+const parseDate = (value: unknown): string | undefined => {
+  if (!value) {
     return undefined;
   }
 
-  return entries
-    .sort((a, b) => new Date(b).valueOf() - new Date(a).valueOf())[0];
-}
+  const parsedDate = value instanceof Date ? value : new Date(String(value));
+  return Number.isNaN(parsedDate.valueOf()) ? undefined : parsedDate.toISOString();
+};
 
-function buildPaginationEntries(
+const buildUrlTag = ({ loc, lastmod }: SitemapEntry) => {
+  const lines = ['  <url>', `    <loc>${escapeXml(loc)}</loc>`];
+  if (lastmod) {
+    lines.push(`    <lastmod>${escapeXml(lastmod)}</lastmod>`);
+  }
+  lines.push('  </url>');
+
+  return lines.join('\n');
+};
+
+const latestDate = (values: string[]): string | undefined => {
+  if (!values.length) {
+    return undefined;
+  }
+
+  return values.reduce((latest, current) =>
+    new Date(current).valueOf() > new Date(latest).valueOf() ? current : latest,
+  );
+};
+
+const buildPaginationEntries = (
   basePath: string,
   totalItems: number,
   pageSize: number,
-  pageLastMod?: string,
-): SitemapEntry[] {
-  const pages = Math.max(1, Math.ceil(totalItems / pageSize));
-  return Array.from({ length: pages }, (_, index) => {
-    const page = index + 1;
-    return {
-      loc: toAbsolute(`${basePath}/page/${page}`),
-      lastmod: pageLastMod,
-    };
-  });
-}
+  lastmod?: string,
+): SitemapEntry[] => {
+  const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
+
+  return Array.from({ length: totalPages }, (_, index) => ({
+    loc: toAbsolute(`${basePath}/page/${index + 1}`),
+    lastmod,
+  }));
+};
+
+const buildDetailEntries = <T extends string>(
+  items: CollectionEntry<T>[],
+  basePath: string,
+  getLastMod?: (entry: CollectionEntry<T>) => string | undefined,
+) =>
+  items.map((entry) => ({
+    loc: toAbsolute(`${basePath}/${entry.id}`),
+    lastmod: getLastMod?.(entry),
+  }));
 
 export async function GET() {
   const [essays, bits, modules, pages] = await Promise.all([
@@ -87,15 +81,18 @@ export async function GET() {
     getCollection('pages'),
   ]);
 
+  const termsPage = pages.find((entry) => entry.id === 'terms');
+  const contributePage = pages.find((entry) => entry.id === 'contribute');
+
   const staticEntries: SitemapEntry[] = [
     { loc: toAbsolute('/') },
     {
       loc: toAbsolute('/terms'),
-      lastmod: parseDate(pages.find((entry: CollectionEntry<'pages'>) => entry.id === 'terms')?.data.lastUpdated),
+      lastmod: parseDate(termsPage?.data.lastUpdated),
     },
     {
       loc: toAbsolute('/contribute'),
-      lastmod: parseDate(pages.find((entry: CollectionEntry<'pages'>) => entry.id === 'contribute')?.data.lastUpdated),
+      lastmod: parseDate(contributePage?.data.lastUpdated),
     },
     {
       loc: toAbsolute('/authors'),
@@ -104,42 +101,26 @@ export async function GET() {
   ];
 
   const essayDates = essays
-    .map((entry: CollectionEntry<'essays'>) => parseDate(entry.data.pubDate))
-    .filter((value): value is string => Boolean(value));
+    .map((entry) => parseDate(entry.data.pubDate))
+    .filter((date): date is string => Boolean(date));
   const bitDates = bits
-    .map((entry: CollectionEntry<'bits'>) => parseDate(entry.data.timestamp))
-    .filter((value): value is string => Boolean(value));
+    .map((entry) => parseDate(entry.data.timestamp))
+    .filter((date): date is string => Boolean(date));
 
-  const essayPaginationEntries = buildPaginationEntries('/essays', essays.length, ESSAYS_PAGE_SIZE, latestDate(essayDates));
-  const bitPaginationEntries = buildPaginationEntries('/bits', bits.length, BITS_PAGE_SIZE, latestDate(bitDates));
-  const modulePaginationEntries = buildPaginationEntries('/logic-modules', modules.length, MODULES_PAGE_SIZE);
-
-  const essayEntries: SitemapEntry[] = essays.map((entry: CollectionEntry<'essays'>) => ({
-    loc: toAbsolute(`/essays/${entry.id}`),
-    lastmod: parseDate(entry.data.pubDate),
-  }));
-
-  const bitEntries: SitemapEntry[] = bits.map((entry: CollectionEntry<'bits'>) => ({
-    loc: toAbsolute(`/bits/${entry.id}`),
-    lastmod: parseDate(entry.data.timestamp),
-  }));
-
-  const moduleEntries: SitemapEntry[] = modules.map((entry: CollectionEntry<'logicModules'>) => ({
-    loc: toAbsolute(`/logic-modules/${entry.id}`),
-  }));
+  const entries: SitemapEntry[] = [
+    ...staticEntries,
+    ...buildPaginationEntries('/essays', essays.length, ESSAYS_PAGE_SIZE, latestDate(essayDates)),
+    ...buildPaginationEntries('/bits', bits.length, BITS_PAGE_SIZE, latestDate(bitDates)),
+    ...buildPaginationEntries('/logic-modules', modules.length, MODULES_PAGE_SIZE),
+    ...buildDetailEntries(essays, '/essays', (entry) => parseDate(entry.data.pubDate)),
+    ...buildDetailEntries(bits, '/bits', (entry) => parseDate(entry.data.timestamp)),
+    ...buildDetailEntries(modules, '/logic-modules'),
+  ];
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...[
-      ...staticEntries,
-      ...essayPaginationEntries,
-      ...bitPaginationEntries,
-      ...modulePaginationEntries,
-      ...essayEntries,
-      ...bitEntries,
-      ...moduleEntries,
-    ].map(buildUrlTag),
+    ...entries.map(buildUrlTag),
     '</urlset>',
   ].join('\n');
 

@@ -1,38 +1,28 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/layout/Header.astro';
 import Footer from '../../../components/layout/Footer.astro';
 import BitCard from '../../../components/cards/BitCard.astro';
+import { paginateItems, parsePageNumber } from '../../../utils/pagination';
 
-const pageNumber = Number.parseInt(Astro.params.page ?? '1', 10);
-
-if (!Number.isInteger(pageNumber) || pageNumber < 1) {
+const pageNumber = parsePageNumber(Astro.params.page);
+if (!pageNumber) {
   return new Response('Not found', { status: 404 });
 }
 
 const bits = await getCollection('bits');
-const sortedBits = bits.sort((a: CollectionEntry<'bits'>, b: CollectionEntry<'bits'>) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf());
-const pageSize = 12;
-const lastPage = Math.max(1, Math.ceil(sortedBits.length / pageSize));
+const sortedBits = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf());
 
-if (pageNumber > lastPage) {
+const page = paginateItems(sortedBits, {
+  pageNumber,
+  pageSize: 12,
+  basePath: '/bits',
+});
+
+if (!page) {
   return new Response('Not found', { status: 404 });
 }
-
-const start = (pageNumber - 1) * pageSize;
-const end = start + pageSize;
-const pageData: CollectionEntry<'bits'>[] = sortedBits.slice(start, end);
-
-const page = {
-  data: pageData,
-  currentPage: pageNumber,
-  lastPage,
-  url: {
-    prev: pageNumber > 1 ? `/bits/page/${pageNumber - 1}` : null,
-    next: pageNumber < lastPage ? `/bits/page/${pageNumber + 1}` : null,
-  },
-};
 ---
 
 <BaseLayout
@@ -55,7 +45,7 @@ const page = {
 
     <section class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {page.data.map((bit: CollectionEntry<'bits'>) => (
+        {page.items.map((bit) => (
           <BitCard 
             tag={`#${bit.data.bitNumber} / ${bit.data.category.toUpperCase()}`}
             content={bit.data.content}

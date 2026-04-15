@@ -3,7 +3,7 @@ interface Props {
   tag: string;
   title: string;
   description: string;
-  readTime: string;
+  readTime: string | Date;
   imageSrc: string;
   imageAlt: string;
   href?: string;
@@ -15,21 +15,30 @@ interface Props {
   imageClass?: string;
 }
 
-const { 
-  tag, 
-  title, 
-  description, 
-  readTime, 
+const {
+  tag,
+  title,
+  description,
+  readTime,
   imageSrc, 
   imageAlt,
-  href = "#",
-  bgClass = "bg-white hover:bg-surface-container-low",
-  textClass = "text-secondary",
-  tagClass = "text-primary",
-  buttonClass = "text-secondary hover:text-primary",
-  buttonText = "Read Fragment",
-  imageClass = "transition-transform duration-700 group-hover:scale-105"
-} = Astro.props;
+  href = '#',
+  bgClass = 'bg-white hover:bg-surface-container-low',
+  textClass = 'text-secondary',
+  tagClass = 'text-primary',
+  buttonClass = 'text-secondary hover:text-primary',
+  buttonText = 'Read Fragment',
+  imageClass = 'transition-transform duration-700 group-hover:scale-105',
+} = Astro.props as Props;
+
+const timestampLabel =
+  readTime instanceof Date
+    ? readTime.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : readTime;
 ---
 
 <a href={href} class="block group">
@@ -42,7 +51,7 @@ const {
       <h2 class={`font-headline text-3xl font-bold mb-4 leading-tight ${textClass}`}>{title}</h2>
       <p class={`font-body text-base mb-6 flex-grow ${textClass === 'text-white' ? 'opacity-90' : 'text-on-surface-variant'}`}>{description}</p>
       <div class={`flex items-center justify-between border-t pt-6 ${textClass === 'text-white' ? 'border-secondary-fixed/30' : 'border-outline-variant'}`}>
-        <span class={`font-label text-[10px] uppercase ${textClass === 'text-white' ? 'text-secondary-fixed' : 'text-outline'}`}>{readTime}</span>
+        <span class={`font-label text-[10px] uppercase ${textClass === 'text-white' ? 'text-secondary-fixed' : 'text-outline'}`}>{timestampLabel}</span>
         <span class={`font-label text-[10px] uppercase font-bold transition-colors ${buttonClass}`}>{buttonText}</span>
       </div>
     </div>

@@ -5,24 +5,23 @@ import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import TruthTable from '../../components/mdx/TruthTable.astro';
 import FormalProof from '../../components/mdx/FormalProof.astro';
-import CodeBlock from '../../components/mdx/CodeBlock.astro';
 import InteractiveQuiz from '../../components/mdx/InteractiveQuiz.astro';
 import Blockquote from '../../components/mdx/Blockquote.astro';
-import Callout from '../../components/mdx/callout.astro';
+import Callout from '../../components/mdx/Callout.astro';
 
-const slug = Astro.params.slug;
+const moduleSlug = Astro.params.slug;
 const modules = await getCollection('logicModules');
-const sortedModules = modules.sort((a: CollectionEntry<'logicModules'>, b: CollectionEntry<'logicModules'>) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
-const moduleIndex = sortedModules.findIndex((entry: CollectionEntry<'logicModules'>) => entry.id === slug);
+const sortedModules = modules.sort((a, b) => a.data.moduleNumber.localeCompare(b.data.moduleNumber));
+const moduleIndex = sortedModules.findIndex((entry: CollectionEntry<'logicModules'>) => entry.id === moduleSlug);
 
 if (moduleIndex === -1) {
   return new Response('Not found', { status: 404 });
 }
 
-const module = sortedModules[moduleIndex];
+const currentModule = sortedModules[moduleIndex];
 const prevModule = moduleIndex > 0 ? sortedModules[moduleIndex - 1] : null;
 const nextModule = moduleIndex < sortedModules.length - 1 ? sortedModules[moduleIndex + 1] : null;
-const { Content } = await render(module);
+const { Content } = await render(currentModule);
 
 const components = {
   TruthTable,
@@ -34,9 +33,9 @@ const components = {
 ---
 
 <BaseLayout
-  title={`${module.data.title} | Logic Modules`}
-  description={module.data.description}
-  keywords={['logic module', 'reasoning', 'critical thinking', module.data.category, module.data.difficulty]}
+  title={`${currentModule.data.title} | Logic Modules`}
+  description={currentModule.data.description}
+  keywords={['logic module', 'reasoning', 'critical thinking', currentModule.data.category, currentModule.data.difficulty]}
 >
   <Header />
   
@@ -45,24 +44,24 @@ const components = {
       <header class="mb-16 border-b-2 border-secondary pb-12">
         <div class="flex items-center justify-between mb-6">
           <span class="font-label text-sm text-primary font-bold tracking-[0.2em] uppercase">
-            [ {module.data.moduleNumber} ]
+            [ {currentModule.data.moduleNumber} ]
           </span>
           <span class="font-label text-xs border-2 border-secondary px-3 py-1 uppercase tracking-widest text-secondary">
-            {module.data.difficulty}
+            {currentModule.data.difficulty}
           </span>
         </div>
         <h1 class="text-5xl md:text-7xl font-bold italic tracking-tighter text-secondary mb-6">
-          {module.data.title}
+          {currentModule.data.title}
         </h1>
         <p class="text-xl text-on-surface-variant leading-relaxed font-body">
-          {module.data.description}
+          {currentModule.data.description}
         </p>
         
-        {module.data.prerequisites.length > 0 && (
+        {currentModule.data.prerequisites.length > 0 && (
           <div class="mt-8 p-4 bg-surface-container-low border-l-4 border-secondary">
             <h3 class="font-label text-xs uppercase tracking-widest text-secondary mb-2">Prerequisites:</h3>
             <ul class="flex flex-wrap gap-4">
-              {module.data.prerequisites.map((prereq: string) => (
+              {currentModule.data.prerequisites.map((prereq: string) => (
                 <li class="font-body text-sm italic">{prereq}</li>
               ))}
             </ul>

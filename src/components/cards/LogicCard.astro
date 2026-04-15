@@ -11,13 +11,13 @@ interface Props {
   titleClass?: string;
 }
 
-const { 
-  title, 
-  description, 
-  moduleNumber, 
-  icon = "open_in_new", 
+const {
+  title,
+  description,
+  moduleNumber,
+  icon = 'open_in_new',
   class: className = '',
-  titleClass = ''
+  titleClass = '',
 } = Astro.props;
 
 const MAX_DESCRIPTION_WORDS = 20;

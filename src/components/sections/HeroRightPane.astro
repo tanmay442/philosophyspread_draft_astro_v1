@@ -1,20 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import HeroBlock from '../cards/HeroBlock.astro';
 
-// Fetch the latest from each collection
+const pickLatest = <T>(items: T[], compareFn: (a: T, b: T) => number) =>
+  [...items].sort(compareFn)[0];
+
 const logicModules = await getCollection('logicModules');
-const latestLogic = logicModules.sort((a, b) => b.data.moduleNumber.localeCompare(a.data.moduleNumber))[0];
+const latestLogic = pickLatest(
+  logicModules,
+  (a: CollectionEntry<'logicModules'>, b: CollectionEntry<'logicModules'>) =>
+    b.data.moduleNumber.localeCompare(a.data.moduleNumber),
+);
 
 const bits = await getCollection('bits');
-const latestBit = bits.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf())[0];
+const latestBit = pickLatest(
+  bits,
+  (a: CollectionEntry<'bits'>, b: CollectionEntry<'bits'>) =>
+    b.data.timestamp.valueOf() - a.data.timestamp.valueOf(),
+);
 
 const essays = await getCollection('essays');
-const latestEssay = essays.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+const latestEssay = pickLatest(
+  essays,
+  (a: CollectionEntry<'essays'>, b: CollectionEntry<'essays'>) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const truncateText = (value: string, maxLength: number) =>
+  value.length > maxLength ? `${value.slice(0, maxLength)}...` : value;
 ---
 
 <div class="md:col-span-4 flex flex-col bg-surface-container-low">
-  <!-- Block 1: Logic Module (Ice Blue) -->
   {latestLogic && (
     <HeroBlock 
       tag={`MODULE ${latestLogic.data.moduleNumber}`}
@@ -26,19 +42,17 @@ const latestEssay = essays.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubD
     />
   )}
   
-  <!-- Block 2: 48hrs-bits (White) -->
   {latestBit && (
     <HeroBlock 
       tag={`BIT ${latestBit.data.bitNumber}`}
       title={latestBit.data.category}
-      description={latestBit.data.content.substring(0, 100) + '...'}
+      description={truncateText(latestBit.data.content, 100)}
       bgClass="bg-[#FFFFFF]"
       hoverBgClass="hover:bg-[#00887A]/10 hover:-translate-y-1"
       href={`/bits/${latestBit.id}`}
     />
   )}
   
-  <!-- Block 3: Essays Teaser (Muted Peach) -->
   {latestEssay && (
     <HeroBlock 
       tag={`ESSAY`}

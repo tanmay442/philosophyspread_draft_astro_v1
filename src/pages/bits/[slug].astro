@@ -1,34 +1,35 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
-import Callout from '../../components/mdx/callout.astro';
+import Callout from '../../components/mdx/Callout.astro';
 import Icon from '../../components/ui/Icon.astro';
 
-const slug = Astro.params.slug;
+const bitSlug = Astro.params.slug;
 
-if (slug && /^\d+$/.test(slug)) {
-  return Astro.redirect(`/bits/page/${slug}`, 301);
+const truncateText = (value: string, maxLength: number) =>
+  value.length > maxLength ? `${value.slice(0, maxLength)}...` : value;
+
+if (bitSlug && /^\d+$/.test(bitSlug)) {
+  return Astro.redirect(`/bits/page/${bitSlug}`, 301);
 }
 
 const bits = await getCollection('bits');
-const bit = bits.find((entry: CollectionEntry<'bits'>) => entry.id === slug);
+const currentBit = bits.find((entry) => entry.id === bitSlug);
 
-if (!bit) {
+if (!currentBit) {
   return new Response('Not found', { status: 404 });
 }
 
-const { Content } = await render(bit);
-const bitDescription = bit.data.content.length > 157
-  ? `${bit.data.content.slice(0, 157)}...`
-  : bit.data.content;
+const { Content } = await render(currentBit);
+const bitDescription = truncateText(currentBit.data.content, 157);
 ---
 
 <BaseLayout
-  title={`Bit ${bit.data.bitNumber} | Philosophy Spread`}
+  title={`Bit ${currentBit.data.bitNumber} | Philosophy Spread`}
   description={bitDescription}
-  keywords={['philosophy bit', 'Idea-Bits', bit.data.category, 'thought experiment']}
+  keywords={['philosophy bit', 'Idea-Bits', currentBit.data.category, 'thought experiment']}
 >
   <Header />
   
@@ -37,17 +38,17 @@ const bitDescription = bit.data.content.length > 157
       <header class="mb-12 border-b-2 border-secondary pb-8">
         <div class="flex items-center gap-4 mb-6">
           <span class="bg-primary text-on-primary font-label text-xs px-3 py-1 uppercase tracking-widest">
-            Bit {bit.data.bitNumber}
+            Bit {currentBit.data.bitNumber}
           </span>
           <span class="font-label text-xs text-secondary uppercase tracking-widest">
-            {bit.data.category}
+            {currentBit.data.category}
           </span>
         </div>
-        <time datetime={bit.data.timestamp.toISOString()} class="font-label text-sm text-on-surface-variant opacity-80 uppercase tracking-widest">
-          {bit.data.timestamp.toLocaleString('en-US', { timeZone: 'UTC', dateStyle: 'long', timeStyle: 'short' })} UTC
+        <time datetime={currentBit.data.timestamp.toISOString()} class="font-label text-sm text-on-surface-variant opacity-80 uppercase tracking-widest">
+          {currentBit.data.timestamp.toLocaleString('en-US', { timeZone: 'UTC', dateStyle: 'long', timeStyle: 'short' })} UTC
         </time>
         <div class="mt-3 font-label text-xs text-on-surface-variant uppercase tracking-widest">
-          By {bit.data.author}
+          By {currentBit.data.author}
         </div>
       </header>
       
